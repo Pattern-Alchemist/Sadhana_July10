@@ -85,7 +85,7 @@ export default async function JourneyPage() {
                           {r.siddhiSlug && siddhiMap.get(r.siddhiSlug) && (
                             <>
                               <span className="text-[var(--color-gold)]/40">·</span>
-                              <span>{siddhiMap.get(r.siddhiSlug)}</span>
+                              <span>{siddhiMap.get(r.siddhiSlug) as string}</span>
                             </>
                           )}
                           {r.createdAt && (
