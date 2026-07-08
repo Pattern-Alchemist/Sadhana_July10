@@ -1,0 +1,1969 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ASTROKALKI — THE LIVING ARCHIVE
+   Museum-grade design system : obsidian, gold, ivory
+   ============================================================ */
+
+@theme {
+  --color-obsidian: #0a0908;
+  --color-ink: #100f0d;
+  --color-charcoal: #181612;
+  --color-stone: #242019;
+  --color-gold: #c9985e;
+  --color-gold-bright: #e6c089;
+  --color-gold-deep: #9a7340;
+  --color-ivory: #f5f1e6;
+  --color-parchment: #e8dcc4;
+  --color-bone: #d8cdb4;
+  --color-cyan-accent: #6fc7bd;
+  --color-purple-accent: #a98ad6;
+  --color-rose-accent: #d99a8a;
+  --color-sage: #8fa97e;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-crimson), "Crimson Text", Georgia, serif;
+  --font-mono-ui: ui-monospace, "SFMono-Regular", "Courier New", monospace;
+}
+
+:root {
+  --gold-grad: linear-gradient(135deg, #9a7340 0%, #e6c089 38%, #c9985e 60%, #8a6432 100%);
+  --hairline: rgba(201, 152, 94, 0.22);
+}
+
+* {
+  border-color: var(--hairline);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 152, 94, 0.1), transparent 60%),
+    radial-gradient(circle at 0% 100%, rgba(169, 138, 214, 0.05), transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Subtle archive grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: rgba(201, 152, 94, 0.35);
+  color: var(--color-ivory);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-gold-deep), var(--color-stone));
+  border-radius: 6px;
+  border: 2px solid var(--color-ink);
+}
+
+/* ============================ TYPOGRAPHY ============================ */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.tracking-luxe {
+  letter-spacing: 0.32em;
+}
+.tracking-wide-sm {
+  letter-spacing: 0.18em;
+}
+
+.text-gold-foil {
+  background: var(--gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.engraved {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 -1px 0 rgba(230, 192, 137, 0.12);
+}
+
+/* Drop cap for folio openings */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 4.2rem;
+  line-height: 0.82;
+  padding: 0.32rem 0.7rem 0 0;
+  color: var(--color-gold-bright);
+  font-weight: 600;
+}
+
+/* ============================ SURFACES ============================ */
+.parchment {
+  background:
+    linear-gradient(180deg, rgba(232, 220, 196, 0.04), rgba(232, 220, 196, 0.01)),
+    var(--color-charcoal);
+  border: 1px solid var(--hairline);
+}
+
+.folio-card {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(24, 22, 18, 0.96), rgba(16, 15, 13, 0.99));
+  border: 1px solid var(--hairline);
+  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+.folio-card:hover {
+  border-color: rgba(201, 152, 94, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(201, 152, 94, 0.15) inset;
+}
+
+/* Engraved double border frame */
+.engraved-frame {
+  position: relative;
+  border: 1px solid rgba(201, 152, 94, 0.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(10, 9, 8, 0.9),
+    inset 0 0 0 5px rgba(201, 152, 94, 0.14),
+    inset 0 0 0 6px rgba(10, 9, 8, 0.9);
+}
+
+.hairline-top {
+  border-top: 1px solid var(--hairline);
+}
+.hairline-bottom {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Gold rule with center diamond */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 152, 94, 0.55) 20%,
+    rgba(230, 192, 137, 0.85) 50%,
+    rgba(201, 152, 94, 0.55) 80%,
+    transparent
+  );
+}
+
+/* ============================ WAX SEAL / BADGES ============================ */
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #b8302a, #7c1d1d 60%, #4a1010);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 180, 160, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6),
+    0 6px 14px -4px rgba(0, 0, 0, 0.7);
+  color: rgba(255, 230, 210, 0.92);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-bone);
+  background: rgba(201, 152, 94, 0.06);
+}
+
+.badge-gold {
+  border-color: rgba(201, 152, 94, 0.5);
+  color: var(--color-gold-bright);
+  background: rgba(201, 152, 94, 0.1);
+}
+
+/* ============================ BUTTONS ============================ */
+.btn-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-obsidian);
+  background: var(--gold-grad);
+  border: 1px solid rgba(230, 192, 137, 0.6);
+  transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.btn-gold:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px rgba(201, 152, 94, 0.5);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+  border: 1px solid var(--hairline);
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  border-color: rgba(201, 152, 94, 0.6);
+  background: rgba(201, 152, 94, 0.08);
+  color: var(--color-ivory);
+}
+
+/* ============================ ANIMATIONS ============================ */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 30%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold-deep) 70%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.9s ease both;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 120s linear infinite;
+}
+.spin-slower {
+  animation: spin-slow 240s linear infinite reverse;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================ CONSTELLATION / COSMOS ============================ */
+.cosmos-dots {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(245, 241, 230, 0.7), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(245, 241, 230, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 40% 80%, rgba(201, 152, 94, 0.6), transparent),
+    radial-gradient(1px 1px at 85% 20%, rgba(245, 241, 230, 0.6), transparent),
+    radial-gradient(1px 1px at 55% 15%, rgba(230, 192, 137, 0.5), transparent),
+    radial-gradient(1px 1px at 10% 70%, rgba(245, 241, 230, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 90% 85%, rgba(201, 152, 94, 0.5), transparent);
+  background-size: 100% 100%;
+}
+
+/* ============================ INPUTS ============================ */
+.field {
+  width: 100%;
+  background: rgba(10, 9, 8, 0.6);
+  border: 1px solid var(--hairline);
+  color: var(--color-ivory);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-body);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: rgba(201, 152, 94, 0.7);
+  box-shadow: 0 0 0 3px rgba(201, 152, 94, 0.12);
+}
+.field::placeholder {
+  color: rgba(216, 205, 180, 0.4);
+}
+
+/* ============================ UTILITIES ============================ */
+.text-balance {
+  text-wrap: balance;
+}
+.content-z {
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative corner flourishes */
+.corner-flourish::before,
+.corner-flourish::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: rgba(201, 152, 94, 0.5);
+}
+.corner-flourish::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.corner-flourish::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+/* ============================================================
+   ASTROKALKI v1.5 — "LIVING ESOTERIC INTELLIGENCE"
+   Cinematic motion, immersive depth, scholarly reverence
+   ============================================================ */
+
+/* ---------- CINEMATIC ANIMATIONS ---------- */
+
+/* Slow-rotating yantra background (used on /yantras hero) */
+@keyframes yantra-bg-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.yantra-bg-spin {
+  animation: yantra-bg-spin 180s linear infinite;
+  transform-origin: center center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .yantra-bg-spin { animation: none; }
+}
+
+/* Fade-up entrance (used across all page heroes and cards) */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.fade-up {
+  animation: fade-up 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: fade-up 600ms ease-out both;
+    filter: none;
+  }
+}
+
+/* Scroll-triggered reveal (uses IntersectionObserver via .reveal class) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(6px);
+  transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1000ms ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* Shimmer (used on hero italic accent text) */
+@keyframes shimmer-text {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-bright) 30%,
+    var(--color-ivory) 50%,
+    var(--color-gold-bright) 70%,
+    var(--color-gold-deep) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 6s ease-in-out infinite;
+}
+
+/* Pulse glow (used on CTA chevrons) */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    text-shadow: 0 0 12px rgba(201, 152, 94, 0.3);
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 0 0 20px rgba(230, 192, 137, 0.6);
+  }
+}
+.pulse-glow {
+  animation: pulse-glow 3.5s ease-in-out infinite;
+}
+
+/* Slow float (used on hero glyphs) */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-14px) rotate(2deg); }
+}
+.float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-slow { animation: none; }
+}
+
+/* ---------- HOVER MICRO-INTERACTIONS ---------- */
+
+/* Folio card lift + gold glow */
+.folio-card {
+  position: relative;
+  background: linear-gradient(180deg,
+    rgba(24, 22, 18, 0.5) 0%,
+    rgba(16, 15, 13, 0.7) 100%);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 400ms ease,
+              box-shadow 600ms ease;
+}
+.folio-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 152, 94, 0.45);
+  box-shadow:
+    0 20px 50px -20px rgba(0, 0, 0, 0.8),
+    0 0 60px -25px rgba(201, 152, 94, 0.5),
+    inset 0 1px 0 rgba(230, 192, 137, 0.08);
+}
+.folio-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(201, 152, 94, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.folio-card:hover::after {
+  opacity: 1;
+}
+
+/* ---------- ENHANCED TYPOGRAPHY ---------- */
+
+/* Drop-cap on the first paragraph of the editorial description */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.2rem;
+  font-weight: 500;
+  float: left;
+  line-height: 0.85;
+  margin: 0.3rem 0.65rem 0 0;
+  color: var(--color-gold-bright);
+  text-shadow: 0 0 30px rgba(230, 192, 137, 0.25);
+}
+
+/* Wide-tracking eyebrow */
+.tracking-luxe {
+  letter-spacing: 0.32em;
+}
+.tracking-wide-sm {
+  letter-spacing: 0.18em;
+}
+
+/* Gold-foil text effect (used on the wordmark) */
+.gold-foil {
+  background: linear-gradient(
+    180deg,
+    #f5f1e6 0%,
+    #e6c089 35%,
+    #c9985e 55%,
+    #9a7340 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ---------- SCROLLBAR & SELECTION ---------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(154, 115, 64, 0.5) 0%,
+    rgba(201, 152, 94, 0.4) 100%
+  );
+  border-radius: 5px;
+  border: 2px solid var(--color-obsidian);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(201, 152, 94, 0.7) 0%,
+    rgba(230, 192, 137, 0.6) 100%
+  );
+}
+::selection {
+  background: rgba(201, 152, 94, 0.3);
+  color: var(--color-ivory);
+  text-shadow: 0 0 8px rgba(230, 192, 137, 0.4);
+}
+
+/* ---------- ENHANCED BUTTONS ---------- */
+
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-obsidian);
+  background: linear-gradient(
+    135deg,
+    #9a7340 0%,
+    #e6c089 38%,
+    #c9985e 60%,
+    #8a6432 100%
+  );
+  border: 1px solid rgba(230, 192, 137, 0.4);
+  border-radius: 2px;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 400ms ease;
+  box-shadow:
+    0 4px 20px -8px rgba(201, 152, 94, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px -8px rgba(230, 192, 137, 0.7),
+    0 0 40px -10px rgba(201, 152, 94, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 700ms ease;
+}
+.btn-gold:hover::before {
+  left: 100%;
+}
+
+.btn-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+  background: transparent;
+  border: 1px solid rgba(201, 152, 94, 0.35);
+  border-radius: 2px;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-ghost:hover {
+  color: var(--color-ivory);
+  border-color: rgba(230, 192, 137, 0.7);
+  background: rgba(201, 152, 94, 0.08);
+  box-shadow: 0 0 30px -10px rgba(201, 152, 94, 0.4);
+}
+
+/* ---------- BADGES ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid;
+  transition: all 300ms ease;
+}
+.badge-gold {
+  color: var(--color-gold-bright);
+  background: rgba(201, 152, 94, 0.08);
+  border-color: rgba(201, 152, 94, 0.35);
+}
+
+/* ---------- HAIRLINE & DIVIDERS ---------- */
+
+.hairline-bottom {
+  border-bottom: 1px solid var(--hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---------- STARFIELD / COSMIC BACKGROUND ---------- */
+
+.cosmos-dots {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(230, 192, 137, 0.6), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(245, 241, 230, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 80% 20%, rgba(201, 152, 94, 0.5), transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(216, 205, 180, 0.3), transparent),
+    radial-gradient(1px 1px at 90% 60%, rgba(230, 192, 137, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 45% 45%, rgba(245, 241, 230, 0.3), transparent);
+  background-size: 100% 100%;
+}
+
+/* ---------- PAGE TRANSITION (view-transitions API) ---------- */
+
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 600ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  ::view-transition-old(root) {
+    animation-name: fade-out-blur;
+  }
+  ::view-transition-new(root) {
+    animation-name: fade-in-blur;
+  }
+  @keyframes fade-out-blur {
+    from { opacity: 1; filter: blur(0); transform: scale(1); }
+    to   { opacity: 0; filter: blur(10px); transform: scale(0.98); }
+  }
+  @keyframes fade-in-blur {
+    from { opacity: 0; filter: blur(10px); transform: scale(1.02); }
+    to   { opacity: 1; filter: blur(0); transform: scale(1); }
+  }
+}
+
+/* ---------- REDUCED MOTION FALLBACK ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   ASTROKALKI v1.6 — ANIMATED ŚRĪ CAKRA HERO
+   CSS-only triangle-by-triangle assembly on the homepage
+   ============================================================ */
+
+/* The animated Śrī Cakra is a pure-CSS construction: 9 triangles
+   (4 upward Śiva in gold, 5 downward Śakti in cyan) that fade and
+   rotate into place one by one, converging on the central bindu. */
+
+.sri-cakra-hero {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .sri-cakra-hero { width: 380px; height: 380px; }
+}
+@media (min-width: 1024px) {
+  .sri-cakra-hero { width: 460px; height: 460px; }
+}
+
+.sri-cakra-hero .sc-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: sc-assemble 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Each layer assembles in sequence */
+.sri-cakra-hero .sc-layer:nth-child(1) { animation-delay: 200ms; }
+.sri-cakra-hero .sc-layer:nth-child(2) { animation-delay: 400ms; }
+.sri-cakra-hero .sc-layer:nth-child(3) { animation-delay: 600ms; }
+.sri-cakra-hero .sc-layer:nth-child(4) { animation-delay: 800ms; }
+.sri-cakra-hero .sc-layer:nth-child(5) { animation-delay: 1000ms; }
+.sri-cakra-hero .sc-layer:nth-child(6) { animation-delay: 1200ms; }
+.sri-cakra-hero .sc-layer:nth-child(7) { animation-delay: 1400ms; }
+.sri-cakra-hero .sc-layer:nth-child(8) { animation-delay: 1600ms; }
+.sri-cakra-hero .sc-layer:nth-child(9) { animation-delay: 1800ms; }
+
+.sri-cakra-hero .sc-bindu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #f5f1e6 0%, #e6c089 40%, #c9985e 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: sc-bindu-appear 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 2200ms;
+  box-shadow:
+    0 0 20px rgba(230, 192, 137, 0.6),
+    0 0 40px rgba(201, 152, 94, 0.4),
+    0 0 60px rgba(201, 152, 94, 0.2);
+}
+
+@keyframes sc-assemble {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-12deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 0.85;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes sc-bindu-appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Slow rotation after assembly */
+.sri-cakra-hero.sc-assembled .sc-layer {
+  animation: sc-assemble 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards,
+             sc-slow-rotate 180s linear infinite 2500ms;
+}
+
+@keyframes sc-slow-rotate {
+  from { transform: scale(1) rotate(0deg); }
+  to   { transform: scale(1) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sri-cakra-hero .sc-layer,
+  .sri-cakra-hero .sc-bindu {
+    animation: none !important;
+    opacity: 0.85;
+  }
+  .sri-cakra-hero .sc-bindu { opacity: 1; }
+  .sri-cakra-hero.sc-assembled .sc-layer {
+    animation: none !important;
+  }
+}
+
+/* ---------- MOBILE RESPONSIVENESS OVERRIDES ---------- */
+
+/* Ensure horizontal padding scales down on small screens */
+@media (max-width: 380px) {
+  .content-z { padding-left: 2px; padding-right: 2px; }
+}
+
+/* Long-form text optimization on mobile */
+@media (max-width: 640px) {
+  .font-display {
+    letter-spacing: -0.01em;
+  }
+  /* Prevent horizontal overflow from long Sanskrit strings */
+  body {
+    overflow-x: hidden;
+  }
+  /* Tighter line-height for small screens */
+  .leading-relaxed {
+    line-height: 1.6;
+  }
+}
+
+/* Touch-friendly tap targets on mobile (min 44px) */
+@media (max-width: 768px) {
+  .btn-gold,
+  .btn-ghost {
+    min-height: 44px;
+    padding: 0.7rem 1.4rem;
+  }
+  a, button {
+    -webkit-tap-highlight-color: rgba(201, 152, 94, 0.15);
+  }
+}
+
+/* Hide certain decorative elements on very small screens to save space */
+@media (max-width: 480px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Sticky nav compact mode on mobile */
+@media (max-width: 640px) {
+  .sticky.top-0 {
+    /* Allow content to scroll under without being cut off */
+    position: sticky;
+  }
+}
+
+/* ============================================================
+   ASTROKALKI v1.7 — MOTION SYSTEM SPEC
+   "Material-style motion: transitions preserve spatial continuity,
+    clarify hierarchy, and never delay task completion."
+
+   This spec defines:
+     1. Global motion tokens (duration, easing, reduced-motion)
+     2. Pattern library (button, modal, sheet, toast, tab, list, card, page)
+     3. Screen-specific mapping
+     4. Restraint rules (max one primary transition per action)
+
+   Principles:
+     - Motion only for orientation, feedback, continuity, loading,
+       and important success/error states. Never decoration alone.
+     - Elements move from clear source to clear destination.
+       Nothing pops in or vanishes without reason.
+     - Subtle motion for common actions; richer motion for rare,
+       meaningful events (completion, success, onboarding).
+   ============================================================ */
+
+/* ---------- 1. GLOBAL MOTION TOKENS ---------- */
+
+:root {
+  /* Duration scale (Material-style) */
+  --dur-instant: 80ms;       /* hover, focus, press — fast feedback */
+  --dur-quick: 150ms;        /* small component enter/update */
+  --dur-short: 220ms;        /* tab switch, accordion, badge update */
+  --dur-medium: 300ms;       /* modal enter, drawer enter, page enter */
+  --dur-long: 400ms;         /* page exit (slightly faster than enter), sheet enter */
+  --dur-cinematic: 900ms;    /* rare celebratory / onboarding moments only */
+
+  /* Easing curves */
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);     /* default — ease-out-back */
+  --ease-decelerated: cubic-bezier(0, 0, 0.2, 1);     /* incoming elements */
+  --ease-accelerated: cubic-bezier(0.4, 0, 1, 1);     /* outgoing elements */
+  --ease-linear: linear;                                /* continuous rotation / progress only */
+
+  /* Z-depth scale (Material elevation) */
+  --z-0: 0;                  /* resting */
+  --z-1: 1;                  /* hover, card lift */
+  --z-2: 8;                  /* sticky nav, drawer */
+  --z-3: 24;                 /* modal, sheet */
+  --z-4: 100;                /* toast, snackbar */
+  --z-5: 1000;               /* critical overlay */
+
+  /* Motion intent — semantic names for component use */
+  --motion-hover: var(--dur-instant) var(--ease-standard);
+  --motion-press: var(--dur-instant) var(--ease-standard);
+  --motion-enter-sm: var(--dur-quick) var(--ease-decelerated);
+  --motion-exit-sm: var(--dur-instant) var(--ease-accelerated);
+  --motion-enter-md: var(--dur-medium) var(--ease-decelerated);
+  --motion-exit-md: var(--dur-long) var(--ease-accelerated);
+  --motion-enter-lg: var(--dur-cinematic) var(--ease-standard);
+}
+
+/* ---------- 2. REDUCED MOTION FALLBACK ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Replace strong movement with quick fades only */
+  .reveal, .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  /* Disable decorative looping motion */
+  .yantra-bg-spin,
+  .float-slow,
+  .pulse-glow,
+  .shimmer,
+  .sri-cakra-hero .sc-layer,
+  .sri-cakra-hero.sc-assembled .sc-layer {
+    animation: none !important;
+  }
+}
+
+/* ---------- 3. PATTERN LIBRARY ---------- */
+
+/* 3.1 Button — press feedback (scale 0.97, instant) */
+.btn-gold:active,
+.btn-ghost:active {
+  transform: translateY(0) scale(0.97);
+  transition: transform var(--dur-instant) var(--ease-standard);
+}
+
+/* 3.2 Input focus — border + box-shadow (180ms) */
+.field:focus {
+  transition: border-color var(--dur-instant) var(--ease-standard),
+              box-shadow var(--dur-instant) var(--ease-standard);
+}
+
+/* 3.3 Accordion / collapsible — height + opacity (220ms) */
+.accordion-content {
+  overflow: hidden;
+  transition: max-height var(--dur-short) var(--ease-decelerated),
+              opacity var(--dur-short) var(--ease-decelerated);
+}
+.accordion-collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+.accordion-expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* 3.4 Tab switch — opacity crossfade (220ms, no layout shift) */
+.tab-panel {
+  opacity: 0;
+  transition: opacity var(--dur-short) var(--ease-decelerated);
+}
+.tab-panel.tab-active {
+  opacity: 1;
+}
+
+/* 3.5 Card hover — lift + shadow (subtle, 180ms) */
+/* Applied to .folio-card — already defined in v1.5, refined here */
+.folio-card {
+  transition: transform var(--dur-instant) var(--ease-standard),
+              border-color var(--dur-instant) var(--ease-standard),
+              box-shadow var(--dur-quick) var(--ease-standard);
+}
+/* Disable hover lift on touch devices (no hover state) */
+@media (hover: none) {
+  .folio-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* 3.6 Modal / drawer enter — translate + opacity (300ms enter, 250ms exit) */
+.modal-backdrop {
+  opacity: 0;
+  transition: opacity var(--dur-medium) var(--ease-decelerated);
+}
+.modal-backdrop.modal-open {
+  opacity: 1;
+}
+.modal-content {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity var(--dur-medium) var(--ease-decelerated),
+              transform var(--dur-medium) var(--ease-decelerated);
+}
+.modal-backdrop.modal-open .modal-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* Exit — faster, accelerated */
+.modal-backdrop.modal-closing {
+  opacity: 0;
+  transition: opacity var(--dur-long) var(--ease-accelerated);
+}
+.modal-backdrop.modal-closing .modal-content {
+  opacity: 0;
+  transform: translateY(8px) scale(0.99);
+  transition: opacity var(--dur-long) var(--ease-accelerated),
+              transform var(--dur-long) var(--ease-accelerated);
+}
+
+/* 3.7 Drawer (side panel) — translateX */
+.drawer {
+  transform: translateX(100%);
+  transition: transform var(--dur-medium) var(--ease-decelerated);
+}
+.drawer.drawer-open {
+  transform: translateX(0);
+}
+.drawer.drawer-closing {
+  transform: translateX(100%);
+  transition: transform var(--dur-long) var(--ease-accelerated);
+}
+
+/* 3.8 Skeleton loader — shimmer pulse (1.5s linear infinite) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(36, 32, 25, 0.3) 25%,
+    rgba(60, 54, 42, 0.5) 50%,
+    rgba(36, 32, 25, 0.3) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s var(--ease-linear) infinite;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 3.9 Toast / snackbar — enter from bottom, exit down */
+.toast {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity var(--dur-medium) var(--ease-decelerated),
+              transform var(--dur-medium) var(--ease-decelerated);
+}
+.toast.toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast.toast-closing {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity var(--dur-long) var(--ease-accelerated),
+              transform var(--dur-long) var(--ease-accelerated);
+}
+
+/* 3.10 List item insertion / deletion (FLIP-friendly) */
+.list-item-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.list-item-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur-short) var(--ease-decelerated),
+              transform var(--dur-short) var(--ease-decelerated);
+}
+.list-item-exit {
+  opacity: 1;
+}
+.list-item-exit-active {
+  opacity: 0;
+  transition: opacity var(--dur-instant) var(--ease-accelerated);
+}
+
+/* 3.11 Number count-up (for stats) — no JS needed with CSS counter */
+.count-up {
+  animation: count-up-fade var(--dur-medium) var(--ease-decelerated) both;
+}
+@keyframes count-up-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 3.12 Success / error feedback — subtle highlight, no shake */
+.state-success {
+  animation: state-success-pulse var(--dur-medium) var(--ease-standard);
+  border-color: var(--color-sage) !important;
+}
+@keyframes state-success-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(143, 169, 126, 0.4); }
+  100% { box-shadow: 0 0 0 8px rgba(143, 169, 126, 0); }
+}
+.state-error {
+  animation: state-error-pulse var(--dur-medium) var(--ease-standard);
+  border-color: var(--color-rose-accent) !important;
+}
+@keyframes state-error-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(217, 154, 138, 0.4); }
+  100% { box-shadow: 0 0 0 8px rgba(217, 154, 138, 0); }
+}
+
+/* 3.13 Shared element / container transform (list → detail) */
+/* Triggered via view-transition-name per route — see v1.5 spec */
+.shared-element {
+  view-transition-name: var(--vt-name, none);
+}
+
+/* 3.14 Scroll reveal — opacity + clip-path ONLY (no translateY, no layout shift) */
+/* Override the v1.5 .reveal that used translateY + blur */
+.reveal {
+  opacity: 0;
+  transform: none;  /* NO translateY — prevents layout shift */
+  filter: none;     /* NO blur — prevents jank on low-end devices */
+  clip-path: inset(0 0 100% 0);  /* reveal from top */
+  transition: opacity var(--dur-long) var(--ease-decelerated),
+              clip-path var(--dur-long) var(--ease-decelerated);
+}
+.reveal.is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+/* 3.15 Page transition (View Transitions API) — refined from v1.5 */
+@supports (view-transition-name: none) {
+  ::view-transition-old(root) {
+    animation: var(--dur-long) var(--ease-accelerated) both fade-out-page;
+  }
+  ::view-transition-new(root) {
+    animation: var(--dur-medium) var(--ease-decelerated) both fade-in-page;
+  }
+  @keyframes fade-out-page {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  @keyframes fade-in-page {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
+/* ---------- 4. SCREEN-SPECIFIC MAPPING ---------- */
+
+/* 4.1 Homepage — animated Śrī Cakra is the ONLY decorative motion allowed.
+   Everything else (pillar cards, constellation, folio grid) is static
+   on load. Scroll reveals use clip-path, not translateY. */
+
+/* 4.2 Siddhi folio — tab switches use opacity crossfade (no slide).
+   Yantra tab image hover uses scale (1.05) + rotate (1deg) only.
+   Evidence panel expand uses accordion pattern. */
+
+/* 4.3 Yantra gallery — card hover uses lift + shadow only (no scale on the card itself).
+   Yantra image inside the card uses scale + rotate on hover.
+   On touch devices (hover: none), all hover effects disabled. */
+
+/* 4.4 Knowledge archive search — results use list-item-enter pattern (staggered).
+   Loading state uses skeleton pattern. No decorative motion. */
+
+/* 4.5 Cosmos — real-time planetary positions. NO animation on the positions
+   themselves (they update via server fetch, not client animation).
+   The CosmosPanel re-renders every 60s with a quick opacity fade. */
+
+/* ---------- 5. RESTRAINT RULES ---------- */
+
+/* Rule 1: Max one primary transition per user action.
+   If a card lifts on hover, it must not also rotate.
+   If a tab switches, the panel must not also slide. */
+
+/* Rule 2: No more than one decorative motion layer visible at a time.
+   On the homepage, the animated Śrī Cakra is the only decorative motion.
+   The rotating yantra-bg-spin on /yantras is the only decorative motion.
+   Never combine both on the same screen. */
+
+/* Rule 3: Hover effects only on clickable elements.
+   Add .no-hover to any element that should not have hover effects. */
+.no-hover,
+.no-hover * {
+  cursor: default !important;
+  pointer-events: auto;
+}
+.no-hover:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+/* Rule 4: No transition: all. Always specify properties. */
+/* Enforced by code review — no CSS rule. */
+
+/* Rule 5: On mobile (hover: none), disable ALL hover-only effects. */
+@media (hover: none) {
+  .folio-card:hover,
+  .group:hover .group-hover\:scale-105,
+  [class*="hover:"]:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Rule 6: Scroll reveals must NOT cause layout shift.
+   Elements occupy final space from the start.
+   Reveal uses opacity + clip-path only (see 3.14 above). */
+
+/* Rule 7: Exit animations are faster than enter animations.
+   Enter: 300-400ms ease-decelerated.
+   Exit: 200-250ms ease-accelerated. */
+
+/* Rule 8: No jump cuts for major screen changes.
+   Page transitions use View Transitions API (fade, 300-400ms).
+   Exception: highly efficiency-focused utilities (search, archivist)
+   may use instant changes where speed matters more than orientation. */
+
+/* ---------- 6. UTILITY CLASSES ---------- */
+
+.motion-safe { /* motion is allowed */ }
+.motion-reduce { /* motion is reduced */ }
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motion-reduce { display: none; }
+}
+
+/* Instant transition for utility-focused actions (search, filter) */
+.transition-instant {
+  transition-duration: var(--dur-instant) !important;
+}
+
+/* ============================================================
+   PRINT STYLESHEET — siddhi folios print cleanly to PDF
+   ============================================================ */
+
+@media print {
+  /* Force light background, black text */
+  body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+
+  /* Hide navigation, footer, decorative elements */
+  header,
+  footer,
+  nav,
+  .sticky,
+  .fade-up,
+  .yantra-bg-spin,
+  .float-slow,
+  .pulse-glow,
+  .shimmer,
+  .sri-cakra-hero,
+  .btn-gold,
+  .btn-ghost,
+  [class*="hover:"],
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset dark backgrounds to white */
+  [class*="bg-[var(--color-"],
+  [style*="background"] {
+    background: #ffffff !important;
+  }
+
+  /* Reset text colors to black/gray for print */
+  [class*="text-[var(--color-"] {
+    color: #1a1a1a !important;
+  }
+
+  /* Ensure links show their URL */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";  /* don't show internal links */
+  }
+
+  /* Page breaks between major sections */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  article, section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Folio-specific: ensure the article fills the page */
+  article {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Yantra images print in grayscale */
+  img[src*="/yantras/"] {
+    filter: grayscale(1) contrast(1.2);
+    max-width: 400px;
+    page-break-inside: avoid;
+  }
+
+  /* Borders become thin gray lines */
+  [class*="border"] {
+    border-color: #ccc !important;
+    border-width: 1px !important;
+  }
+
+  /* Remove box shadows */
+  [class*="shadow"] {
+    box-shadow: none !important;
+  }
+
+  /* Font size for print readability */
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  h1 { font-size: 22pt; }
+  h2 { font-size: 16pt; }
+  h3 { font-size: 13pt; }
+}
+
+/* ============================================================
+   ASTROKALKI v2.4 — CINEMATIC MOTION GRAPHICS SYSTEM
+   Top-level animation, ambient backgrounds, scroll-driven
+   parallax, cinematic page entrances, particle effects.
+   ============================================================ */
+
+/* ---------- 1. AMBIENT ANIMATED BACKGROUND ---------- */
+
+/* Floating gold particles — ambient atmospheric depth */
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+    transform: translateY(90vh) translateX(10px) scale(1);
+  }
+  90% {
+    opacity: 0.4;
+    transform: translateY(10vh) translateX(-10px) scale(0.8);
+  }
+  100% {
+    transform: translateY(-10vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+}
+
+.ambient-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-particles .particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 192, 137, 0.8) 0%, rgba(201, 152, 94, 0.2) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+/* 12 particles with varied positions, sizes, and timings */
+.ambient-particles .p1 { left: 5%; width: 3px; height: 3px; animation: particle-float 18s linear infinite; animation-delay: 0s; }
+.ambient-particles .p2 { left: 15%; width: 2px; height: 2px; animation: particle-float 22s linear infinite; animation-delay: 3s; }
+.ambient-particles .p3 { left: 25%; width: 4px; height: 4px; animation: particle-float 16s linear infinite; animation-delay: 7s; }
+.ambient-particles .p4 { left: 35%; width: 2px; height: 2px; animation: particle-float 25s linear infinite; animation-delay: 1s; }
+.ambient-particles .p5 { left: 45%; width: 3px; height: 3px; animation: particle-float 20s linear infinite; animation-delay: 9s; }
+.ambient-particles .p6 { left: 55%; width: 2px; height: 2px; animation: particle-float 19s linear infinite; animation-delay: 4s; }
+.ambient-particles .p7 { left: 65%; width: 4px; height: 4px; animation: particle-float 23s linear infinite; animation-delay: 6s; }
+.ambient-particles .p8 { left: 75%; width: 3px; height: 3px; animation: particle-float 17s linear infinite; animation-delay: 2s; }
+.ambient-particles .p9 { left: 85%; width: 2px; height: 2px; animation: particle-float 21s linear infinite; animation-delay: 8s; }
+.ambient-particles .p10 { left: 92%; width: 3px; height: 3px; animation: particle-float 24s linear infinite; animation-delay: 5s; }
+.ambient-particles .p11 { left: 50%; width: 5px; height: 5px; animation: particle-float 28s linear infinite; animation-delay: 10s; }
+.ambient-particles .p12 { left: 10%; width: 4px; height: 4px; animation: particle-float 26s linear infinite; animation-delay: 12s; }
+
+/* Aurora gradient — slowly shifting ambient glow */
+@keyframes aurora-shift {
+  0%, 100% {
+    background-position: 0% 50%, 100% 50%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%;
+  }
+}
+
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 0%, rgba(201, 152, 94, 0.15), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(111, 199, 189, 0.08), transparent 70%);
+  background-size: 200% 200%, 200% 200%;
+  animation: aurora-shift 30s ease-in-out infinite;
+}
+
+/* ---------- 2. CINEMATIC PAGE ENTRANCE ---------- */
+
+@keyframes cinematic-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.99);
+    filter: brightness(0.7) blur(6px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(0.85) blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1) blur(0);
+  }
+}
+
+.cinematic-enter {
+  animation: cinematic-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered child entrance — for grids and lists */
+.cinematic-stagger > * {
+  opacity: 0;
+  animation: cinematic-fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cinematic-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.cinematic-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.cinematic-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.cinematic-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+.cinematic-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+.cinematic-stagger > *:nth-child(6) { animation-delay: 0.6s; }
+.cinematic-stagger > *:nth-child(7) { animation-delay: 0.7s; }
+.cinematic-stagger > *:nth-child(8) { animation-delay: 0.8s; }
+.cinematic-stagger > *:nth-child(9) { animation-delay: 0.9s; }
+.cinematic-stagger > *:nth-child(10) { animation-delay: 1.0s; }
+.cinematic-stagger > *:nth-child(n+11) { animation-delay: 1.1s; }
+
+/* ---------- 3. SCROLL-DRIVEN PARALLAX REVEAL ---------- */
+
+/* Scroll-linked opacity + slight scale (NO translateY — prevents layout shift) */
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(20% 0 20% 0);
+    filter: blur(8px) brightness(0.6);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    filter: blur(0) brightness(1);
+  }
+}
+
+.scroll-reveal {
+  animation: scroll-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-play-state: paused;
+  animation-delay: 0s;
+}
+
+.scroll-reveal.is-visible {
+  animation-play-state: running;
+}
+
+/* Parallax depth layers — for hero sections */
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-far {
+  transform: translateZ(-100px) scale(1.2);
+}
+
+.parallax-mid {
+  transform: translateZ(-50px) scale(1.1);
+}
+
+.parallax-near {
+  transform: translateZ(0);
+}
+
+/* ---------- 4. HERO TEXT REVEAL — KINETIC TYPOGRAPHY ---------- */
+
+@keyframes word-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+.word-reveal {
+  display: inline-block;
+  opacity: 0;
+  animation: word-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.word-reveal:nth-child(1) { animation-delay: 0.3s; }
+.word-reveal:nth-child(2) { animation-delay: 0.5s; }
+.word-reveal:nth-child(3) { animation-delay: 0.7s; }
+.word-reveal:nth-child(4) { animation-delay: 0.9s; }
+.word-reveal:nth-child(5) { animation-delay: 1.1s; }
+
+/* Letter-by-letter for special headings */
+@keyframes letter-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.5);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.letter-drop {
+  display: inline-block;
+  opacity: 0;
+  animation: letter-drop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ---------- 5. AMBIENT YANTRA ROTATION (BACKGROUND) ---------- */
+
+@keyframes yantra-ambient-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.yantra-ambient {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.03;
+  animation: yantra-ambient-rotate 120s linear infinite;
+}
+
+.yantra-ambient svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 6. SECTION DIVIDER ANIMATION ---------- */
+
+@keyframes divider-grow {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.animated-divider {
+  transform-origin: center;
+  animation: divider-grow 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------- 7. CARD ENTRANCE — 3D TILT + GLOW ---------- */
+
+@keyframes card-entrance {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(10deg) translateY(40px) scale(0.95);
+    filter: brightness(0.5) blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0) translateY(0) scale(1);
+    filter: brightness(1) blur(0);
+  }
+}
+
+.card-entrance {
+  animation: card-entrance 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 3D tilt on hover (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .card-3d {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+  }
+
+  .card-3d:hover {
+    transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+    box-shadow:
+      0 20px 60px -20px rgba(0, 0, 0, 0.8),
+      0 0 80px -30px rgba(201, 152, 94, 0.4);
+  }
+}
+
+/* ---------- 8. MAGNETIC BUTTON EFFECT ---------- */
+
+.magnetic-btn {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.magnetic-btn::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 152, 94, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.magnetic-btn:hover::after {
+  opacity: 1;
+}
+
+/* ---------- 9. LIQUID LOADING TRANSITION ---------- */
+
+@keyframes liquid-wipe {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.liquid-enter {
+  animation: liquid-wipe 0.8s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+/* ---------- 10. ENHANCED LAYOUT SYSTEM ---------- */
+
+/* Refined container — max-width by content type */
+.container-prose {
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.container-wide {
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-prose { padding-left: 2rem; padding-right: 2rem; }
+  .container-wide { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* Enhanced section rhythm */
+.section-lg { padding-top: 5rem; padding-bottom: 5rem; }
+.section-md { padding-top: 3rem; padding-bottom: 3rem; }
+.section-sm { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+
+@media (min-width: 640px) {
+  .section-lg { padding-top: 7rem; padding-bottom: 7rem; }
+  .section-md { padding-top: 4rem; padding-bottom: 4rem; }
+}
+
+/* Enhanced type scale */
+.type-hero { font-size: clamp(2rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -0.02em; }
+.type-h1 { font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1.1; }
+.type-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.15; }
+.type-h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.2; }
+.type-body { font-size: clamp(0.875rem, 1vw, 1rem); line-height: 1.7; }
+.type-small { font-size: 0.75rem; line-height: 1.5; }
+.type-micro { font-size: 0.625rem; line-height: 1.4; }
+
+/* Enhanced visual hierarchy — gold eyebrow with line */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-gold);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold));
+}
+
+/* Glass morphism for cards */
+.glass {
+  background: rgba(16, 15, 13, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 152, 94, 0.15);
+}
+
+.glass-strong {
+  background: rgba(10, 9, 8, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 152, 94, 0.2);
+}
+
+/* Gold line separator with gradient */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold) 50%, transparent);
+  border: none;
+  margin: 2rem 0;
+}
+
+/* Enhanced focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- 11. REDUCED MOTION FALLBACK ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-particles,
+  .aurora-bg,
+  .yantra-ambient,
+  .cinematic-enter,
+  .cinematic-stagger > *,
+  .word-reveal,
+  .letter-drop,
+  .animated-divider,
+  .card-entrance,
+  .liquid-enter,
+  .scroll-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+
+  .card-3d:hover {
+    transform: none !important;
+  }
+}
+
+/* ---------- 12. MOBILE OPTIMIZATION ---------- */
+
+@media (max-width: 640px) {
+  .ambient-particles .particle { display: none; }
+  .ambient-particles .p1,
+  .ambient-particles .p5,
+  .ambient-particles .p10 { display: block; }
+
+  .aurora-bg { opacity: 0.25; }
+
+  .cinematic-enter { animation-duration: 0.6s; }
+  .cinematic-stagger > * { animation-duration: 0.5s; }
+}
+
+/* ============================================================
+   RITUAL MODE — offering animations & visual effects
+   ============================================================ */
+
+/* Offering expand ring (on release) */
+@keyframes offering-expand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+    border-width: 3px;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+    border-width: 0.5px;
+  }
+}
+
+/* Charged halo pulse */
+@keyframes halo-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.offering-halo {
+  animation: halo-pulse 2s ease-in-out infinite;
+}
+
+/* Burst ring on release */
+.offering-burst {
+  animation: offering-expand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Fire offering — flame flicker during hold */
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.8; }
+  25% { transform: scaleY(1.1) scaleX(0.95); opacity: 0.9; }
+  50% { transform: scaleY(0.95) scaleX(1.05); opacity: 0.7; }
+  75% { transform: scaleY(1.05) scaleX(0.98); opacity: 0.85; }
+}
+
+/* Water offering — ripple on release */
+@keyframes water-ripple {
+  0% { transform: scale(0); opacity: 0.8; border-width: 2px; }
+  100% { transform: scale(3); opacity: 0; border-width: 0; }
+}
+
+/* Flower offering — petal float */
+@keyframes petal-float {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-60px) rotate(45deg); opacity: 0; }
+}
+
+/* Incense — smoke rise */
+@keyframes smoke-rise {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.6; }
+  100% { transform: translateY(-80px) scaleX(1.5); opacity: 0; }
+}
+
+/* Mantra — pulse ring */
+@keyframes mantra-pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Bell — rapid vibration ring */
+@keyframes bell-vibrate {
+  0% { transform: scale(1); opacity: 0.8; }
+  20% { transform: scale(1.3); opacity: 0.5; }
+  40% { transform: scale(1.1); opacity: 0.7; }
+  60% { transform: scale(1.25); opacity: 0.3; }
+  80% { transform: scale(1.15); opacity: 0.5; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .offering-halo,
+  .offering-burst {
+    animation: none !important;
+  }
+}
+
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

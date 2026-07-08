@@ -1,0 +1,87 @@
+---
+title: Vajravārāhī / Vajrayoginī Sādhana
+category: Buddhist Tantra
+subcategory: Yoginī-tantra (Cakrasaṃvara cycle) — Vajravārāhī
+tradition: Vajrayāna Buddhism (Sakya, Kagyu, Gelug)
+language: Sanskrit (original sādhana texts); Tibetan (canonical translations)
+century: "Sādhana texts c. 9th–11th c. (Pāla-era); Tibetan translations 11th–13th c."
+tags: [buddhist-tantra, vajrayogini, vajravarahi, cakrasamvara, yogini-tantra, dakini, highest-yoga-tantra]
+caution_level: high
+source: "Web-researched, scholarly attested"
+---
+
+# Vajravārāhī / Vajrayoginī Sādhana
+
+> A Buddhist tantric sādhana of the *yoginī-tantra* (highest yoga tantra) class, addressed to Vajravārāhī ("Adamantine Sow") / Vajrayoginī ("Adamantine Yoginī"), the ḍākinī of the Cakrasaṃvara cycle. High caution — a Buddhist Anuttarayoga-tantra practice requiring highest-tantra empowerment (*abhiṣeka*). Preserved here as heritage / source material. Not instructional.
+
+---
+
+## I. Textual Attestation
+
+- **Primary text:** *Śrī Vajravārāhīsādhana* (sādhana-text attributed to Umapatideva, surviving in Sanskrit manuscript and Tibetan translation in the Tengyur); the *Cakrasaṃvara Tantra* (root tantra of the cycle) and its explanatory tantras (the *Vajraḍāka Tantra*); the *Vajrayoginī Sādhana* of Nāropa (the Nāro Khechari tradition). The *Śrī Vajravārāhīsādhana* is indexed in the Digital Sanskrit Buddhist Canon.
+- **Secondary text(s):** Tengyur commentarial corpus (Tibetan translations of Indic commentaries); modern practice-manuals (e.g., the Vajrayoginī practice manual translated for the Drikung Tibetan Meditation Center, drawing on the Cakrasaṃvara cycle).
+- **Key scholarship:** Elizabeth English, *Vajrayoginī: Her Visualizations, Rituals, and Forms — A Study of the Cult of Vajrayoginī in India* (Wisdom Publications, Studies in Indian and Tibetan Buddhism, 2002); Ronald M. Davidson, *Indian Esoteric Buddhism: A Social History of the Tantric Movement* (Columbia, 2002); Janet Gyatso, ed., *In the Mirror of Memory: Reflections on Mindfulness and Remembrance in Indian and Tibetan Buddhism* (SUNY, 1992); Miranda Shaw, *Passionate Enlightenment: Women in Tantric Buddhism* (Princeton, 1994); Stephan Beyer, *The Cult of Tārā* (Hermeneutics, 1978); David Snellgrove, *Indo-Tibetan Buddhism* (Serindia, 1987).
+- **Source URL (archive):**
+  - Elizabeth English, *Vajrayoginī: Her Visualizations, Rituals, and Forms* (full PDF) — https://www.tsemrinpoche.com/download/Tantra/en/Elizabeth%20English%20-%20Vajrayogini%20-%20Her%20Visualization,%20Rituals%20and%20Forms.pdf
+  - *Śrī Vajravārāhīsādhana* — Digital Sanskrit Buddhist Canon catalogue entry — https://www.dsbcproject.org/canon-text/book/351
+  - Ronald Davidson, *Indian Esoteric Buddhism* PDF — http://www.tantriklaboratories.com/wp-content/uploads/2015/05/Indian-Esoteric-Buddhism-A-Social-History-of-the-Tantric-Movement.pdf
+  - Tantrika Bauddha Sadhana Aur Sahitya, Nagendranath Upadhyaya (DLI, 1958), Internet Archive — https://archive.org/details/in.ernet.dli.2015.429811
+  - Dakini Translations — Vajrayoginī research resource — https://dakinitranslations.com/vajrayogini
+  - Bhagavatī Vajrayoginī (Drikung TMC practice manual) — https://www.drikungtmc.com/wp-content/uploads/2021/12/Vajrayogini-Comentary-for-Winter-Retreta.pdf
+
+Vajravārāhī / Vajrayoginī is the principal female *yi-dam* (meditational deity) of the Anuttarayoga-tantra class in the Tibetan Buddhist canon, and her practice is the principal female-deity sādhana of the Sakya, Kagyu, and Gelug schools. The root textual source is the *Cakrasaṃvara Tantra* (an Indic *yoginī-tantra* of the late 8th–10th century Pāla-era), with Vajravārāhī appearing as the consort of Cakrasaṃvara and, in her independent sādhana form, as a complete *yi-dam* in her own right. Davidson (2002, *Indian Esoteric Buddhism*, chs. 5–6) places the crystallisation of the *yoginī-tantra* class — including the Cakrasaṃvara cycle and the Vajravārāhī / Vajrayoginī cult — in the 9th–11th century Pāla-era Buddhist-Tantric milieu, with the Tibetan canonical translations completed by the 11th–13th centuries.
+
+Elizabeth English's 2002 monograph *Vajrayoginī: Her Visualizations, Rituals, and Forms* (Wisdom Publications, Studies in Indian and Tibetan Buddhism series) is the standard scholarly treatment of the cult; it surveys the Sanskrit sādhana literature (including Umapatideva's *Śrī Vajravārāhīsādhana*), the Tibetan commentarial tradition, and the iconographic record. English documents the systematic equivalence between Vajravārāhī and Vajrayoginī — the two names refer to the same deity in most textual recensions, with the "Vārāhī" form being explicitly sow-headed and the "Yoginī" form being the same deity in her human-headed visualisation. The Digital Sanskrit Buddhist Canon (DSBC) indexes the *Śrī Vajravārāhīsādhana* in its Sanskrit-text catalogue. The Nāro Khechari form of Vajrayoginī, transmitted by Nāropa to Marpa and thence to the Kagyu tradition, is the best-known Tibetan recension and is documented in the practice-manual digitised by the Drikung Tibetan Meditation Center.
+
+Shaw (1994) and Gyatso (1992) note that the Vajrayoginī cult is one of the few Anuttarayoga-tantra traditions in which a female deity is the principal meditational deity, and is the primary textual locus of the Buddhist *ḍākinī* concept in its fully developed form. Davidson (2002) places the cult in the broader context of the late-Pāla Śākta-Buddhist cross-fertilisation, noting the textual cognates between the Hindu Chinnamastā tradition and the Buddhist Chinnamundā-Vajravārāhī tradition.
+
+---
+
+## II. Mantra & Method (as documented in sources)
+
+> **Editorial note.** The mantra and method below are reproduced from published textual sources for scholarly preservation. This is documentation, not instruction.
+
+- **Bīja mantra:** The Vajravārāhī / Vajrayoginī *oṃ-mantra* is documented in the *Śrī Vajravārāhīsādhana* of Umapatideva and in the Nāro Khechari sādhana of Nāropa. Its exact form varies across textual lineages (Umapatideva's Sanskrit sādhana, the Nāro Khechari Tibetan tradition, the Mārti Khechari, the Indra Khechari). The specific syllable-sequences are not reproduced here, as the Vajrayāna tradition restricts open recitation of the *vidyā*-mantra to practitioners who have received the appropriate Anuttarayoga-tantra empowerment (*abhiṣeka*) in the Cakrasaṃvara or Vajrayoginī cycle.
+- **Mantra count:** Paddhati literature (English 2002, pp. 169–178) documents recitation counts in multiples of 100,000, with a structural *mantra-sādhana* count of 100,000 or 1,000,000 for the close-retreat (*nyen-pa*). Specific numbers vary across recensions.
+- **Duration:** The Tibetan close-retreat (*nyen-pa*) is typically a 41-day or 90-day cycle; the longer completion-retreat (*drub-pa*) is documented in the practice manuals.
+- **Direction facing:** East or South, per Vajrayāna convention (the Cakrasaṃvara cycle paddhati favours east).
+- **Mālā:** Bodhi-seed (*bodhi-mālā*) or rudrākṣa, per Vajrayāna convention; some recensions specify a *kapāla* (skull-bead) mālā for the completion-stage (*dzog-rim*) practice.
+
+The procedure documented in Umapatideva's *Śrī Vajravārāhīsādhana* (and translated in English 2002, ch. 4) opens with the standard Vajrayāna *sādhana* sequence — *guru-yoga*, *śūnyatā* contemplation, *vajra-āsana*, *rakṣā* (protection), the *dhāraṇī* of the *yi-dam*'s emergence from the seed-syllable *hrīḥ* or *baṃ*, the *abhiṣeka* of the deity by the *tathāgatas*, the *japa* of the *vidyā*-mantra, the *bali* offering to the *ḍākinīs*, and the *prasara* dissolution. The Nāro Khechari form, transmitted by Nāropa and translated by Marpa, structures the sādhana around the *khecharī* ("sky-goer") identification of the practitioner with Vajrayoginī, with the visualization of the central channel (*avadhūtī*) and the *cakras* as her mandala-palace. English (2002, ch. 5) documents the systematic equivalence between the Vajravārāhī mandala in Umapatideva's sādhana and the Cakrasaṃvara mandala of which she is the consort.
+
+Davidson (2002, ch. 6) notes that the Vajrayoginī sādhana is structurally cognate with the Hindu Chinnamastā / Chinnamundā sādhana — a textual cognate that is direct in the case of the Chinnamundā form of Vajravārāhī, in which the deity is iconographically self-decapitated in the same posture as the Hindu Chinnamastā. The Pāla-era textual record preserves both the Hindu and the Buddhist recensions, and the two traditions historically cross-fertilised.
+
+---
+
+## III. Yantra (if attested)
+
+A circular maṇḍala of thirty-seven deities — Vajravārāhī at the centre, surrounded by the four *pīṭha*-ḍākinīs in the cardinal directions, the twenty-four *khecarīs* of the *saṃvara* maṇḍala in the intermediate directions, and the eight additional offering-goddesses at the periphery — is described in Umapatideva's *Śrī Vajravārāhīsādhana* and is the canonical maṇḍala of the Vajravārāhī cycle. English (2002, ch. 4) gives the full iconographic mapping. The maṇḍala is traditionally constructed of coloured powders (*ril-bu*) on a flat surface, or visualised internally in the *samaya*-maṇḍala of the generation-stage (*kye-rim*). Bīja placements within the maṇḍala are documented in the Umapatideva sādhana and in the Tengyur commentaries; the per-deity bījas are not reproduced here.
+
+---
+
+## IV. Warnings and Contraindications (per sources)
+
+- The *Śrī Vajravārāhīsādhana* of Umapatideva, the Nāro Khechari sādhana of Nāropa, and the entire Vajrayāna commentarial tradition uniformly restrict the Vajravārāhī / Vajrayoginī practice to practitioners who have received the appropriate Anuttarayoga-tantra empowerment (*abhiṣeka*) in the Cakrasaṃvara or Vajrayoginī cycle. This restriction is explicit in the printed practice-manuals and is foundational to the Vajrayāna samaya-vow.
+- Davidson (2002) and English (2002) note that the *yoginī-tantra* class carries the most severe samaya-restrictions in the Vajrayāna canon; paddhati literature records that "incorrect" practice (without empowerment) is considered a violation of the *samaya* and is ritually and karmically counter-productive.
+- The completion-stage (*dzog-rim*) practices of the *tuṃmo* (caṇḍālī) inner-fire yoga that are structurally allied with the Vajrayoginī sādhana are physically and psychologically intense; the Tibetan commentarial tradition records that they are not to be undertaken without the direct supervision of a *dīkṣā-guru*.
+- The Nāro Khechari tradition is the most widely transmitted of the Vajrayoginī forms and is documented in the Drikung TMC practice-manual; that manual carries the standard Vajrayāna restriction that the practice is to be undertaken only under the guidance of a *lama* who holds the lineage.
+- The Hindu-Buddhist cognate forms (Chinnamastā / Chinnamundā) should not be conflated with each other; the two traditions, while textually cognate, are soteriologically distinct and are not interchangeable in practice.
+
+---
+
+## V. Bibliography
+
+1. English, Elizabeth. *Vajrayoginī: Her Visualizations, Rituals, and Forms — A Study of the Cult of Vajrayoginī in India.* Boston: Wisdom Publications, Studies in Indian and Tibetan Buddhism, 2002. PDF: https://www.tsemrinpoche.com/download/Tantra/en/Elizabeth%20English%20-%20Vajrayogini%20-%20Her%20Visualization,%20Rituals%20and%20Forms.pdf
+2. Davidson, Ronald M. *Indian Esoteric Buddhism: A Social History of the Tantric Movement.* New York: Columbia University Press, 2002. PDF: http://www.tantriklaboratories.com/wp-content/uploads/2015/05/Indian-Esoteric-Buddhism-A-Social-History-of-the-Tantric-Movement.pdf
+3. Shaw, Miranda. *Passionate Enlightenment: Women in Tantric Buddhism.* Princeton: Princeton University Press, 1994.
+4. Gyatso, Janet, ed. *In the Mirror of Memory: Reflections on Mindfulness and Remembrance in Indian and Tibetan Buddhism.* Albany: SUNY Press, 1992.
+5. *Śrī Vajravārāhīsādhana* — Digital Sanskrit Buddhist Canon catalogue entry: https://www.dsbcproject.org/canon-text/book/351
+6. Upadhyaya, Nagendranath. *Tantrika Bauddha Sadhana Aur Sahitya.* 1958. Internet Archive (DLI): https://archive.org/details/in.ernet.dli.2015.429811
+7. *Bhagavatī Vajrayoginī — Generation Stage Liberating Instructions*, Drikung Tibetan Meditation Center practice-manual: https://www.drikungtmc.com/wp-content/uploads/2021/12/Vajrayogini-Comentary-for-Winter-Retreta.pdf
+8. Dakini Translations — Vajrayoginī scholarly research resource: https://dakinitranslations.com/vajrayogini
+
+---
+
+## Editorial Framing
+
+This document is preserved as part of the AstroKalki knowledge archive for scholarly study. It does not prescribe, recommend, or guarantee outcomes. Readers seeking to undertake the described practice should consult qualified lineage holders and the primary texts directly. The AstroKalki project does not endorse the practice of high-intensity rites without adequate preparation, transmission, and supervision.

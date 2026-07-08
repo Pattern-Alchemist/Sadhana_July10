@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pratyaṅgirā Yantra — AstroKalki
+  ================================
+  Geometrically faithful rendering of the Pratyaṅgirā Devī yantra as
+  specified in the Atharvānokta Pratyaṅgirā Vidhāna and the Pratyaṅgirā
+  Kalpa. Pratyaṅgirā (also Atharvaṇa Bhadrakālī, Siṃhamukhī) is the
+  lion-faced (siṃha-vaktrā) goddess of the Atharva-veda register — the
+  protective (rakṣā) counterpart to destructive Śākta forms, whose bīja
+  hrīṁ is here rendered in the rose Atharvaṇa-protective accent. Her
+  iconography is the lion face (siṃha-mukha) — referenced by the lion-
+  face motif at the center of the yantra — and the eight-bladed chakra
+  (aṣṭa-dala-cakra) surrounding her, representing her all-directional
+  protective aspect.
+
+  Construction per the source texts:
+    - Outer square bhūpura with four cardinal gates
+    - 8-petalled lotus ring
+    - Inverted triangle (yoni, downward-pointing) at the center
+    - 8-bladed chakra (an 8-pointed star, the aṣṭa-dala-cakra) inside
+      the triangle, representing the all-directional protective aspect
+    - Lion-face motif (siṃha-mukha) at the center of the star: two eyes
+      with pupils, a nose (downward triangle), a mouth line with four
+      fangs (2 upper, 2 lower), rendered in the rose Atharvaṇa accent
+    - Central bindu (above the lion face) bearing the Pratyaṅgirā bīja
+      hrīṁ
+    - Gate bījas: East oṁ, South hrīṁ, West kṣauṁ, North phaṭ
+    - Outer mantra ring: "oṁ hrīṁ pratyaṅgirāyai namaḥ"
+
+  Note on geometry: The 8-pointed star (aṣṭa-dala-cakra) is rendered as
+  a 16-vertex polygon with alternating outer/inner radii (55/28), centered
+  at the centroid of the inverted triangle. The lion-face motif is
+  rendered as a simple geometric abstraction (almond-eye ellipses + small
+  downward-triangle nose + horizontal mouth line with 4 small triangular
+  fangs), in the rose Atharvaṇa-protective accent. The central bindu with
+  the Pratyaṅgirā bīja hrīṁ is placed above the lion face, in the upper
+  portion of the triangle — the standard placement for the presiding bīja
+  of a protective yantra. This is consistent with the Atharvānokta
+  Pratyaṅgirā Vidhāna's prescription that the sādhaka visualise the lion-
+  face at the yoni-center and the hrīṁ-bīja above it.
+
+  CAUTION: HIGH — dīkṣā-restricted Atharvaṇa practice; Pratyaṅgirā
+  sādhana of the abhicāra (adverse-action) variety is strictly forbidden.
+  The protective rakṣā-form visualised here is itself dīkṣā-restricted.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!-- Outer circular mantra ring -->
+  <circle cx="300" cy="300" r="295"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="2"
+          opacity="0.7"/>
+
+  <!-- Mantra around the outer ring -->
+  <defs>
+    <path id="mantraRingPratyangira"
+          d="M 595,300 A 295,295 0 1,1 594.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="14" fill="#e6c089" letter-spacing="3" opacity="0.9">
+    <textPath href="#mantraRingPratyangira" startOffset="0%">
+      oṁ hrīṁ pratyaṅgirāyai namaḥ    oṁ hrīṁ pratyaṅgirāyai namaḥ    oṁ hrīṁ pratyaṅgirāyai namaḥ    oṁ hrīṁ pratyaṅgirāyai namaḥ
+    </textPath>
+  </text>
+
+  <!-- Outer bhūpura (square frame with four cardinal gates) -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#c9985e" stroke-width="10"/>
+
+  <!-- Inner bhūpura (second ring) -->
+  <rect x="55" y="55" width="490" height="490"
+        fill="none" stroke="#9a7340" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- 8-petalled lotus ring -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#e6c089" stroke-width="1.8" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+    </g>
+  </g>
+
+  <!-- Inverted triangle (yoni-trikoṇa) -->
+  <polygon points="180,220 420,220 300,430"
+           fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+  <!-- Inner concentric triangle for visual depth -->
+  <polygon points="195,240 405,240 300,408"
+           fill="none" stroke="#9a7340" stroke-width="1" opacity="0.5"/>
+
+  <!--
+    8-bladed chakra (aṣṭa-dala-cakra) — 8-pointed star polygon centered
+    at (300, 345), with outer radius 55 and inner radius 28. Represents
+    Pratyaṅgirā's all-directional protective aspect. Rose accent (#d99a8a)
+    — the Atharvaṇa protective register.
+  -->
+  <polygon points="300,290 310.7,319.1 338.9,306.1 325.9,334.3 355,345 325.9,355.7 338.9,383.9 310.7,370.9 300,400 289.3,370.9 261.1,383.9 274.1,355.7 245,345 274.1,334.3 261.1,306.1 289.3,319.1"
+           fill="none" stroke="#d99a8a" stroke-width="2" opacity="0.95"/>
+
+  <!--
+    Lion-face motif (siṃha-mukha) at the center of the star — rendered as
+    a simple geometric abstraction. Rose accent throughout.
+  -->
+  <g>
+    <!-- Two eyes (almond ellipses) -->
+    <ellipse cx="287" cy="335" rx="5.5" ry="3.5"
+             fill="none" stroke="#d99a8a" stroke-width="1.5" opacity="0.95"/>
+    <ellipse cx="313" cy="335" rx="5.5" ry="3.5"
+             fill="none" stroke="#d99a8a" stroke-width="1.5" opacity="0.95"/>
+    <!-- Two pupils (solid black dots) -->
+    <circle cx="287" cy="335" r="1.5" fill="#000000"/>
+    <circle cx="313" cy="335" r="1.5" fill="#000000"/>
+
+    <!-- Nose (small downward triangle) -->
+    <polygon points="296,344 304,344 300,353"
+             fill="none" stroke="#d99a8a" stroke-width="1.5" opacity="0.95"/>
+
+    <!-- Mouth (horizontal line) -->
+    <line x1="291" y1="362" x2="309" y2="362"
+          stroke="#d99a8a" stroke-width="1.6" opacity="0.95"/>
+    <!-- Lower jaw (horizontal line below the mouth, defining the open mouth) -->
+    <line x1="291" y1="372" x2="309" y2="372"
+          stroke="#d99a8a" stroke-width="1.6" opacity="0.95"/>
+
+    <!-- Upper fangs (2 small downward-pointing triangles, base on mouth line) -->
+    <polygon points="293,362 296,362 294.5,369"
+             fill="#d99a8a" opacity="0.95"/>
+    <polygon points="304,362 307,362 305.5,369"
+             fill="#d99a8a" opacity="0.95"/>
+
+    <!-- Lower fangs (2 small upward-pointing triangles, base on lower jaw line) -->
+    <polygon points="296,372 299,372 297.5,365"
+             fill="#d99a8a" opacity="0.95"/>
+    <polygon points="301,372 304,372 302.5,365"
+             fill="#d99a8a" opacity="0.95"/>
+  </g>
+
+  <!--
+    Central bindu above the lion face (in the upper portion of the triangle)
+    with the Pratyaṅgirā bīja hrīṁ. The standard placement for the
+    presiding bīja of a protective yantra.
+  -->
+  <circle cx="300" cy="262" r="11" fill="#000000"/>
+  <circle cx="300" cy="262" r="13" fill="none" stroke="#e6c089" stroke-width="1.2" opacity="0.85"/>
+  <text x="300" y="268" text-anchor="middle"
+        font-size="20" fill="#e6c089" font-weight="bold">hrīṁ</text>
+
+  <!-- Gate bīja labels -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">oṁ</text>
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">hrīṁ</text>
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#e6c089" font-weight="bold">kṣauṁ</text>
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">phaṭ</text>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    PRATYAṄGIRĀ YANTRA · ATHARVĀNOKTA PRATYAṄGIRĀ VIDHĀNA · CAUTION: HIGH
+  </text>
+
+</svg>

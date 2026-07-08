@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lakulīśa Liṅga — AstroKalki
+  ============================
+  Geometrically faithful rendering of the Lakulīśa liṅga diagram as
+  specified in the Pāśupata Sūtras with Kauṇḍinya's Pañcārthabhāṣya. This
+  is NOT a standard tantric yantra — the Pāśupata path is the oldest
+  surviving Śaiva ascetic order (attributed to Lakulīśa, ca. 2nd century
+  CE), and its practice is conduct-centric (vrata-dharma) rather than
+  mantra-centric. There is therefore no outer mantra ring, no bīja-
+  framework, and no complex lotus-cakra geometry — only the liṅga
+  silhouette with the lakula (club) that is Lakulīśa's identifying
+  attribute, the pīṭha (pedestal) on which it stands, and the tripuṇḍra
+  (three-ash-lines) above it.
+
+  Construction per the source texts:
+    - Simple square frame with four cardinal gates (no inner bhūpura
+      second ring — the Pāśupata path is austere and aniconic)
+    - The pañcākṣara "Namaḥ Śivāya" inscribed at the four gates in IAST
+      (the Pāśupata path predates the tantric bīja-framework; the
+      pañcākṣara is its central mantra, attested in the Pāśupata Sūtras
+      and Kauṇḍinya's commentary)
+    - Central liṅga silhouette: a vertical rounded-top form (the liṅga
+      proper) with a slight crown-bulb at the top — the standard Śaiva
+      liṅga form
+    - Horizontal club (lakula) across the upper third of the liṅga —
+      Lakulīśa's identifying attribute, by which the Pāśupata order is
+      also known as the Lakulīśa-Pāśupata
+    - Below the liṅga, a small pedestal (pīṭha) — the liṅga's seat
+    - Above the liṅga, a small three-line tripuṇḍra (Śiva's mark) — the
+      bhasma-tripuṇḍra prescribed for Śaiva dīkṣā
+    - No outer mantra ring (the Pāśupata path is not mantra-centric)
+    - Pure gold #c9985e throughout — no special accent (the Pāśupata
+      path is austere, and unlike the tantric Śākta/Buddhist traditions,
+      has no prescribed color-register)
+
+  Note on geometry: The liṅga silhouette is rendered as a simple
+  rounded-top vertical rectangle (the standard liṅga form), with a
+  slightly wider ellipse overlaid at the top to suggest the "crown bulb"
+  characteristic of Lakulīśa's liṅga icons. The lakula (club) is rendered
+  as a horizontal bar with knob-ends (the characteristic club-head),
+  crossing the upper third of the liṅga — a stylised abstraction of
+  Lakulīśa's standard iconographic attribute. The pīṭha is a trapezoidal
+  pedestal, and the tripuṇḍra is three horizontal lines of decreasing
+  length (the third line shortest, matching the bhasma-tripuṇḍra form
+  prescribed for Śaiva dīkṣā). The deliberate visual simplicity of this
+  diagram — no lotus rings, no bījas, no mantra-text — reflects the
+  Pāśupata path's aniconic and conduct-centric character, which the
+  Pāśupata Sūtras consistently prescribe over visualisation-practice.
+
+  CAUTION: HIGH — the Pāśupata path is an extreme ascetic practice
+  reserved for sannyāsins; its vrata-dharma (including the laughing-and-
+  weeping ritual, the deliberate social-outcaste conduct, and the ash-
+  smearing practices) is not adaptable to householder practice without
+  distortion. The liṅga-diagram here is a scholarly contemplative
+  rendering, not an activated ritual object.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!--
+    Simple square frame (outer bhūpura only — no inner ring, no lotus,
+    no mantra ring). The Pāśupata path is austere and aniconic.
+  -->
+  <!-- Top side with North gate gap -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <!-- Right side with East gate gap -->
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Bottom side with South gate gap -->
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Left side with West gate gap -->
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#c9985e" stroke-width="10"/>
+
+  <!--
+    Pañcākṣara "Namaḥ Śivāya" inscribed at the four gates (in IAST).
+    The Pāśupata path predates the tantric bīja-framework; the pañcākṣara
+    is its central mantra, attested in the Pāśupata Sūtras 1.43 and
+    Kauṇḍinya's Pañcārthabhāṣya.
+  -->
+  <!-- East gate — Namaḥ Śivāya -->
+  <text x="590" y="307" text-anchor="end" font-size="12" fill="#e6c089"
+        letter-spacing="2" font-weight="bold">Namaḥ Śivāya</text>
+  <!-- South gate — Namaḥ Śivāya -->
+  <text x="300" y="582" text-anchor="middle" font-size="12" fill="#e6c089"
+        letter-spacing="2" font-weight="bold">Namaḥ Śivāya</text>
+  <!-- West gate — Namaḥ Śivāya -->
+  <text x="10" y="307" text-anchor="start" font-size="12" fill="#e6c089"
+        letter-spacing="2" font-weight="bold">Namaḥ Śivāya</text>
+  <!-- North gate — Namaḥ Śivāya -->
+  <text x="300" y="28" text-anchor="middle" font-size="12" fill="#e6c089"
+        letter-spacing="2" font-weight="bold">Namaḥ Śivāya</text>
+
+  <!--
+    Tripuṇḍra — three horizontal ash-lines above the liṅga (Śiva's mark).
+    Three lines of decreasing length (top shortest, bottom longest),
+    matching the bhasma-tripuṇḍra form prescribed for Śaiva dīkṣā.
+  -->
+  <g stroke="#c9985e" stroke-width="2.4" opacity="0.95">
+    <!-- Top line (shortest) -->
+    <line x1="285" y1="155" x2="315" y2="155"/>
+    <!-- Middle line -->
+    <line x1="275" y1="172" x2="325" y2="172"/>
+    <!-- Bottom line (longest) -->
+    <line x1="265" y1="189" x2="335" y2="189"/>
+  </g>
+
+  <!--
+    Central liṅga silhouette — vertical rounded-top form (the liṅga proper)
+    with a slight crown-bulb at the top. Pure gold throughout.
+  -->
+  <!-- Liṅga body: rounded-top vertical rectangle -->
+  <path d="M 275,440 L 275,250 Q 275,225 300,225 Q 325,225 325,250 L 325,440 Z"
+        fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+  <!-- Crown-bulb (slightly wider ellipse at the top, suggesting the glans-like crown) -->
+  <ellipse cx="300" cy="225" rx="28" ry="9"
+           fill="none" stroke="#c9985e" stroke-width="2" opacity="0.95"/>
+
+  <!--
+    Horizontal club (lakula) across the upper third of the liṅga —
+    Lakulīśa's identifying attribute. Rendered as a horizontal bar with
+    knob-ends (the characteristic club-head).
+  -->
+  <g>
+    <!-- Club bar (horizontal) -->
+    <line x1="252" y1="278" x2="348" y2="278"
+          stroke="#c9985e" stroke-width="7" opacity="0.95"/>
+    <!-- Left club-head (knob) -->
+    <circle cx="250" cy="278" r="7" fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+    <!-- Right club-head (knob) -->
+    <circle cx="350" cy="278" r="7" fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+  </g>
+
+  <!--
+    Pīṭha (pedestal) below the liṅga — the liṅga's seat.
+    Rendered as a trapezoidal pedestal.
+  -->
+  <path d="M 248,440 L 352,440 L 342,462 L 258,462 Z"
+        fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+  <!-- Pedestal base-line (the ground on which the pīṭha rests) -->
+  <line x1="240" y1="468" x2="360" y2="468"
+        stroke="#c9985e" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    LAKULĪŚA LIṄGA · PĀŚUPATA SŪTRAS / KAUṆḌINYA PAÑCĀRTHABHĀṢYA · CAUTION: HIGH
+  </text>
+
+</svg>

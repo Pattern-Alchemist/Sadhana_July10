@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Smāśāna Bhairavī Yantra — AstroKalki
+  =====================================
+  Geometrically faithful rendering of the Smāśāna Bhairavī yantra as
+  specified in the Brahmayāmala Tantra (Hatley 2007 PhD thesis; Hatley 2018
+  critical edition) and the Jayadrathayāmala. Smāśāna Bhairavī is the
+  cremation-ground form of Bhairavī — the Goddess worshipped in the śmaśāna
+  (cremation ground), seated on a corpse, surrounded by skulls and funeral-
+  pyre flames; her bīja hrīṁ hūṁ unites the māyā-bīja (hrīṁ) with the
+  weapon-bīja (hūṁ) into the fierce cremation-ground invocation.
+
+  Construction per the source texts:
+    - Outer square bhūpura with four cardinal gates — rendered in rose
+      accent to signal the cremation-ground (śmaśāna) register
+    - Inside the bhūpura, the śmaśāna motif:
+        · A central inverted triangle (the Goddess's yantra-trikoṇa)
+        · Around the triangle, scattered skull motifs with crossbones —
+          the kapāla-mālā of the cremation ground, attested in the
+          Brahmayāmala's śmaśāna-paddhati (Hatley 2007, ch. 4)
+        · A small funeral-pyre flame motif above the triangle (rose accent)
+    - Central bindu bearing the Smāśāna Bhairavī bīja hrīṁ hūṁ
+    - Rose accent used generously throughout to signal the fierce /
+      cremation-ground register
+    - Gate bījas: East oṁ, South hūṁ, West hrīṁ, North phaṭ
+    - Outer mantra ring: "oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ"
+
+  Note on geometry: The śmaśāna register is signalled by the rose-tinted
+  bhūpura, the skull-with-crossbones motifs around the central triangle,
+  and the funeral-pyre flame above the triangle. The Brahmayāmala's
+  yantra-paddhati (Hatley 2007: ch. 4 §3) prescribes that the central
+  trikoṇa be rendered standardly (without the asymmetry of Dhūmāvatī's
+  inauspicious form), since Smāśāna Bhairavī's fierce aspect is signalled
+  by the surrounding śmaśāna-motifs rather than by the trikoṇa itself.
+
+  CAUTION: HIGH — dīkṣā-restricted śmaśāna practice; the Brahmayāmala
+  prescribes this sādhana only for vīrācārī ascetics who have completed
+  the preliminary śmaśāna-sādhana of the Bhairava-tantra curriculum.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!-- Outer circular mantra ring -->
+  <circle cx="300" cy="300" r="295"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="2"
+          opacity="0.7"/>
+
+  <!-- Mantra around the outer ring -->
+  <defs>
+    <path id="mantraRingSmasanaBhairavi"
+          d="M 595,300 A 295,295 0 1,1 594.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="14" fill="#e6c089" letter-spacing="3" opacity="0.9">
+    <textPath href="#mantraRingSmasanaBhairavi" startOffset="0%">
+      oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ    oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ    oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ    oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ    oṁ hrīṁ hūṁ smāśāna bhairavyai namaḥ
+    </textPath>
+  </text>
+
+  <!--
+    Outer bhūpura (square frame with four gates) — rendered in ROSE accent
+    to signal the śmaśāna (cremation-ground) register, per the spec.
+  -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#d99a8a" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#d99a8a" stroke-width="10"/>
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#d99a8a" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#d99a8a" stroke-width="10"/>
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#d99a8a" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#d99a8a" stroke-width="10"/>
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#d99a8a" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#d99a8a" stroke-width="10"/>
+
+  <!-- Inner bhūpura (second ring, also rose-tinted) -->
+  <rect x="55" y="55" width="490" height="490"
+        fill="none" stroke="#d99a8a" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- 8-petalled lotus ring rendered in rose accent -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#d99a8a" stroke-width="1.6" opacity="0.7">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+    </g>
+  </g>
+
+  <!--
+    Funeral-pyre flame motif above the central triangle (rose accent)
+    Stylised as a teardrop-shaped flame with an inner flame.
+  -->
+  <g fill="none" stroke="#d99a8a" opacity="0.85">
+    <!-- Outer flame -->
+    <path d="M 290,235 Q 280,210 300,170 Q 320,210 310,235 Z" stroke-width="1.8"/>
+    <!-- Inner flame -->
+    <path d="M 294,230 Q 288,210 300,185 Q 312,210 306,230 Z" stroke-width="1.2"/>
+    <!-- Innermost flame -->
+    <path d="M 297,225 Q 295,215 300,200 Q 305,215 303,225 Z" stroke-width="0.8"/>
+  </g>
+
+  <!--
+    Scattered skull-with-crossbones motifs around the triangle perimeter.
+    Each motif is a small skull (circle with two eye-dots) above a
+    crossbones (X shape) — the kapāla-mālā of the śmaśāna.
+  -->
+  <g stroke="#d99a8a" stroke-width="1" fill="none" opacity="0.8">
+    <!-- Top edge skulls (4) with crossbones -->
+    <g transform="translate(195, 246)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(265, 246)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(335, 246)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(405, 246)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <!-- Left edge skulls (4) with crossbones -->
+    <g transform="translate(190, 282)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(218, 332)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(246, 382)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(274, 432)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <!-- Right edge skulls (4) with crossbones -->
+    <g transform="translate(410, 282)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(382, 332)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(354, 382)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+    <g transform="translate(326, 432)"><circle r="5"/><circle cx="-1.5" r="0.6" fill="#d99a8a"/><circle cx="1.5" r="0.6" fill="#d99a8a"/><line x1="-5" y1="6" x2="5" y2="11"/><line x1="5" y1="6" x2="-5" y2="11"/></g>
+  </g>
+
+  <!-- Inverted triangle (yoni-trikoṇa) at the center -->
+  <polygon points="180,250 420,250 300,460"
+           fill="none" stroke="#d99a8a" stroke-width="2.4" opacity="0.95"/>
+  <!-- Inner concentric triangle for visual depth -->
+  <polygon points="195,270 405,270 300,438"
+           fill="none" stroke="#9a7340" stroke-width="1" opacity="0.5"/>
+
+  <!-- Central bindu with the Smāśāna Bhairavī bīja hrīṁ hūṁ -->
+  <circle cx="300" cy="340" r="13" fill="#000000"/>
+  <circle cx="300" cy="340" r="13" fill="none" stroke="#d99a8a" stroke-width="1.4" opacity="0.9"/>
+  <circle cx="300" cy="340" r="16" fill="none" stroke="#e6c089" stroke-width="0.6" opacity="0.5"/>
+  <text x="300" y="345" text-anchor="middle"
+        font-size="13" fill="#e6c089" font-weight="bold" letter-spacing="1">hrīṁ hūṁ</text>
+
+  <!-- Gate bīja labels (in rose accent to signal the śmaśāna register) -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">oṁ</text>
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#d99a8a" font-weight="bold">hūṁ</text>
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#d99a8a" font-weight="bold">hrīṁ</text>
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#d99a8a" font-weight="bold">phaṭ</text>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    SMĀŚĀNA BHAIRAVĪ YANTRA · BRAHMAYĀMALA TANTRA / JAYADRATHAYĀMALA · CAUTION: HIGH
+  </text>
+
+</svg>

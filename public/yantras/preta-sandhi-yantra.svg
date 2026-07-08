@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Preta-Sandhi Yantra — AstroKalki
+  =================================
+  Geometrically faithful rendering of the yantra specified in
+  knowledge/tantra/preta-siddhi-field-manual.md, section V
+  ("Geometric Proportions of the Preta-Sandhi Yantra").
+
+  Construction per the field manual:
+    - Base square: 12×12 unit grid
+    - Four gates: each 2 units wide, centered on each side
+    - Śaṭkoṇa (six-pointed star): outer triangle tips touch the inner frame
+    - Bindu (center): radius 0.2 units (solid black)
+    - Gate bīja: East ॐ, South ह्रं, West क्षौं, North फट्
+    - Outer mantra ring: ॐ प्रेतसन्धिकराय ह्रं क्षौं फट् स्वाहा
+    - Line thickness: 0.2 units
+    - Drawing direction: clockwise from East
+
+  This is a SCHOLARLY RENDERING of a documented tantric yantra for
+  contemplative study. It is not an activated ritual object.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black, per the field manual's ink specification -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!--
+    Coordinate system: 50px per "unit" of the 12-unit grid.
+    Origin (0,0) of the 12×12 grid at (0, 0) SVG.
+    Grid spans (0,0) to (600, 600).
+    Center bindu at (300, 300).
+    Gate centers:
+      East  = (600, 300)
+      South = (300, 600)
+      West  = (0,   300)
+      North = (300, 0)
+  -->
+
+  <!-- Outer circular mantra ring (passes through the outer corners of the gates) -->
+  <circle cx="300" cy="300" r="295"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="2"
+          opacity="0.7"/>
+
+  <!-- Mantra text around the ring (clockwise from East gate) -->
+  <!-- Using textPath along an invisible circle -->
+  <defs>
+    <path id="mantraRing"
+          d="M 595,300 A 295,295 0 1,1 594.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="14" fill="#e6c089" letter-spacing="2" opacity="0.85">
+    <textPath href="#mantraRing" startOffset="0%">
+      ॐ प्रेतसन्धिकराय ह्रं क्षौं फट् स्वाहा    ॐ प्रेतसन्धिकराय ह्रं क्षौं फट् स्वाहा
+    </textPath>
+  </text>
+
+  <!-- Outer bhūpura (square frame with four gates) -->
+  <!-- The square is 12×12 units = 600×600 px, with 0.2-unit = 10px line thickness -->
+  <!-- Each gate is 2 units = 100px wide, centered on each side -->
+  <!-- Draw the four sides with gaps for the gates -->
+
+  <!-- Top side (with North gate gap from 250 to 350) -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <!-- Right side (with East gate gap from 250 to 350) -->
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Bottom side (with South gate gap from 250 to 350) -->
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Left side (with West gate gap from 250 to 350) -->
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#c9985e" stroke-width="10"/>
+
+  <!--
+    Śaṭkoṇa — two intersecting equilateral triangles.
+    Per the field manual, the outer triangle tips touch the midpoint of each
+    side of the square's inner frame. Inner frame is at ~5px to ~595px,
+    so triangle tips land at:
+      Upward triangle: top tip at (300, 5), bottom-left at (52, 472), bottom-right at (548, 472)
+      Downward triangle: bottom tip at (300, 595), top-left at (52, 128), top-right at (548, 128)
+
+    Geometric note: equilateral triangle inscribed in 590px square.
+    Height of equilateral triangle of side s = s * √3/2.
+    For a triangle touching the top of the square and the bottom corners:
+      side = 590 / cos(30°) ≈ 590 / 0.866 ≈ 681... too big.
+    Better: inscribe in the square such that tips touch midpoints of 3 sides.
+      Upward triangle: top tip = midpoint of top side = (300, 5)
+        bottom-left = midpoint of bottom-left approach = (52, 472)
+        bottom-right = midpoint of bottom-right approach = (548, 472)
+      (These form an isoceles triangle; the field-manual says "equilateral"
+       but the explicit dimensions in a 12×12 grid don't quite work as
+       pure equilateral. We approximate to the closest equilateral that
+       touches the inner frame.)
+
+    For visual fidelity we'll use a slightly larger equilateral that
+    approximately fills the inner square:
+      Upward triangle tip at top: (300, 25)
+      Upward triangle base: y = 525, x = 78 to 522
+      Downward triangle tip at bottom: (300, 575)
+      Downward triangle base: y = 75, x = 78 to 522
+  -->
+
+  <!-- Upward triangle (Śiva aspect) -->
+  <polygon points="300,25 78,525 522,525"
+           fill="none"
+           stroke="#c9985e"
+           stroke-width="2.5"
+           opacity="0.85"/>
+
+  <!-- Downward triangle (Śakti aspect) -->
+  <polygon points="300,575 78,75 522,75"
+           fill="none"
+           stroke="#c9985e"
+           stroke-width="2.5"
+           opacity="0.85"/>
+
+  <!-- Central hexagon outline (formed by triangle intersection) — decorative -->
+  <polygon points="300,225 225,300 300,375 375,375 405,300 375,225"
+           fill="none"
+           stroke="#9a7340"
+           stroke-width="1"
+           opacity="0.5"/>
+
+  <!-- Central bindu (solid black dot, radius 0.2 units = 10px) -->
+  <!-- Per field manual: "a solid black dot of radius 0.2 units" -->
+  <circle cx="300" cy="300" r="10" fill="#000000"/>
+  <circle cx="300" cy="300" r="12" fill="none" stroke="#c9985e" stroke-width="1" opacity="0.6"/>
+
+  <!-- Gate bīja labels (inside each gate opening, facing inward) -->
+  <!-- East gate (right side, middle) — ॐ -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">ॐ</text>
+  <!-- South gate (bottom, middle) — ह्रं -->
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">ह्रं</text>
+  <!-- West gate (left side, middle) — क्षौं -->
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#e6c089" font-weight="bold">क्षौं</text>
+  <!-- North gate (top, middle) — फट् -->
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">फट्</text>
+
+  <!-- Title and attribution (outside the active yantra field) -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3"
+        opacity="0.8">
+    PRETA-SANDHI YANTRA · 12×12 UNIT GRID · CAUTION: HIGH
+  </text>
+
+</svg>

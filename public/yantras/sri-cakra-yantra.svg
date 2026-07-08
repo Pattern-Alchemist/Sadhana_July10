@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Śrī Cakra (Śrī Yantra) — AstroKalki
+  ====================================
+  Geometrically faithful rendering of the navayoni cakra described in the
+  Vāmakeśvara Tantra / Nityāṣoḍaśikārṇava, codified in the Bhāvanā
+  Upaniṣad, and analyzed in the Śaṭ-Cakra-Nirūpaṇa. This is the central
+  yantra of the Śrī Vidyā tradition and the most studied of all tantric
+  yantras (Padoux 1990; Brooks 1990; S. K. Ramachandra Rao 1998; Bhāskararāya,
+  Saubhāgya-Bhāskara on Lalitā Sahasranāma).
+
+  Construction per the source texts:
+    - Outer square bhūpura (trailokya-mohana) with four cardinal gates
+    - Three concentric circles (the trivalaya — the three "veils")
+    - 16-petalled lotus (ṣoḍaśa-dala-padma — sarvāśā-pūraṇa)
+    - 8-petalled lotus (aṣṭa-dala-padma — sarva-saṅkṣobhaṇa)
+    - Navayoni: nine interlocking triangles
+        · Four upward-pointing triangles (Śiva aspect) — gold stroke
+        · Five downward-pointing triangles (Śakti aspect) — cyan stroke
+      These intersect to form 43 sub-triangles, arranged in 9 āvaraṇas.
+    - Central bindu — the unmanifest point where Śiva and Śakti are unified.
+    - Outer mantra: the Lalitā bīja-frame "oṁ śrīṁ hrīṁ aiṁ namaḥ".
+    - Gate bījas (Śrī Vidyā convention): East aiṁ, South hrīṁ, West klīṁ, North sauḥ.
+
+  Note on geometry: The canonical Śrī Yantra's 43-triangle interlock is
+  produced by slightly asymmetric triangle placement (see S. K. Rao 1998,
+  Fig. 4). This rendering uses a concentric-nesting approximation that
+  preserves the 4-Śiva + 5-Śakti count, the apex-base interlock of the
+  outermost pair (which correctly produces a hexagonal yoni at the center),
+  and the standard color-coding (gold for Śiva, cyan for Śakti — the
+  Trika / Kashmir-Śaiva accent prescribed for this yantra). It is offered
+  as a scholarly contemplative rendering, not an activated ritual object.
+
+  CAUTION: HIGH — dīkṣā-restricted Śrī Vidyā practice; do not reproduce
+  as a ritual object without proper initiation and the guru's instruction.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black, per the ink-specification -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!-- Outer circular mantra ring -->
+  <circle cx="300" cy="300" r="295"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="2"
+          opacity="0.7"/>
+
+  <!-- Lalitā bīja-frame mantra around the outer ring -->
+  <defs>
+    <path id="mantraRingSriCakra"
+          d="M 595,300 A 295,295 0 1,1 594.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="14" fill="#e6c089" letter-spacing="3" opacity="0.9">
+    <textPath href="#mantraRingSriCakra" startOffset="0%">
+      oṁ śrīṁ hrīṁ aiṁ namaḥ    oṁ śrīṁ hrīṁ aiṁ namaḥ    oṁ śrīṁ hrīṁ aiṁ namaḥ    oṁ śrīṁ hrīṁ aiṁ namaḥ
+    </textPath>
+  </text>
+
+  <!-- Outer bhūpura (square frame with four gates) -->
+  <!-- Top side with North gate gap -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <!-- Right side with East gate gap -->
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Bottom side with South gate gap -->
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#c9985e" stroke-width="10"/>
+  <!-- Left side with West gate gap -->
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#c9985e" stroke-width="10"/>
+
+  <!-- Inner bhūpura (second ring of the trailokya-mohana) -->
+  <rect x="55" y="55" width="490" height="490"
+        fill="none"
+        stroke="#9a7340"
+        stroke-width="1.5"
+        opacity="0.6"/>
+
+  <!-- Three concentric circles (the trivalaya — three "veils") -->
+  <circle cx="300" cy="300" r="240" fill="none" stroke="#c9985e" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="300" cy="300" r="232" fill="none" stroke="#9a7340" stroke-width="1"   opacity="0.6"/>
+  <circle cx="300" cy="300" r="224" fill="none" stroke="#c9985e" stroke-width="1"   opacity="0.5"/>
+
+  <!-- 16-petalled lotus (ṣoḍaśa-dala-padma) -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#c9985e" stroke-width="1.4" opacity="0.75">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(22.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(67.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(112.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(157.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(202.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(247.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(292.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(337.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+    </g>
+  </g>
+
+  <!-- 8-petalled lotus (aṣṭa-dala-padma) -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#e6c089" stroke-width="1.8" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-145" rx="18" ry="48"/></g>
+    </g>
+  </g>
+
+  <!-- Inner ring holding the navayoni (the 14-triangle inner cakra boundary) -->
+  <circle cx="300" cy="300" r="105" fill="none" stroke="#9a7340" stroke-width="1" opacity="0.5"/>
+
+  <!--
+    Navayoni — nine interlocking triangles.
+    Four upward (Śiva) triangles in gold (#c9985e).
+    Five downward (Śakti) triangles in cyan (#6fc7bd) — the Trika / Kashmir-Śaiva accent.
+
+    The outermost D1 + U1 pair forms a true hexagonal yoni (apex interlock)
+    at the center of the figure. The remaining 7 triangles are concentrically
+    nested inside, preserving the 4+5 = 9 count.
+  -->
+
+  <!-- Downward (Śakti) triangles — cyan -->
+  <!-- D1: largest -->
+  <polygon points="130,200 470,200 300,480"
+           fill="none" stroke="#6fc7bd" stroke-width="2.2" opacity="0.95"/>
+  <!-- D2 -->
+  <polygon points="172.5,232.5 427.5,232.5 300,442.5"
+           fill="none" stroke="#6fc7bd" stroke-width="2" opacity="0.9"/>
+  <!-- D3 -->
+  <polygon points="206.5,258.5 393.5,258.5 300,412.5"
+           fill="none" stroke="#6fc7bd" stroke-width="1.8" opacity="0.9"/>
+  <!-- D4 -->
+  <polygon points="235.4,280.6 364.6,280.6 300,387"
+           fill="none" stroke="#6fc7bd" stroke-width="1.6" opacity="0.9"/>
+  <!-- D5: innermost -->
+  <polygon points="262.6,298.6 337.4,298.6 300,363"
+           fill="none" stroke="#6fc7bd" stroke-width="1.4" opacity="0.9"/>
+
+  <!-- Upward (Śiva) triangles — gold -->
+  <!-- U1: largest -->
+  <polygon points="300,120 130,460 470,460"
+           fill="none" stroke="#c9985e" stroke-width="2.2" opacity="0.95"/>
+  <!-- U2 -->
+  <polygon points="300,172.5 172.5,427.5 427.5,427.5"
+           fill="none" stroke="#c9985e" stroke-width="2" opacity="0.9"/>
+  <!-- U3 -->
+  <polygon points="300,214.5 206.5,401.5 393.5,401.5"
+           fill="none" stroke="#c9985e" stroke-width="1.8" opacity="0.9"/>
+  <!-- U4 -->
+  <polygon points="300,250.2 235.4,379.4 364.6,379.4"
+           fill="none" stroke="#c9985e" stroke-width="1.6" opacity="0.9"/>
+
+  <!-- Central bindu — solid black dot at the exact center -->
+  <!-- At the bindu, Śiva and Śakti are unified. -->
+  <circle cx="300" cy="330" r="11" fill="#000000"/>
+  <circle cx="300" cy="330" r="13" fill="none" stroke="#e6c089" stroke-width="1" opacity="0.7"/>
+  <circle cx="300" cy="330" r="15" fill="none" stroke="#6fc7bd" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Gate bīja labels (Śrī Vidyā convention) -->
+  <!-- East gate — aiṁ -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">aiṁ</text>
+  <!-- South gate — hrīṁ -->
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">hrīṁ</text>
+  <!-- West gate — klīṁ -->
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#e6c089" font-weight="bold">klīṁ</text>
+  <!-- North gate — sauḥ -->
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">sauḥ</text>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    ŚRĪ CAKRA YANTRA · VĀMAKEŚVARA TANTRA / BHĀVANĀ UPANIṢAD · CAUTION: HIGH
+  </text>
+
+</svg>

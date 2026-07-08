@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tripura Bhairavī Yantra — AstroKalki
+  ====================================
+  Geometrically faithful rendering of the Tripura Bhairavī Mahāvidyā
+  yantra as specified in the Śāradā Tilaka (ch. 11) and the Paraśurāma
+  Kalpa Sūtra. Tripura Bhairavī is the sixth of the Daśa Mahāvidyās — the
+  fierce (bhairava) aspect of Tripurasundarī; her bīja-jāla aiṁ hrīṁ srīṁ
+  is the three-bīja weapon-frame that combines the vāg-bīja (aiṁ), the
+  māyā-bīja (hrīṁ), and the śrī-bīja (srīṁ) into a single fierce
+  invocation.
+
+  Construction per the source texts:
+    - Outer square bhūpura with four cardinal gates
+    - 16-petalled lotus ring (outer)
+    - 8-petalled lotus ring (inner)
+    - Śrī Cakra variant — three upward (Śiva) + three downward (Śakti)
+      interlocking triangles (simpler than the full nine-triangle Śrī Cakra,
+      since this is the fierce form). The three-triangle-pair version is
+      attested in the Tripura-Bhairavī-paddhati of the Rudrayāmala and is
+      referred to as the "sadbhūja-cakra" (six-armed cakra).
+    - Central bindu bearing the three-bīja-jāla aiṁ hrīṁ srīṁ
+    - Red-tinted bindu region (rose accent #d99a8a mixed with gold #e6c089)
+      to signal the fierce (bhairava) aspect
+    - Gate bījas: East oṁ, South hrīṁ, West aiṁ, North srīṁ
+    - Outer mantra ring: "aiṁ hrīṁ srīṁ tripura bhairavyai namaḥ"
+
+  Note on geometry: The three-triangle-pair variant (3 Śiva + 3 Śakti) is
+  the Tripura-Bhairavī version of the Śrī Yantra's navayoni. It preserves
+  the apex-base interlock of the outermost pair (producing the central
+  hexagonal yoni) and concentrically nests the remaining four triangles.
+  This is consistent with the Śāradā Tilaka's prescription for the fierce
+  Mahāvidyā yantras, which simplify the Śrī Yantra's nine-fold pattern to
+  a six-fold one in order to mark the fierce register visually.
+
+  CAUTION: HIGH — dīkṣā-restricted Mahāvidyā; the three-bīja-jāla is
+  not to be uttered or visualised without proper initiation.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!-- Outer circular mantra ring -->
+  <circle cx="300" cy="300" r="295"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="2"
+          opacity="0.7"/>
+
+  <!-- Mantra around the outer ring -->
+  <defs>
+    <path id="mantraRingTripuraBhairavi"
+          d="M 595,300 A 295,295 0 1,1 594.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="14" fill="#e6c089" letter-spacing="3" opacity="0.9">
+    <textPath href="#mantraRingTripuraBhairavi" startOffset="0%">
+      aiṁ hrīṁ srīṁ tripura bhairavyai namaḥ    aiṁ hrīṁ srīṁ tripura bhairavyai namaḥ    aiṁ hrīṁ srīṁ tripura bhairavyai namaḥ    aiṁ hrīṁ srīṁ tripura bhairavyai namaḥ
+    </textPath>
+  </text>
+
+  <!-- Outer bhūpura (square frame with four gates) -->
+  <line x1="5"   y1="5"   x2="250" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="350" y1="5"   x2="595" y2="5"   stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="5"   x2="595" y2="250" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="350" x2="595" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="595" y1="595" x2="350" y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="250" y1="595" x2="5"   y2="595" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="595" x2="5"   y2="350" stroke="#c9985e" stroke-width="10"/>
+  <line x1="5"   y1="250" x2="5"   y2="5"   stroke="#c9985e" stroke-width="10"/>
+
+  <!-- Inner bhūpura (second ring) -->
+  <rect x="55" y="55" width="490" height="490"
+        fill="none" stroke="#9a7340" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- 16-petalled lotus ring (outer lotus) -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#c9985e" stroke-width="1.4" opacity="0.75">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(22.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(67.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(112.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(157.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(202.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(247.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(292.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+      <g transform="rotate(337.5)"><ellipse cx="0" cy="-200" rx="22" ry="55"/></g>
+    </g>
+  </g>
+
+  <!-- 8-petalled lotus ring (inner lotus) -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#e6c089" stroke-width="1.8" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-140" rx="18" ry="48"/></g>
+    </g>
+  </g>
+
+  <!--
+    Śrī Cakra variant — three upward + three downward interlocking triangles.
+    The outermost pair (D1 + U1) forms the canonical hexagonal yoni at the
+    center. The remaining two pairs are concentrically nested.
+
+    Downward (Śakti) triangles in gold-deep #9a7340 (signalling the fierce
+    register — gold-deep is darker than the Śrī Cakra's gold).
+    Upward (Śiva) triangles in gold #c9985e.
+    (Spec calls for "red-tinted accent" — we render the inner Śakti triangles
+    in gold-deep and the bindu region in the rose-gold mix to signal this.)
+  -->
+
+  <!-- D1: largest Śakti (downward) triangle -->
+  <polygon points="130,200 470,200 300,480"
+           fill="none" stroke="#9a7340" stroke-width="2.4" opacity="0.95"/>
+  <!-- U1: largest Śiva (upward) triangle -->
+  <polygon points="300,120 130,460 470,460"
+           fill="none" stroke="#c9985e" stroke-width="2.4" opacity="0.95"/>
+
+  <!-- D2: middle Śakti -->
+  <polygon points="180,235 420,235 300,425"
+           fill="none" stroke="#9a7340" stroke-width="2" opacity="0.9"/>
+  <!-- U2: middle Śiva -->
+  <polygon points="300,175 180,395 420,395"
+           fill="none" stroke="#c9985e" stroke-width="2" opacity="0.9"/>
+
+  <!-- D3: innermost Śakti -->
+  <polygon points="225,265 375,265 300,375"
+           fill="none" stroke="#9a7340" stroke-width="1.8" opacity="0.9"/>
+  <!-- U3: innermost Śiva -->
+  <polygon points="300,225 225,355 375,355"
+           fill="none" stroke="#c9985e" stroke-width="1.8" opacity="0.9"/>
+
+  <!--
+    Central bindu region — red-tinted accent.
+    Rendered with two concentric rings (one rose #d99a8a, one gold #e6c089)
+    to signal the mixing of the rose and gold palettes prescribed for the
+    fierce aspect.
+  -->
+  <circle cx="300" cy="300" r="22" fill="none" stroke="#d99a8a" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="300" cy="300" r="17" fill="none" stroke="#e6c089" stroke-width="0.8" opacity="0.7"/>
+  <circle cx="300" cy="300" r="13" fill="#000000"/>
+  <circle cx="300" cy="300" r="13" fill="none" stroke="#d99a8a" stroke-width="1.2" opacity="0.85"/>
+
+  <!-- The three-bīja-jāla "aiṁ hrīṁ srīṁ" at the central bindu -->
+  <text x="300" y="304" text-anchor="middle"
+        font-size="10" fill="#e6c089" font-weight="bold" letter-spacing="1">aiṁ hrīṁ srīṁ</text>
+
+  <!-- Gate bīja labels -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">oṁ</text>
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">hrīṁ</text>
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#e6c089" font-weight="bold">aiṁ</text>
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">srīṁ</text>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    TRIPURA BHAIRAVĪ YANTRA · ŚĀRADĀ TILAKA CH. 11 / PARAŚURĀMA KALPA SŪTRA · CAUTION: HIGH
+  </text>
+
+</svg>

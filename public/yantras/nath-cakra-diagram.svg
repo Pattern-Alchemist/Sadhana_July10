@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Nāth Cakra Diagram — AstroKalki
+  ===============================
+  Geometrically faithful rendering of the six-cakra (ṣaṭ-cakra) + sahasrāra
+  astral-body diagram as specified in the Kaulajñānanirṇaya of Matsyendranāth
+  and codified in the Śaṭ-Cakra-Nirūpaṇa (Pūrnānanda, c. 1577, with
+  Kālīcarana's commentary). This is NOT a deity-yantra — it is a cakra-
+  diagram of the yogic-astral-body, central to the Nāth path's kuṇḍalinī-
+  yoga practice. The Nāth tradition is yogic (founded by Matsyendranāth,
+  c. 9th-10th century) rather than fierce-Śākta, and its core practice is
+  the raising of kuṇḍalinī-śakti through the six cakras along the suṣumṇā
+  nāḍī, to merge with Śiva in the sahasrāra.
+
+  Construction per the source texts:
+    - Vertical central axis (the suṣumṇā nāḍī) from bottom to top
+    - Six cakras stacked along the axis, each a horizontal lotus-form with
+      the canonical petal counts and tattva-color associations:
+        1. Mūlādhāra (bottom) — 4-petalled lotus, deep red/maroon (gold-deep
+           #9a7340)
+        2. Svādhiṣṭhāna — 6-petalled lotus, orange-gold tint (primary gold
+           #c9985e — the palette's closest match to the canonical orange)
+        3. Maṇipūra — 10-petalled lotus, yellow tint (gold-bright #e6c089)
+        4. Anāhata — 12-petalled lotus, gold (#c9985e)
+        5. Viśuddha — 16-petalled lotus, smoky purple tint (purple #a98ad6
+           — the palette's prescribed purple accent, used lightly)
+        6. Ājñā — 2-petalled lotus, ivory (#f5f1e6 — the palette override
+           prescribed in the geometry spec)
+    - Sahasrāra at the top — a 1000-petalled lotus (rendered as a dense
+      ring of 48 tiny petals, since 1000 is impractical at 600×600 — the
+      simplification is noted below), with ivory (#f5f1e6) petals
+    - Iḍā nāḍī (left, lunar, cyan #6fc7bd) and Piṅgalā nāḍī (right, solar,
+      gold #c9985e) weaving around the central axis in a double-helix
+      pattern — the two auxiliary nāḍīs that flank suṣumṇā in the
+      yogic-anatomy
+    - So'ham mantra inscribed along the central axis: "sa" on the inhale
+      (lower half, reading upward from Mūlādhāra), "haṁ" on the exhale
+      (upper half, reading upward toward the Brahmarandhra) — together
+      forming the natural breath-mantra "so'ham" ("I am That")
+    - Each cakra labeled with its name in small text to the right of the
+      lotus (placed to the right rather than directly below to avoid
+      overlap with the So'ham inscription on the axis — interpretive
+      choice, see note below)
+    - No outer bhūpura, no gate bījas, no mantra ring (this is a cakra-
+      diagram, not a deity-yantra)
+
+  Note on geometry: The 1000-petalled sahasrāra is rendered as 48 small
+  petals densely packed around the central bindu — the simplification is
+  necessary because 1000 individual petals cannot be legibly rendered at
+  600×600. The 48 count is sufficient to convey the dense-petalled
+  appearance of the canonical sahasrāra (per the Śaṭ-Cakra-Nirūpaṇa's
+  description of "a thousand petals, like the hood of a serpent"). The
+  Iḍā/Piṅgalā double-helix is rendered as two cubic-Bezier paths that
+  cross the central axis at each cakra-center, alternating left/right —
+  matching the Śaṭ-Cakra-Nirūpaṇa's description of the two nāḍīs crossing
+  at each cakra. The cakra labels are placed to the right of each lotus
+  (at x=380) rather than directly below, because the So'ham inscription
+  on the central axis (rotated -90°) would overlap with horizontal label
+  text placed on the axis at the same y-coordinate. The ivory color
+  #f5f1e6 is used for the Ājñā and Sahasrāra cakras per the geometry
+  spec's explicit prescription (an override of the standard palette,
+  applied only to this diagram).
+
+  CAUTION: HIGH — kuṇḍalinī-yoga practice of the Nāth tradition is
+  dīkṣā-restricted; the raising of kuṇḍalinī-śakti without proper
+  preparation and the guru's supervision is associated with well-
+  documented physiological and psychological hazards.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!--
+    Vertical central axis (the suṣumṇā nāḍī) from bottom to top.
+    Gold #c9985e — the Nāth path is yogic (not fierce-Śākta).
+  -->
+  <line x1="300" y1="30" x2="300" y2="590"
+        stroke="#c9985e" stroke-width="2" opacity="0.85"/>
+
+  <!--
+    Piṅgalā nāḍī (right, solar, gold #c9985e) weaving around the axis.
+    Starts at Mūlādhāra right (325, 560), crosses to Svādhiṣṭhāna left,
+    and so on, alternating at each cakra, ending at Sahasrāra center.
+  -->
+  <path d="M 325,560
+           C 275,540 275,505 275,485
+           C 325,465 325,425 325,405
+           C 275,385 275,340 275,320
+           C 325,300 325,255 325,235
+           C 275,215 275,175 275,155
+           C 300,135 300,95 300,70"
+        fill="none" stroke="#c9985e" stroke-width="1.6" opacity="0.85"/>
+
+  <!--
+    Iḍā nāḍī (left, lunar, cyan #6fc7bd) weaving around the axis.
+    Mirror of Piṅgalā — starts at Mūlādhāra left, alternates at each
+    cakra, ending at Sahasrāra center.
+  -->
+  <path d="M 275,560
+           C 325,540 325,505 325,485
+           C 275,465 275,425 275,405
+           C 325,385 325,340 325,320
+           C 275,300 275,255 275,235
+           C 325,215 325,175 325,155
+           C 300,135 300,95 300,70"
+        fill="none" stroke="#6fc7bd" stroke-width="1.6" opacity="0.85"/>
+
+  <!--
+    Sahasrāra (1000-petalled lotus) at the top — rendered as 48 tiny
+    petals densely packed around a central bindu. Ivory (#f5f1e6).
+    Center at (300, 70), petals at radius 32, central bindu r=4.
+  -->
+  <g transform="translate(300, 70)">
+    <g fill="none" stroke="#f5f1e6" stroke-width="0.8" opacity="0.95">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(7.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(15)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(22.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(30)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(37.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(52.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(60)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(67.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(75)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(82.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(97.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(105)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(112.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(120)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(127.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(142.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(150)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(157.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(165)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(172.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(187.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(195)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(202.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(210)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(217.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(232.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(240)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(247.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(255)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(262.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(277.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(285)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(292.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(300)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(307.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(322.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(330)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(337.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(345)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+      <g transform="rotate(352.5)"><ellipse cx="0" cy="-32" rx="2" ry="9"/></g>
+    </g>
+    <!-- Central bindu -->
+    <circle cx="0" cy="0" r="4" fill="#000000"/>
+    <circle cx="0" cy="0" r="5.5" fill="none" stroke="#f5f1e6" stroke-width="1" opacity="0.8"/>
+  </g>
+
+  <!--
+    Ājñā cakra — 2-petalled lotus, ivory (#f5f1e6).
+    Center at (300, 155). Petals at 90° and 270° (left and right).
+  -->
+  <g transform="translate(300, 155)">
+    <g fill="none" stroke="#f5f1e6" stroke-width="1.6" opacity="0.95">
+      <g transform="rotate(90)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    Viśuddha cakra — 16-petalled lotus, purple (#a98ad6, smoky purple tint).
+    Center at (300, 235).
+  -->
+  <g transform="translate(300, 235)">
+    <g fill="none" stroke="#a98ad6" stroke-width="1.4" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(22.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(67.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(112.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(157.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(202.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(247.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(292.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(337.5)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    Anāhata cakra — 12-petalled lotus, gold (#c9985e).
+    Center at (300, 320).
+  -->
+  <g transform="translate(300, 320)">
+    <g fill="none" stroke="#c9985e" stroke-width="1.4" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(30)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(60)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(120)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(150)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(210)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(240)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(300)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(330)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    Maṇipūra cakra — 10-petalled lotus, gold-bright (#e6c089, yellow tint).
+    Center at (300, 405).
+  -->
+  <g transform="translate(300, 405)">
+    <g fill="none" stroke="#e6c089" stroke-width="1.4" opacity="0.95">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(36)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(72)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(108)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(144)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(216)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(252)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(288)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(324)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    Svādhiṣṭhāna cakra — 6-petalled lotus, primary gold (#c9985e, orange-gold).
+    Center at (300, 485).
+  -->
+  <g transform="translate(300, 485)">
+    <g fill="none" stroke="#c9985e" stroke-width="1.4" opacity="0.9">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(60)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(120)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(240)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+      <g transform="rotate(300)"><ellipse cx="0" cy="-22" rx="3.5" ry="10"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    Mūlādhāra cakra — 4-petalled lotus, gold-deep (#9a7340, deep red/maroon tint).
+    Center at (300, 560).
+  -->
+  <g transform="translate(300, 560)">
+    <g fill="none" stroke="#9a7340" stroke-width="1.6" opacity="0.95">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-22" rx="4" ry="11"/></g>
+    </g>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+
+  <!--
+    So'ham mantra inscribed along the central axis (rotated -90° to read
+    upward, matching the kuṇḍalinī's upward flow).
+    "sa" on the inhale (lower half, between Maṇipūra and Svādhiṣṭhāna).
+    "haṁ" on the exhale (upper half, between Ājñā and Viśuddha).
+    Together they form the natural breath-mantra "so'ham" ("I am That").
+  -->
+  <text x="300" y="445" text-anchor="middle"
+        font-size="14" fill="#e6c089" font-weight="bold"
+        transform="rotate(-90, 300, 445)">sa</text>
+  <text x="300" y="195" text-anchor="middle"
+        font-size="14" fill="#e6c089" font-weight="bold"
+        transform="rotate(-90, 300, 195)">haṁ</text>
+
+  <!--
+    Cakra name labels — placed to the right of each lotus (at x=380) to
+    avoid overlap with the So'ham inscription on the central axis.
+    Small font, gold-deep #9a7340.
+  -->
+  <g font-size="11" fill="#9a7340" letter-spacing="1.5" opacity="0.9">
+    <text x="380" y="74"  text-anchor="start">sahasrāra</text>
+    <text x="380" y="159" text-anchor="start">ājñā</text>
+    <text x="380" y="239" text-anchor="start">viśuddha</text>
+    <text x="380" y="324" text-anchor="start">anāhata</text>
+    <text x="380" y="409" text-anchor="start">maṇipūra</text>
+    <text x="380" y="489" text-anchor="start">svādhiṣṭhāna</text>
+    <text x="380" y="564" text-anchor="start">mūlādhāra</text>
+  </g>
+
+  <!-- Side legend: Iḍā / Piṅgalā / Suṣumṇā identifiers (small, on the left) -->
+  <g font-size="9" fill="#9a7340" letter-spacing="1" opacity="0.7">
+    <text x="220" y="200" text-anchor="end">iḍā</text>
+    <text x="380" y="200" text-anchor="start">piṅgalā</text>
+    <text x="220" y="216" text-anchor="end">(lunar)</text>
+    <text x="380" y="216" text-anchor="start">(solar)</text>
+  </g>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    NĀTH CAKRA DIAGRAM · KAULAJÑĀNANIRṆAYA / ŚAṬ-CAKRA-NIRŪPAṆA · CAUTION: HIGH
+  </text>
+
+</svg>

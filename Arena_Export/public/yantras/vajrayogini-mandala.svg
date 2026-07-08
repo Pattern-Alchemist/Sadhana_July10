@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Vajravārāhī Maṇḍala — AstroKalki
+  ================================
+  Geometrically faithful rendering of the Vajravārāhī (Vajrayoginī) Buddhist
+  tantric maṇḍala as specified in the Śrī Vajravārāhīsādhana of the
+  Cakrasaṃvara-tantra cycle. Vajravārāhī (the "Adamantine Sow") is the
+  Buddhist tantric counterpart to the Hindu Vajrayoginī — her distinctive
+  iconographic mark is the sow-head (vārāhī-mukha) protruding from behind
+  her right ear, signifying her triumph over ignorance (the sow rooting in
+  the mud of saṃsāra). She carries the kartari (curved knife) in her right
+  hand and the kapāla (skull bowl) in her left — the standard attributes of
+  the Buddhist tantric ḍākinī.
+
+  This is a BUDDHIST MAṆḌALA — distinct from the Hindu Śākta yantra style:
+    - The outer container is a CIRCLE (not a square bhūpura) — Buddhist
+      maṇḍalas are typically circular
+    - Four cardinal gates pierce the outer protective ring (not the bhūpura)
+    - Three concentric protective rings inside the outer ring (the standard
+      three-fold protective ring of Buddhist tantric maṇḍalas)
+    - Inner 8-petalled lotus at the center (the deity's heart-lotus)
+    - Central bindu with the Vajravārāhī bīja hrīṁ (rendered in PURPLE —
+      the Buddhist tantric register, distinct from the Hindu Śākta
+      gold/rose palette)
+    - Sow-head silhouette above the bindu — the vārāhī marker
+    - Kartari (curved knife) and kapāla (skull bowl) flanking the bindu —
+      the standard Vajravārāhī iconographic attributes
+    - Gate bījas: East oṁ, South hrīṁ, West hūṁ, North phaṭ
+    - Outer mantra ring: "oṁ hrīṁ vajravārāhyai hūṃ phaṭ"
+
+  Note on geometry: The outer protective ring's four cardinal gates are
+  rendered as gaps in the r=295 circle — the circle is drawn as 4 separate
+  arc segments, leaving 100-px-wide gaps at each cardinal point. The three
+  inner protective rings (r=255, 215, 175) are solid circles in the purple
+  Buddhist accent (#a98ad6), distinguishing them visually from the gold
+  outer structure. The sow-head, kartari, and kapāla are rendered as
+  simple geometric abstractions in the purple accent — the sow-head as a
+  small head-ellipse + snout-ellipse + two ear-triangles; the kartari as a
+  curved crescent-blade path with a short handle-line; the kapāla as a
+  small open-bowl path with a rim-line. This is consistent with the
+  Cakrasaṃvara-tantra's prescription that the sādhaka visualise the
+  deity's attributes at the central lotus of the maṇḍala.
+
+  CAUTION: HIGH — dīkṣā-restricted Buddhist tantric practice; the
+  Vajravārāhī bīja hrīṁ is not to be uttered or visualised without proper
+  abhiṣeka (initiation) and the guru's instruction.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 600"
+     width="600" height="600"
+     font-family="'Noto Sans', 'Noto Serif Devanagari', serif">
+
+  <!-- Background: lamp-soot black -->
+  <rect x="0" y="0" width="600" height="600" fill="#0a0908"/>
+
+  <!-- Outer circular mantra ring (just inside the outer protective ring) -->
+  <circle cx="300" cy="300" r="288"
+          fill="none"
+          stroke="#c9985e"
+          stroke-width="1"
+          opacity="0.5"/>
+
+  <!-- Mantra around the outer ring -->
+  <defs>
+    <path id="mantraRingVajraVarahi"
+          d="M 588,300 A 288,288 0 1,1 587.99,300"
+          fill="none"/>
+  </defs>
+  <text font-size="13" fill="#e6c089" letter-spacing="3" opacity="0.9">
+    <textPath href="#mantraRingVajraVarahi" startOffset="0%">
+      oṁ hrīṁ vajravārāhyai hūṃ phaṭ    oṁ hrīṁ vajravārāhyai hūṃ phaṭ    oṁ hrīṁ vajravārāhyai hūṃ phaṭ    oṁ hrīṁ vajravārāhyai hūṃ phaṭ
+    </textPath>
+  </text>
+
+  <!--
+    Outer protective ring (r=295) with four cardinal gates.
+    Rendered as 4 separate clockwise arc segments, each spanning ~70.5°
+    (the 360° minus the 4 × 19.5° gate gaps = 282° / 4 = 70.5° per segment).
+    Gold stroke, stroke-width 10.
+  -->
+  <g fill="none" stroke="#c9985e" stroke-width="10" opacity="0.85">
+    <!-- East-to-South segment (gate gap at East + South) -->
+    <path d="M 590.7,350.0 A 295,295 0 0 1 350.0,590.7"/>
+    <!-- South-to-West segment (gate gap at South + West) -->
+    <path d="M 250.0,590.7 A 295,295 0 0 1 9.3,350.0"/>
+    <!-- West-to-North segment (gate gap at West + North) -->
+    <path d="M 9.3,250.0 A 295,295 0 0 1 250.0,9.3"/>
+    <!-- North-to-East segment (gate gap at North + East) -->
+    <path d="M 350.0,9.3 A 295,295 0 0 1 590.7,250.0"/>
+  </g>
+
+  <!-- Inner gold ring (the inner edge of the outer protective ring) -->
+  <circle cx="300" cy="300" r="275"
+          fill="none"
+          stroke="#9a7340"
+          stroke-width="1.5"
+          opacity="0.6"/>
+
+  <!--
+    Three concentric protective rings inside the outer ring.
+    Purple accent (#a98ad6) — the Buddhist tantric register, distinct
+    from the Hindu Śākta gold/rose palette.
+  -->
+  <circle cx="300" cy="300" r="255"
+          fill="none"
+          stroke="#a98ad6"
+          stroke-width="1.5"
+          opacity="0.85"/>
+  <circle cx="300" cy="300" r="215"
+          fill="none"
+          stroke="#a98ad6"
+          stroke-width="1.5"
+          opacity="0.85"/>
+  <circle cx="300" cy="300" r="175"
+          fill="none"
+          stroke="#a98ad6"
+          stroke-width="1.5"
+          opacity="0.85"/>
+
+  <!-- Inner 8-petalled lotus at the center (the deity's heart-lotus) -->
+  <!-- Purple accent for the petals — Buddhist tantric register -->
+  <g transform="translate(300, 300)">
+    <g fill="none" stroke="#a98ad6" stroke-width="1.8" opacity="0.95">
+      <g transform="rotate(0)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(45)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(90)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(135)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(180)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(225)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(270)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+      <g transform="rotate(315)"><ellipse cx="0" cy="-120" rx="16" ry="42"/></g>
+    </g>
+  </g>
+
+  <!-- Inner ring holding the central bindu and attributes -->
+  <circle cx="300" cy="300" r="65"
+          fill="none" stroke="#a98ad6" stroke-width="1" opacity="0.6"/>
+
+  <!--
+    Sow-head silhouette (the vārāhī marker) above the bindu.
+    Rendered as a small head-ellipse + snout-ellipse + two ear-triangles,
+    in the purple Buddhist accent.
+  -->
+  <g>
+    <!-- Head (small ellipse) -->
+    <ellipse cx="300" cy="280" rx="9" ry="7"
+             fill="none" stroke="#a98ad6" stroke-width="1.5" opacity="0.95"/>
+    <!-- Snout (small ellipse extending downward from the head) -->
+    <ellipse cx="300" cy="290" rx="3.5" ry="4.5"
+             fill="none" stroke="#a98ad6" stroke-width="1.3" opacity="0.95"/>
+    <!-- Two ears (small triangles on left and right of head) -->
+    <polygon points="291,275 287,269 294,272"
+             fill="none" stroke="#a98ad6" stroke-width="1.2" opacity="0.9"/>
+    <polygon points="309,275 313,269 306,272"
+             fill="none" stroke="#a98ad6" stroke-width="1.2" opacity="0.9"/>
+  </g>
+
+  <!--
+    Kartari (curved knife) — left of the bindu.
+    Stylised as a curved crescent-blade path + short handle-line.
+  -->
+  <g>
+    <!-- Curved blade (crescent path) -->
+    <path d="M 273,313 Q 261,320 270,329"
+          fill="none" stroke="#a98ad6" stroke-width="2" opacity="0.95"/>
+    <!-- Handle (short line from blade bottom) -->
+    <line x1="270" y1="329" x2="265" y2="334"
+          stroke="#a98ad6" stroke-width="2" opacity="0.95"/>
+  </g>
+
+  <!--
+    Kapāla (skull bowl) — right of the bindu.
+    Stylised as a small open-bowl path with a rim-line on top.
+  -->
+  <g>
+    <!-- Bowl body (open-top oval path) -->
+    <path d="M 322,318 Q 322,328 330,328 Q 338,328 338,318"
+          fill="none" stroke="#a98ad6" stroke-width="2" opacity="0.95"/>
+    <!-- Rim (horizontal line on top, closing the bowl opening) -->
+    <line x1="322" y1="318" x2="338" y2="318"
+          stroke="#a98ad6" stroke-width="2" opacity="0.95"/>
+  </g>
+
+  <!-- Central bindu with the Vajravārāhī bīja hrīṁ (purple accent) -->
+  <circle cx="300" cy="320" r="11" fill="#000000"/>
+  <circle cx="300" cy="320" r="13" fill="none" stroke="#a98ad6" stroke-width="1.2" opacity="0.9"/>
+  <text x="300" y="326" text-anchor="middle"
+        font-size="20" fill="#a98ad6" font-weight="bold">hrīṁ</text>
+
+  <!-- Gate bīja labels (inside each gate opening, facing inward) -->
+  <!-- East gate — oṁ -->
+  <text x="570" y="306" text-anchor="end" font-size="22" fill="#e6c089" font-weight="bold">oṁ</text>
+  <!-- South gate — hrīṁ -->
+  <text x="306" y="585" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">hrīṁ</text>
+  <!-- West gate — hūṁ -->
+  <text x="30" y="306" text-anchor="start" font-size="22" fill="#e6c089" font-weight="bold">hūṁ</text>
+  <!-- North gate — phaṭ -->
+  <text x="306" y="30" text-anchor="middle" font-size="22" fill="#e6c089" font-weight="bold">phaṭ</text>
+
+  <!-- Title and attribution -->
+  <text x="300" y="630" text-anchor="middle"
+        font-size="11" fill="#9a7340" letter-spacing="3" opacity="0.8">
+    VAJRAVĀRAHĪ MAṆḌALA · ŚRĪ VAJRAVĀRAHĪSĀDHANA / CAKRASAṂVARA-TANTRA · CAUTION: HIGH
+  </text>
+
+</svg>

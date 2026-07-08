@@ -1,0 +1,525 @@
+{
+  "name": "AstroKalki — The Living Archive",
+  "version": "2.6.0",
+  "description": "Arena-ready export of the AstroKalki project: a museum-grade digital archive of Indic contemplative heritage.",
+  "generated_at": "2026-07-06",
+  "stack": {
+    "framework": "Next.js 16.2.6",
+    "language": "TypeScript 5.9.3",
+    "runtime": "React 19.2.6",
+    "database": "PostgreSQL 14+ via Drizzle ORM 0.45",
+    "styling": "Tailwind CSS v4",
+    "fonts": [
+      "Cormorant Garamond",
+      "Crimson Text"
+    ]
+  },
+  "structure": {
+    "src/app": "Next.js App Router pages and API routes",
+    "src/components": "13 React components",
+    "src/db": "Drizzle schema and connection",
+    "src/lib": "Domain logic (cosmology, lineage, archive seed, bootstrap)",
+    "docs": "14 documentation files",
+    "ai-context": "6 AI-context files",
+    "knowledge": "Offline Tantra knowledge archive with FTS5 index",
+    "scripts": "Build utilities"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "type": "page",
+      "description": "Home with seven-pillar grid and constellation"
+    },
+    {
+      "path": "/archive",
+      "type": "page",
+      "description": "Browse all siddhis"
+    },
+    {
+      "path": "/archivist",
+      "type": "page",
+      "description": "The Custodian search UI"
+    },
+    {
+      "path": "/comparative",
+      "type": "page",
+      "description": "5-tradition comparative matrix"
+    },
+    {
+      "path": "/cosmos",
+      "type": "page",
+      "description": "Real-time planetary longitudes"
+    },
+    {
+      "path": "/journey",
+      "type": "page",
+      "description": "Curated reading journey"
+    },
+    {
+      "path": "/lineage",
+      "type": "page",
+      "description": "Transmission maps"
+    },
+    {
+      "path": "/manuscripts",
+      "type": "page",
+      "description": "Codex Library"
+    },
+    {
+      "path": "/safety",
+      "type": "page",
+      "description": "Reader safety and epistemic framing"
+    },
+    {
+      "path": "/schools",
+      "type": "page",
+      "description": "Schools of thought"
+    },
+    {
+      "path": "/siddhi/[slug]",
+      "type": "page",
+      "description": "Per-practice deep folio"
+    },
+    {
+      "path": "/api/archivist",
+      "type": "api",
+      "methods": [
+        "POST"
+      ],
+      "description": "The Custodian weighted multi-field search"
+    },
+    {
+      "path": "/api/health",
+      "type": "api",
+      "methods": [
+        "GET"
+      ],
+      "description": "Liveness probe"
+    },
+    {
+      "path": "/api/reflections",
+      "type": "api",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "description": "Reader reflections (pen-name only)"
+    },
+    {
+      "path": "/knowledge",
+      "type": "page",
+      "description": "Browse + search the offline knowledge archive (FTS5-backed)"
+    },
+    {
+      "path": "/api/knowledge",
+      "type": "api",
+      "methods": [
+        "GET"
+      ],
+      "description": "FTS5 full-text search across knowledge archive chunks"
+    },
+    {
+      "path": "/yantras",
+      "type": "page",
+      "description": "Browse the yantra gallery — 12 scholarly renderings with cinematic motion"
+    },
+    {
+      "path": "/yantras/[slug]",
+      "type": "page",
+      "description": "Yantra deep-view with bīja breakdown, symbolism, source citation"
+    },
+    {
+      "path": "/sitemap.xml",
+      "type": "static",
+      "description": "XML sitemap with all 35 siddhis + 18 yantras + static routes"
+    },
+    {
+      "path": "/tags",
+      "type": "page",
+      "description": "Tag-based faceted browsing by category and tradition"
+    },
+    {
+      "path": "/glossary",
+      "type": "page",
+      "description": "Curated Sanskrit glossary with 80+ terms"
+    },
+    {
+      "path": "/reader",
+      "type": "page",
+      "description": "Parallel-Sanskrit reader index"
+    },
+    {
+      "path": "/reader/[slug]",
+      "type": "page",
+      "description": "Parallel-Sanskrit verse with word-by-word parsing"
+    },
+    {
+      "path": "/manuscripts/[slug]",
+      "type": "page",
+      "description": "Manuscript deep-view with catalogue record"
+    },
+    {
+      "path": "/api/archivist/semantic",
+      "type": "api",
+      "methods": [
+        "POST",
+        "GET"
+      ],
+      "description": "pgvector semantic search"
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "type": "static",
+      "description": "PWA manifest for installable web app + offline mode"
+    },
+    {
+      "path": "/offline",
+      "type": "static",
+      "description": "Offline fallback page for service worker"
+    },
+    {
+      "path": "/api/knowledge/morphological",
+      "type": "api",
+      "methods": [
+        "GET"
+      ],
+      "description": "Sanskrit morphological search (sandhi-aware stemmer + FTS5 expansion)"
+    },
+    {
+      "path": "/journal",
+      "type": "page",
+      "description": "Encrypted personal sadhana journal (AES-256, local only)"
+    },
+    {
+      "path": "/cycles",
+      "type": "page",
+      "description": "41-day cycle tracker with daily check-in grid + progress bar"
+    },
+    {
+      "path": "/japa",
+      "type": "page",
+      "description": "Digital japa mālā with haptic feedback, audio chime at 108, session persistence"
+    },
+    {
+      "path": "/breath",
+      "type": "page",
+      "description": "Prāṇāyāma breath timer with 7 patterns, visual ring, audio cues, haptic feedback"
+    },
+    {
+      "path": "/healing",
+      "type": "page",
+      "description": "Healing hub — affliction-to-practice cross-reference + encrypted case notes"
+    },
+    {
+      "path": "/curriculum",
+      "type": "page",
+      "description": "Reading curriculum with 6 structured paths + per-siddhi progress tracking"
+    },
+    {
+      "path": "/calendar",
+      "type": "page",
+      "description": "Vedic lunar calendar with tithi computation + practice recommendations"
+    },
+    {
+      "path": "/insights",
+      "type": "page",
+      "description": "Practice analytics: mood correlation, 90-day heatmap, top practices, japa stats"
+    },
+    {
+      "path": "/dreams",
+      "type": "page",
+      "description": "Dream journal with pattern detection + tagging (lucid, visitation, symbolic, etc.)"
+    },
+    {
+      "path": "/crisis",
+      "type": "page",
+      "description": "Crisis grounding library — instant-access 7-step protocol"
+    },
+    {
+      "path": "/timer",
+      "type": "page",
+      "description": "Meditation timer with bell schedule + auto-logging to journal"
+    },
+    {
+      "path": "/recorder",
+      "type": "page",
+      "description": "Mantra audio recorder — encrypted, local only, playback for self-assessment"
+    },
+    {
+      "path": "/calculator",
+      "type": "page",
+      "description": "Mantra count calculator — plan anusthāna duration from target + practice rate"
+    },
+    {
+      "path": "/ambience",
+      "type": "page",
+      "description": "Practice ambience generator — tanpura drone, rain, fire, bells, Oṃ (Web Audio, no files)"
+    }
+  ],
+  "database_tables": [
+    "siddhis",
+    "manuscripts",
+    "schools",
+    "evidence_sources",
+    "reflections"
+  ],
+  "knowledge_archive": {
+    "documents": 38,
+    "chunks": 633,
+    "caution_levels": {
+      "high": 27,
+      "moderate": 11,
+      "low": 0
+    },
+    "sources": {
+      "pdf": 4,
+      "markdown": 23
+    },
+    "fts_index": "knowledge/sqlite/knowledge.db",
+    "fts_tokenizer": "unicode61 remove_diacritics 2",
+    "categories": [
+      "Buddhist Tantra",
+      "Nāth",
+      "Tantra",
+      "Vaiṣṇava",
+      "Vedānta",
+      "Yoga",
+      "Śaiva",
+      "Śākta"
+    ],
+    "note": "27 source documents: 4 PDFs + 23 markdown transcriptions. 8 categories. 21 high-caution and 6 moderate. Batch 3 added: Dakṣiṇa Kālī, Ṣoḍaśī Tripurasundarī, Bhuvaneśvarī, Kamalā, Bhairavī proper, Lakulīśa Pāśupata, Matsyendranāth Nāth."
+  },
+  "documentation": [
+    "README.md",
+    "docs/PROJECT_OVERVIEW.md",
+    "docs/ARCHITECTURE.md",
+    "docs/SYSTEM_DESIGN.md",
+    "docs/FEATURES.md",
+    "docs/DATABASE.md",
+    "docs/API_REFERENCE.md",
+    "docs/COMPONENT_GUIDE.md",
+    "docs/AI_SYSTEM.md",
+    "docs/KNOWLEDGE_ARCHIVE.md",
+    "docs/DEPLOYMENT.md",
+    "docs/CONTRIBUTING.md",
+    "docs/CHANGELOG.md",
+    "docs/ROADMAP.md",
+    "ai-context/AI_CONTEXT.md",
+    "ai-context/PROJECT_MEMORY.md",
+    "ai-context/CODING_STANDARDS.md",
+    "ai-context/PROMPT_GUIDE.md",
+    "ai-context/TASK_INDEX.md",
+    "ai-context/DEPENDENCIES.md"
+  ],
+  "arena_compatibility": {
+    "accepted_formats": [
+      "text/markdown",
+      "application/json",
+      "text/javascript",
+      "text/css",
+      "text/html",
+      "application/pdf",
+      "image/png",
+      "image/jpeg"
+    ],
+    "note": "All source files are in Arena-accepted formats. The 4 Tantra PDFs are PDF. Documentation is Markdown. Source is TypeScript/TSX. No ZIP uploads required."
+  },
+  "siddhi_count": 41,
+  "evidence_source_count": 118,
+  "static_assets": {
+    "yantras": [
+      {
+        "slug": "sri-cakra",
+        "path": "/yantras/sri-cakra-yantra.svg",
+        "siddhi": "shodashi-tripurasundari-sadhana"
+      },
+      {
+        "slug": "dakshina-kali",
+        "path": "/yantras/dakshina-kali-yantra.svg",
+        "siddhi": "dakshina-kali-sadhana"
+      },
+      {
+        "slug": "guhyakali",
+        "path": "/yantras/guhyakali-yantra.svg",
+        "siddhi": "guhyakali-sadhana"
+      },
+      {
+        "slug": "tara-ugra",
+        "path": "/yantras/tara-ugra-yantra.svg",
+        "siddhi": "tara-ugra-sadhana"
+      },
+      {
+        "slug": "tripura-bhairavi",
+        "path": "/yantras/tripura-bhairavi-yantra.svg",
+        "siddhi": "tripura-bhairavi-sadhana"
+      },
+      {
+        "slug": "bhuvaneshvari",
+        "path": "/yantras/bhuvaneshvari-yantra.svg",
+        "siddhi": "bhuvaneshvari-sadhana"
+      },
+      {
+        "slug": "kamala",
+        "path": "/yantras/kamala-yantra.svg",
+        "siddhi": "kamala-sadhana"
+      },
+      {
+        "slug": "dhumavati",
+        "path": "/yantras/dhumavati-yantra.svg",
+        "siddhi": "dhumavati-sadhana"
+      },
+      {
+        "slug": "matangi",
+        "path": "/yantras/matangi-yantra.svg",
+        "siddhi": "matangi-sadhana"
+      },
+      {
+        "slug": "smasana-bhairavi",
+        "path": "/yantras/smasana-bhairavi-yantra.svg",
+        "siddhi": "smasana-bhairavi-sadhana"
+      },
+      {
+        "slug": "preta-sandhi",
+        "path": "/yantras/preta-sandhi-yantra.svg",
+        "siddhi": "preta-siddhi"
+      },
+      {
+        "slug": "sudarshana",
+        "path": "/yantras/sudarshana-yantra.svg",
+        "siddhi": "sudarshana-chakra-sadhana"
+      },
+      {
+        "slug": "bala-tripurasundari",
+        "path": "/yantras/bala-tripurasundari-yantra.svg",
+        "siddhi": "bala-tripurasundari-sadhana"
+      },
+      {
+        "slug": "bagalamukhi",
+        "path": "/yantras/bagalamukhi-yantra.svg",
+        "siddhi": "bagalamukhi-sadhana"
+      },
+      {
+        "slug": "pratyangira",
+        "path": "/yantras/pratyangira-yantra.svg",
+        "siddhi": "pratyangira-devi-sadhana"
+      },
+      {
+        "slug": "vajrayogini",
+        "path": "/yantras/vajrayogini-yantra.svg",
+        "siddhi": "vajrayogini-sadhana"
+      },
+      {
+        "slug": "lakulisha-linga",
+        "path": "/yantras/lakulisha-linga.svg",
+        "siddhi": "lakulisha-pashupata-sadhana"
+      },
+      {
+        "slug": "nath-cakra",
+        "path": "/yantras/nath-cakra-diagram.svg",
+        "siddhi": "matsyendranath-nath-sadhana"
+      }
+    ]
+  },
+  "structured_data": {
+    "json_ld_siddhi_folios": "Article + BreadcrumbList + Dataset on /siddhi/[slug]",
+    "json_ld_yantra_deep_view": "VisualArtwork on /yantras/[slug]",
+    "sitemap": "/sitemap.xml with all dynamic routes"
+  },
+  "ui_features": {
+    "design_system": "Living Esoteric Intelligence v1.6 — obsidian + gold + cyan + rose + purple",
+    "animations": [
+      "fade-up with blur",
+      "shimmer-text",
+      "pulse-glow",
+      "float-slow",
+      "yantra-bg-spin (180s)",
+      "sri-cakra-hero assembly (2.2s)",
+      "view-transitions API",
+      "scroll-reveal (IntersectionObserver)"
+    ],
+    "mobile_responsive": true,
+    "mobile_breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px"
+    },
+    "mobile_features": [
+      "hamburger drawer nav (xl breakpoint)",
+      "touch-friendly 44px tap targets",
+      "responsive type scaling",
+      "hide-on-mobile utility",
+      "overflow-x hidden",
+      "tap-highlight color"
+    ],
+    "accessibility": [
+      "prefers-reduced-motion support",
+      "aria-expanded on mobile menu",
+      "aria-label on icon buttons",
+      "semantic HTML"
+    ],
+    "random_siddhi_button": "🎲 in nav — jumps to a random folio",
+    "pwa_offline_mode": "service worker + manifest — installable, offline-capable",
+    "sanskrit_morphological_search": "sandhi-aware stemmer catches inflected forms (japati → japa, devaḥ → deva)",
+    "encrypted_vault": "AES-256-GCM + PBKDF2 100K iterations. All personal data encrypted at rest. No server, no cloud, no telemetry.",
+    "personal_sadhana_journal": "Practice session logging with mood tracking, insights, disturbances, dream logs",
+    "cycle_tracker": "41/21/11/108-day cycle tracking with daily check-in grid + progress visualization",
+    "digital_japa_mala": "Tap-to-count with haptic feedback, audio chime at 108, session persistence, cumulative stats",
+    "breath_timer": "7 breath patterns (Kumbhaka of Silence, Whisper Breath, Spine Flame, Shaman Triangle, Quantum Pause, Box, Nadi Shuddhi)",
+    "healing_hub": "Affliction-to-practice cross-reference (8 afflictions mapped to prescribed practices with sources) + encrypted case notes",
+    "reading_curriculum": "6 structured paths (Vedic Foundations, Breath Path, Sri Vidya Graduation, Mahavidya Cycle, Sat-Karma Framework, Concentration Path) with per-siddhi progress tracking",
+    "vault_auto_lock": "30-minute inactivity auto-lock",
+    "vault_passphrase": "AES-256-GCM encryption with PBKDF2 key derivation, 3-attempt lockout, no recovery",
+    "practice_streak_tracker": "Homepage widget — consecutive-day streak with milestones (7/21/41/108)",
+    "lunar_calendar": "Vedic tithi computation with special-tithi practice recommendations",
+    "practice_analytics": "Mood correlation, 90-day heatmap, top practices, japa stats — all client-side",
+    "dream_journal": "Dream log aggregation with tagging + pattern detection",
+    "crisis_grounding": "Instant-access 7-step grounding protocol for destabilization",
+    "meditation_timer": "Configurable timer with interval bells + auto-journal logging",
+    "mantra_recorder": "Encrypted audio recording for pronunciation self-assessment",
+    "count_calculator": "Anusthāna planning tool — target count → duration timeline",
+    "ambience_generator": "Browser-generated tanpura/rain/fire/bells/Oṃ with per-source volume mixing",
+    "session_builder": "Multi-step practice playlists with auto-transition + bell",
+    "sankalpa_builder": "Intention formulation with templates + homepage pinning",
+    "mantra_metronome": "Visual pendulum + audio tick at configurable BPM",
+    "energetic_state_journal": "Prana level, cakra sensations, temperature shifts, subtle-body observations",
+    "fasting_tracker": "Upavasa tracking with type, timing, and state notes",
+    "puja_materials": "Shopping list + budget tracker for practice materials",
+    "practice_dependencies": "Prerequisite graph with completion status checking",
+    "guru_parampara": "Personal transmission chain visualizer (encrypted)",
+    "mantra_vault": "Double-encrypted dīkṣā mantra storage with long-press reveal",
+    "deity_of_day": "Weekday-based deity rotation with Sanskrit + role",
+    "mantra_flashcards": "SM-2 spaced-repetition Sanskrit vocabulary from reader data",
+    "wisdom_board": "Per-siddhi wisdom notes (worked/didnt/differently) — encrypted",
+    "seasonal_practice": "Ayurvedic rtu (6 seasons) with practice recommendations",
+    "quote_of_day": "15 curated quotes from primary sources, rotated daily",
+    "protection_checklist": "8-item pre-practice protection verification (required items gate access)",
+    "purification_countdown": "3-night bhūta-śuddhi tracker with night-by-night steps",
+    "markdown_export": "Full practice history export to .md file",
+    "completion_certificate": "Printable PDF certificate for completed sādhana cycles",
+    "yantra_3d_viewer": "CSS 3D layered yantra rotation for meditative viewing",
+    "year_heatmap": "365-day GitHub-style practice intensity grid",
+    "nav_reorganization": "5 categorized collapsible groups (Reference, Practice, Tracking, Healing, System) with hover dropdowns on desktop + accordion on mobile",
+    "homepage_dashboard": "Personal practice dashboard: tithi, deity, streak, active cycle, saṅkalpa, daily quote, season, quick actions",
+    "deployment_guide": "DEPLOYMENT.md with step-by-step Neon + Vercel free-tier deployment instructions",
+    "cinematic_motion_system": "v2.4 — ambient particles, aurora gradient, cinematic page entrances, scroll-driven reveals, 3D card tilt, kinetic typography, liquid transitions",
+    "ambient_background": "Fixed-position aurora gradient (30s shift) + 12 floating gold particles (16-28s cycles)",
+    "cinematic_enter": "1.2s page entrance: opacity + translateY + brightness + blur (cubic-bezier)",
+    "scroll_reveal": "IntersectionObserver-triggered: opacity + clip-path + blur (1.2s, no layout shift)",
+    "card_3d_tilt": "Perspective-based 3D hover tilt on desktop (rotateX/rotateY)",
+    "kinetic_typography": "Word-by-word reveal with rotateX + blur for hero headings",
+    "glass_morphism": "Backdrop-blur glass cards with gold hairline borders",
+    "enhanced_type_scale": "Fluid clamp-based type scale (hero/h1/h2/h3/body/small/micro)",
+    "enhanced_layout": "Container-prose/wide, section rhythm (lg/md/sm), eyebrow with gold line",
+    "ritual_mode": "v2.5.4 — native disabled attr (not aria-disabled), throttled aria-live (state transitions only), separated keyboard hint text",
+    "offering_interaction": "Pointer-based press-and-hold with progress ring, charge state, release animation, haptic feedback, and audio chimes. Per-offering-type visual effects (fire/water/flower/incense/mantra/bell)",
+    "ritual_state_machine": "idle → pressing → charged → released → completed (with cancelled fallback). Data-driven step configs. Auto-logs to journal on completion.",
+    "ritual_motion_system": "v2.6.0 — Ritual Motion System OSS: centralized tokens, Motion variants, HeroMedia, AmbientBackground v2 (CSS-only, 3 motes), RitualSymbol (6 offering types with inline SVG+Motion), LayoutMotion (RouteTransition, ModalEnter, SheetSlideUp, SectionReveal), MotionConfig reducedMotion=user"
+  },
+  "testing": {
+    "framework": "Vitest",
+    "test_count": 93,
+    "test_files": 8
+  },
+  "route_count": 63
+}
