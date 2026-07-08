@@ -48,9 +48,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // during static generation at build time without DATABASE_URL set).
   let slugs: string[] = [];
   try {
-    await ensureArchiveSeeded();
-    const allSiddhis = await db.select({ slug: siddhis.slug }).from(siddhis);
-    slugs = allSiddhis.map((s) => s.slug).filter(Boolean) as string[];
+    if (db) {
+      await ensureArchiveSeeded();
+      const allSiddhis = await db.select({ slug: siddhis.slug }).from(siddhis);
+      slugs = allSiddhis.map((s) => s.slug).filter(Boolean) as string[];
+    }
   } catch {
     // Database unavailable — the random button will be disabled
   }

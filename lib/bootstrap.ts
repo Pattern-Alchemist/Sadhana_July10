@@ -21,6 +21,9 @@ import {
  * (drizzle-kit push is the primary path; this is the safety net.)
  */
 async function ensureSchema() {
+  if (!db) {
+    throw new Error("Database not initialized - DATABASE_URL not set");
+  }
   await db.execute(sql`
     CREATE TABLE IF NOT EXISTS siddhis (
       id SERIAL PRIMARY KEY,
