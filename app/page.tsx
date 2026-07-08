@@ -35,11 +35,16 @@ export default function DashboardPage() {
   const { data: cycles } = useVaultData<CycleEntry[]>("cycles", []);
   const { data: sankalpas } = useVaultData<{id:string;text:string;pinned:boolean}[]>("sankalpas", []);
 
-  const now = new Date();
-  const today = now.toISOString().slice(0, 10);
-  const weekday = now.getDay();
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setNow(new Date());
+  }, []);
+
+  const today = now?.toISOString().slice(0, 10) ?? "";
+  const weekday = now?.getDay() ?? 0;
   const deity = DEITY_ROTATION[weekday];
-  const tithi = useMemo(() => computeTithi(now), []);
+  const tithi = useMemo(() => (now ? computeTithi(now) : { display: "", note: "", tithiNumber: 0, paksha: "śukla" as const, isAmavasya: false, isPurnima: false }), [now]);
   const season = getCurrentSeason();
   const quote = getDailyQuote();
 
@@ -90,7 +95,7 @@ export default function DashboardPage() {
             <AnimatedSriCakra />
           </div>
           <p className="fade-up text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
-            {now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+            {now ? now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) : "Loading..."}
           </p>
           <h1 className="fade-up mt-3 font-display text-[1.75rem] font-medium leading-tight text-balance text-[var(--color-ivory)] sm:text-4xl">
             Your Practice Dashboard
