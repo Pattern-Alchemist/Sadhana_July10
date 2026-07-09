@@ -53,7 +53,10 @@ export const QUOTES = [
 ];
 
 export function getDailyQuote(): typeof QUOTES[0] {
-  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
+  const today = new Date();
+  // Use midnight UTC to ensure deterministic date-based selection across server/client
+  const startOfYear = new Date(Date.UTC(today.getUTCFullYear(), 0, 0));
+  const dayOfYear = Math.floor((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
   return QUOTES[dayOfYear % QUOTES.length];
 }
 
