@@ -131,7 +131,7 @@ function VaultSetup() {
 }
 
 function VaultUnlock() {
-  const { unlock, lock } = useVault();
+  const { unlock } = useVault();
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const [attempts, setAttempts] = useState(0);
@@ -161,6 +161,11 @@ function VaultUnlock() {
       }
       setPass("");
     }
+  }
+
+  function browsWithoutUnlocking() {
+    // Bypass vault gate but don't actually unlock — encrypted data stays private
+    window.location.href = "/archive";
   }
 
   return (
@@ -203,11 +208,8 @@ function VaultUnlock() {
           </button>
         </form>
         <button
-          onClick={() => {
-            // Allow browsing without unlocking
-            lock();
-          }}
-          className="mt-4 w-full text-center text-[0.55rem] uppercase tracking-luxe text-[var(--color-bone)]/40 transition hover:text-[var(--color-gold-bright)]"
+          onClick={browsWithoutUnlocking}
+          className="mt-4 w-full rounded-sm border border-[var(--hairline)] px-4 py-2 text-center text-[0.55rem] uppercase tracking-luxe text-[var(--color-bone)]/70 transition hover:border-[var(--color-gold)]/40 hover:text-[var(--color-gold-bright)]"
         >
           Browse without unlocking →
         </button>
