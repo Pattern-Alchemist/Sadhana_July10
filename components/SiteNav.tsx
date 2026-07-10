@@ -68,6 +68,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/nyasa-visualizer", label: "✨ Nyasa Visualization" },
       { href: "/preta-work", label: "👻 Preta-Work Suite" },
       { href: "/yantra-builder", label: "🎨 Yantra Builder" },
+      { href: "/chakra-scanner", label: "💎 Chakra Scanner" },
+      { href: "/yantra-meditation", label: "🧘 Yantra Meditation" },
     ],
   },
   {
