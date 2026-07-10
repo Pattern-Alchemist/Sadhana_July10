@@ -20,6 +20,15 @@ interface NavGroup {
 
 const NAV_GROUPS: NavGroup[] = [
   {
+    id: "personal",
+    label: "Personal",
+    icon: "🔻",
+    items: [
+      { href: "/oracle", label: "🔮 Karma Oracle Deck" },
+      { href: "/smashana", label: "🪦 Smashana Companion" },
+    ],
+  },
+  {
     id: "reference",
     label: "Reference",
     icon: "📚",
@@ -44,7 +53,6 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/comparative", label: "Comparative Matrix" },
       { href: "/archivist", label: "The Custodian" },
       { href: "/knowledge", label: "Knowledge Archive" },
-      { href: "/oracle", label: "🔮 Karma Oracle Deck" },
     ],
   },
   {
@@ -117,7 +125,7 @@ const NAV_GROUPS: NavGroup[] = [
 export default function SiteNav({ siddhiSlugs = [] }: { siddhiSlugs?: string[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [expandedGroup, setExpandedGroup] = useState<string | null>("practice");
+  const [expandedGroup, setExpandedGroup] = useState<string | null>("personal");
   const { lens, toggle, mounted } = useEpistemicLens();
 
   function isActive(href: string) {

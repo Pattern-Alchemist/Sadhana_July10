@@ -14,7 +14,7 @@ export default function MeditationPlayer({ path, onComplete, onExit }: Props) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const currentStep = path.steps[currentStepIndex];
   const totalDuration = path.steps.reduce((sum, step) => sum + step.duration, 0);
