@@ -20,21 +20,21 @@ const STATS = [
 export default function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8">
-      {/* Motion background image */}
+      {/* Mystical fire eye background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <img
-          src="/hero/motion-poster.png"
-          alt="Mystical energy portal"
-          className="h-full w-full object-cover opacity-40"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000001fc61f8a59f0e203bde5080-398858ec-db30-4889-86f0-b58be4bf7c80-2F5ReKw85BVFUNLaJDpxwaSVL2C8P3.png"
+          alt="Mystical fire eye of consciousness"
+          className="h-full w-full object-cover opacity-45"
           loading="eager"
         />
       </div>
 
-      {/* Gradient overlay for text legibility */}
+      {/* Strong gradient overlay for oracle text contrast */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          background: "linear-gradient(to bottom, rgba(22, 12, 8, 0.5), rgba(22, 12, 8, 0.3), rgba(22, 12, 8, 0.7))",
+          background: "linear-gradient(135deg, rgba(10, 9, 8, 0.7) 0%, rgba(15, 8, 4, 0.5) 50%, rgba(20, 10, 6, 0.8) 100%)",
         }}
         aria-hidden="true"
       />

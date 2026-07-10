@@ -80,30 +80,30 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — with motion background image */}
-      <section className="relative overflow-hidden border-b border-[var(--color-hairline)] py-12 sm:py-16">
-        {/* Motion background image */}
-        <div className="absolute inset-0 opacity-50">
+      {/* Hero — Sacred Tantric Ritual Checklist */}
+      <section className="relative overflow-hidden border-b border-[var(--color-hairline)]">
+        {/* Background image with aspect ratio container */}
+        <div className="absolute inset-0">
           <img
-            src="/hero/motion-waves.png"
-            alt="Sacred energy flows"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000cb9461f68a8716737015f4dc-c1f6ef2a-322f-4d90-bc46-ec22dec5a5ce-YKRxOKouENGpdqvxjWujQKX0Jld0S2.png"
+            alt="Sacred Tantric Ritual Checklist"
             className="h-full w-full object-cover"
             loading="eager"
           />
         </div>
         
-        {/* Overlay gradient for text legibility */}
+        {/* Dark overlay for text legibility */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, rgba(10, 9, 8, 0.4), rgba(10, 9, 8, 0.2), rgba(10, 9, 8, 0.6))",
+            background: "linear-gradient(135deg, rgba(10, 9, 8, 0.65) 0%, rgba(10, 9, 8, 0.45) 50%, rgba(10, 9, 8, 0.75) 100%)",
           }}
           aria-hidden="true"
         />
 
-        <div className="content-z relative mx-auto max-w-4xl px-4 text-center sm:px-8">
-          <div className="mb-4 flex justify-center opacity-90">
-            <div className="h-20 w-20 rounded-full bg-gradient-to-br from-[var(--color-gold-bright)] to-[var(--color-gold)] opacity-30" />
+        <div className="content-z relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-8 sm:py-24">
+          <div className="mb-6 flex justify-center">
+            <div className="h-16 w-16 rounded-full border-2 border-[var(--color-gold)]/40 bg-gradient-to-br from-[var(--color-gold-bright)] to-[var(--color-gold)] opacity-20" />
           </div>
           <p className="fade-up text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
             {now ? now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) : "Loading..."}
