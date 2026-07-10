@@ -6,8 +6,7 @@ import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import AmbientBackground from "@/components/hero/AmbientBackground";
-import { VaultProvider } from "@/components/VaultProvider";
-import VaultGate from "@/components/VaultGate";
+
 import RitualMotionConfig from "@/motion/RitualMotionConfig";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
 import { db } from "@/db";
@@ -63,13 +62,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <RitualMotionConfig>
           <AmbientBackground />
           <ServiceWorkerRegister />
-          <VaultProvider>
-            <VaultGate>
-              <SiteNav siddhiSlugs={slugs} />
-              <main className="content-z relative">{children}</main>
-              <Footer />
-            </VaultGate>
-          </VaultProvider>
+          <SiteNav siddhiSlugs={slugs} />
+          <main className="content-z relative">{children}</main>
+          <Footer />
         </RitualMotionConfig>
       </body>
     </html>

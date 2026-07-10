@@ -63,6 +63,10 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/mantra-vault", label: "Mantra Vault" },
       { href: "/calculator", label: "Count Calculator" },
       { href: "/curriculum", label: "Reading Path" },
+      { href: "/breath-magic", label: "🔥 Breath Magic Lab" },
+      { href: "/nyasa-visualizer", label: "✨ Nyasa Visualization" },
+      { href: "/preta-work", label: "👻 Preta-Work Suite" },
+      { href: "/yantra-builder", label: "🎨 Yantra Builder" },
     ],
   },
   {
@@ -70,6 +74,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Tracking",
     icon: "📊",
     items: [
+      { href: "/sacred-timeline", label: "🌙 Sacred Timeline" },
       { href: "/journal", label: "Practice Journal" },
       { href: "/energetics", label: "Energetic Journal" },
       { href: "/dreams", label: "Dream Journal" },
