@@ -80,23 +80,23 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — Sacred Tantric Ritual Checklist */}
+      {/* Hero — Shiva Cosmic Deity */}
       <section className="relative overflow-hidden border-b border-[var(--color-hairline)]">
-        {/* Background image with aspect ratio container */}
+        {/* Shiva cosmic energy background */}
         <div className="absolute inset-0">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000cb9461f68a8716737015f4dc-c1f6ef2a-322f-4d90-bc46-ec22dec5a5ce-YKRxOKouENGpdqvxjWujQKX0Jld0S2.png"
-            alt="Sacred Tantric Ritual Checklist"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ShiVa-hxRJzCoxIMkKJkyQrPcMMEzKEgeu6p.png"
+            alt="Shiva cosmic energy deity"
             className="h-full w-full object-cover"
             loading="eager"
           />
         </div>
         
-        {/* Dark overlay for text legibility */}
+        {/* Gradient overlay for text legibility */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(135deg, rgba(10, 9, 8, 0.65) 0%, rgba(10, 9, 8, 0.45) 50%, rgba(10, 9, 8, 0.75) 100%)",
+            background: "linear-gradient(135deg, rgba(10, 9, 8, 0.55) 0%, rgba(10, 9, 8, 0.35) 50%, rgba(10, 9, 8, 0.65) 100%)",
           }}
           aria-hidden="true"
         />
