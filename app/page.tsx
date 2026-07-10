@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useVaultData, type JournalEntry, type CycleEntry } from "@/components/useVaultData";
 import { DEITY_ROTATION, getCurrentSeason, getDailyQuote, QUOTES } from "@/lib/practice-data";
 import { OmGlyph, SriYantraGlyph, FlourishDivider, BinduSun, LotusGlyph } from "@/components/Symbols";
-import AnimatedSriCakra from "@/components/AnimatedSriCakra";
 
 // Lunar tithi computation (same as calendar page)
 function computeTithi(date: Date) {
@@ -81,18 +80,30 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — compact */}
+      {/* Hero — with motion background image */}
       <section className="relative overflow-hidden border-b border-[var(--color-hairline)] py-12 sm:py-16">
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div className="yantra-bg-spin absolute left-1/2 top-1/2 h-[120vh] w-[120vh] -translate-x-1/2 -translate-y-1/2">
-            <div className="absolute inset-0 rounded-full border border-[var(--color-gold)]" />
-            <div className="absolute inset-[20%] rounded-full border border-[var(--color-gold)]" />
-            <div className="absolute inset-[40%] rounded-full border border-[var(--color-gold)]" />
-          </div>
+        {/* Motion background image */}
+        <div className="absolute inset-0 opacity-50">
+          <img
+            src="/hero/motion-waves.png"
+            alt="Sacred energy flows"
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
         </div>
+        
+        {/* Overlay gradient for text legibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, rgba(10, 9, 8, 0.4), rgba(10, 9, 8, 0.2), rgba(10, 9, 8, 0.6))",
+          }}
+          aria-hidden="true"
+        />
+
         <div className="content-z relative mx-auto max-w-4xl px-4 text-center sm:px-8">
-          <div className="mb-4">
-            <AnimatedSriCakra />
+          <div className="mb-4 flex justify-center opacity-90">
+            <div className="h-20 w-20 rounded-full bg-gradient-to-br from-[var(--color-gold-bright)] to-[var(--color-gold)] opacity-30" />
           </div>
           <p className="fade-up text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
             {now ? now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) : "Loading..."}
