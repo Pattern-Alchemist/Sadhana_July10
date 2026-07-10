@@ -12,13 +12,13 @@ export default function YantraMeditationSelector({ selectedPathId, onSelectPath,
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner':
-        return 'bg-green-900 text-green-200';
+        return 'bg-sage/15 text-sage border border-sage/40';
       case 'intermediate':
-        return 'bg-yellow-900 text-yellow-200';
+        return 'bg-gold-bright/15 text-gold-bright border border-gold-bright/40';
       case 'advanced':
-        return 'bg-red-900 text-red-200';
+        return 'bg-rose-accent/15 text-rose-accent border border-rose-accent/40';
       default:
-        return 'bg-gray-700 text-gray-200';
+        return 'bg-gold/15 text-gold border border-gold/40';
     }
   };
 
@@ -26,7 +26,7 @@ export default function YantraMeditationSelector({ selectedPathId, onSelectPath,
     <div className="space-y-8">
       {/* Quick Start Sequences */}
       <div>
-        <h2 className="text-2xl font-bold text-white mb-4">Quick Start Sequences</h2>
+        <h3 className="text-2xl font-display text-yellow-300 tracking-wide mb-6">Quick Start Sequences</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {SUGGESTED_SEQUENCES.map((seq) => (
             <button
@@ -37,13 +37,16 @@ export default function YantraMeditationSelector({ selectedPathId, onSelectPath,
                   onStartMeditation();
                 }
               }}
-              className="bg-gradient-to-br from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 rounded-lg p-4 text-left transition-all hover:shadow-lg"
+              className="folio-card group relative rounded-lg p-5 bg-gradient-to-br from-slate-700/50 to-gray-700/50 border border-amber-600/20 hover:border-amber-600/50 transition-all duration-300 hover:shadow-xl text-left"
             >
-              <h3 className="font-semibold text-white mb-2">{seq.name}</h3>
-              <p className="text-sm text-gray-400 mb-3">{seq.description}</p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-purple-400">{seq.totalDuration} min</span>
-                <span className="text-lg">→</span>
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-600/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+              <div className="relative">
+                <h3 className="font-display text-yellow-300 font-semibold mb-2">{seq.name}</h3>
+                <p className="text-sm text-amber-50/70 mb-4 leading-relaxed">{seq.description}</p>
+                <div className="flex items-center justify-between pt-3 border-t border-amber-600/10">
+                  <span className="text-sm font-display text-amber-600">{seq.totalDuration} minutes</span>
+                  <span className="text-lg text-amber-600/60 group-hover:text-amber-600 transition-colors">→</span>
+                </div>
               </div>
             </button>
           ))}
@@ -52,24 +55,25 @@ export default function YantraMeditationSelector({ selectedPathId, onSelectPath,
 
       {/* All Available Paths */}
       <div>
-        <h2 className="text-2xl font-bold text-white mb-4">All Meditation Paths</h2>
+        <h3 className="text-2xl font-display text-yellow-300 tracking-wide mb-6">All Meditation Paths</h3>
         <div className="grid gap-4">
           {YANTRA_MEDITATION_PATHS.map((path) => (
             <div
               key={path.id}
-              className={`rounded-lg p-5 cursor-pointer transition-all ${
+              className={`folio-card group relative rounded-lg p-6 cursor-pointer transition-all duration-300 ${
                 selectedPathId === path.id
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 ring-2 ring-purple-400'
-                  : 'bg-slate-700 hover:bg-slate-600'
+                  ? 'bg-gradient-to-br from-amber-600/20 to-amber-700/10 border-amber-600/60 ring-1 ring-amber-600/40'
+                  : 'bg-gradient-to-br from-slate-700/40 to-gray-700/40 border-amber-600/20 hover:border-amber-600/50'
               }`}
               onClick={() => onSelectPath(path.id)}
             >
-              <div className="flex items-start justify-between mb-3">
+              <div className={`absolute inset-0 bg-gradient-to-br from-amber-600/10 via-transparent to-amber-600/5 opacity-0 ${selectedPathId === path.id ? 'opacity-100' : 'group-hover:opacity-100'} transition-opacity duration-500 rounded-lg`} />
+              <div className="relative flex items-start justify-between mb-3">
                 <div>
-                  <h3 className={`text-lg font-semibold ${selectedPathId === path.id ? 'text-white' : 'text-white'}`}>
+                  <h3 className={`text-lg font-display font-semibold ${selectedPathId === path.id ? 'text-yellow-300' : 'text-amber-50'}`}>
                     {path.name}
                   </h3>
-                  <p className={`text-sm ${selectedPathId === path.id ? 'text-purple-100' : 'text-gray-400'}`}>
+                  <p className={`text-sm mt-1 ${selectedPathId === path.id ? 'text-amber-600/80' : 'text-amber-50/60'}`}>
                     {path.chakraFocus}
                   </p>
                 </div>

@@ -49,19 +49,19 @@ export default function SmashanaCompanion() {
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-xs rounded-sm px-4 py-3 text-sm ${
+              className={`max-w-xs rounded-lg px-5 py-4 text-sm font-body leading-relaxed border transition-all ${
                 msg.role === 'user'
-                  ? 'bg-[var(--color-gold)]/10 text-[var(--color-bone)]'
-                  : 'bg-[var(--color-obsidian)]/80 text-[var(--color-bone)]/90'
+                  ? 'bg-gradient-to-br from-amber-600/15 to-amber-600/5 text-amber-950 border-amber-600/30 shadow-lg shadow-amber-600/10'
+                  : 'bg-gradient-to-br from-slate-700/60 to-gray-700/60 text-amber-50/90 border-amber-600/20 shadow-md shadow-slate-900/30'
               }`}
             >
               {msg.content}
               {msg.mantras && msg.mantras.length > 0 && (
-                <div className="mt-2 space-y-1 border-t border-[var(--color-gold)]/20 pt-2">
+                <div className="mt-3 space-y-2 border-t border-amber-600/20 pt-3">
                   {msg.mantras.map((mantra, idx) => (
                     <div
                       key={idx}
-                      className="font-display text-xs text-[var(--color-gold-bright)]"
+                      className="font-display text-xs text-yellow-300 italic pl-2 border-l-2 border-amber-600/50"
                     >
                       «{mantra}»
                     </div>
@@ -74,7 +74,7 @@ export default function SmashanaCompanion() {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-[var(--color-obsidian)]/80 rounded-sm px-4 py-3 text-sm text-[var(--color-bone)]/60">
+            <div className="bg-gradient-to-r from-slate-700/50 to-gray-700/50 rounded-lg px-4 py-3 text-sm text-amber-600/60 border border-amber-600/20 italic animate-pulse">
               The Master speaks...
             </div>
           </div>
@@ -86,22 +86,22 @@ export default function SmashanaCompanion() {
       {/* Input Form */}
       <form
         onSubmit={handleSend}
-        className="border-t border-[var(--color-gold)]/20 p-4 flex gap-2"
+        className="border-t border-amber-600/20 p-4 flex gap-2 bg-gradient-to-r from-slate-900/40 to-gray-700/40"
       >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Speak..."
+          placeholder="Speak your truth..."
           disabled={isLoading}
-          className="flex-1 rounded-sm border border-[var(--color-gold)]/10 bg-[var(--color-obsidian)]/80 px-3 py-2 text-sm text-[var(--color-bone)] placeholder-[var(--color-bone)]/30 focus:border-[var(--color-gold)]/40 focus:outline-none disabled:opacity-50"
+          className="flex-1 rounded-lg border border-amber-600/25 bg-gradient-to-r from-slate-900/80 to-slate-700/50 px-4 py-3 text-sm text-amber-50 placeholder-amber-50/40 focus:border-amber-600/60 focus:outline-none focus:ring-1 focus:ring-amber-600/30 transition-all disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="rounded-sm border border-[var(--color-gold)]/50 bg-[var(--color-gold)]/5 px-4 py-2 font-display text-sm text-[var(--color-gold-bright)] transition hover:bg-[var(--color-gold)]/10 hover:border-[var(--color-gold)] disabled:opacity-50"
+          className="rounded-lg border border-amber-600/60 bg-gradient-to-br from-amber-600/20 to-amber-600/5 px-5 py-3 font-display text-sm text-yellow-300 transition hover:bg-amber-600/15 hover:border-amber-600 hover:shadow-lg hover:shadow-amber-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send
+          ✦
         </button>
       </form>
     </div>
