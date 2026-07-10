@@ -44,6 +44,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/comparative", label: "Comparative Matrix" },
       { href: "/archivist", label: "The Custodian" },
       { href: "/knowledge", label: "Knowledge Archive" },
+      { href: "/oracle", label: "🔮 Karma Oracle Deck" },
     ],
   },
   {
