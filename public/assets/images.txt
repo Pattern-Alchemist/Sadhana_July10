@@ -1,0 +1,87 @@
+ASTROKALKI IMAGE ASSETS MANIFEST
+
+HERO IMAGES:
+1. ritual-checklist-hero.png - Sacred Tantric Ritual Checklist
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000cb9461f68a8716737015f4dc-c1f6ef2a-322f-4d90-bc46-ec22dec5a5ce-YKRxOKouENGpdqvxjWujQKX0Jld0S2.png
+   Usage: Homepage hero background
+
+2. oracle-fire-eye.png - Mystical Fire Eye Symbol
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000001fc61f8a59f0e203bde5080-398858ec-db30-4889-86f0-b58be4bf7c80-2F5ReKw85BVFUNLaJDpxwaSVL2C8P3.png
+   Usage: Oracle page hero background
+
+PRACTICE CARDS & SECTIONS:
+3. shadow-sync.png - Kaosacharya Shadow Sync
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000023f461f885e5227d279e342d-6752537f-e6f4-4092-9214-eff442c27bc6-u0KczNjKJgkL8QrMRJfDSxlwLp8YOI.png
+   Usage: Advanced practices section
+
+4. nada-crafting.png - Nāda Crafting
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000cc3461f8be79dfe325e93953-dcce2b38-17e4-4b78-b40b-392618409bd5-PPNTZxtW0v1UnkjY8DwtwVHWD2zFU3.png
+   Usage: Sound/vibration practices card
+
+5. breath-void.png - Breath of the Void
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_000000005ab061f9ad2ff1e26b43ec8c-bcb50f5c-dd28-4f65-96f9-eb2a0f8e7285-lvdMb4r57ucyUWutOdXF6CXfbEzdPm.png
+   Usage: Void meditation/advanced practices
+
+6. bhairava-astra-homa.png - Bhairava-Astra Homa
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000032b861f9a4e84dc784b48e60-1ff3004a-f47b-4d82-822c-2585106a319d-C7SXo4JQ8d3FO8yKPsbmM7Z7k7flDD.png
+   Usage: Ritual practices showcase
+
+7. shiv-mohini-vidya.png - Shiv Mohini Vidya
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000045c461f997502ee7b0748a6b-f9edceee-aa1b-4e42-8dc7-484e9327e383-7dOSgW2t1rTiWMYyYfXA6khxJrGckM.png
+   Usage: Spiritual attraction/influence practices
+
+8. yama-bhairava-grid.png - Yama-Bhairava Karma Rectifier
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000c35c61f9973b1874cda4b79e-fe99e8db-f5ad-49db-a801-6ac34b2e9b2a-cmuodTLnavW3moBhCGaP7E9HvddODw.png
+   Usage: Karma/dharma practices section
+
+9. mirror-gate-ritual.png - Mirror Gate Ritual
+   URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000024c8623093894e7ae59fbddd-5723d831-2607-4748-b0d6-770b4ee8e3e9-F2jq99r64r24QG5kOgoOXmSSqpvJGV.png
+   Usage: Meditation/introspection section
+
+LEARNING & RESOURCES:
+10. tantra-roadmap.png - Learn Tantra from Scripture Roadmap
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000b77861f98b592c42855bb6c7-b48a82d3-1c99-4192-be15-c5404bd8a918-Gj3HTgbWfOfp14mro6NROnP2NR8Z1K.png
+    Usage: Learning path/curriculum guide
+
+11. kali-dark.png - Kali Yantra
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000d5f061f794eece7b51838c12-e4197e37-9fd1-4022-92e8-a90b9ebf9f3c-1OG6OeWTCDingoK2Yb9BGlTSIOHrGy.png
+    Usage: Power/transformation practices
+
+12. reset-kaustubh.png - Reset with Kaustubh Eclipse
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file-2iUUQuFSH2MjeNsrnKXUok-RESET%20with%20KAUSTUBH-iN5K0p5qzlySp0iT9ea28fHTVWSu3n.png
+    Usage: Reset/renewal section featured image
+
+SACRED SYMBOLS & DEITY:
+13. sacred-tantra-eye.png - Sacred Tantra Eye Symbol
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_000000007d1861fb96371f58fd5f1634-9debacdb-8436-4ad4-87ae-28330a1f5e45-S1WrVhb7NRW6QjGCbiOKXHDe9wpggw.png
+    Usage: Background/overlay element
+
+14. astral-geometry-craft.png - Astral Geometry Craft
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000d0b861fd9735fb89605f8060-4ed8eb9e-af49-4b6b-a0a5-1952c83ac0b6-KziM8Sdd2ljooci6hK3RJr77ugvzmD.png
+    Usage: Geometry/visualization practices
+
+15. shiva-cosmic.png - Shiva Cosmic Energy
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ShiVa-uUZ81qtkUFaZs3Aa610IKHtgyhjKIJ.png
+    Usage: Deity worship/Shiva practices hero section
+
+16. astral-geometry-v2.png - Astral Geometry Craft Advanced
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000018ac61f8b67a4a7b13da72e4-607658ea-2bd0-4fc6-9ae9-c1b3891954c8-okYZmajX6faAhLKxtliHP6Oi8sHvU8.png
+    Usage: Advanced geometry section
+
+17. vaj-dakini.png - Vaj Dakini
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000b81461f79d73e2770aa5a3a7-6f126aa0-6208-4433-885b-a241ea87405a-fLP7vfRCd9frSntZHAbqaDS9LN8LBO.png
+    Usage: Dakini practices/feminine energy section
+
+18. black-book-siddha.png - Black Book of Siddha Tantra
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000019e061fd8fde60052e7defab-f1290499-5c14-47a4-8ed8-ff52e20174fa-8ADsNvpMugjPt0gReosOxQfGHkjYi2.png
+    Usage: Grimoire/codex section featured image
+
+19. bhairava-astra-alt.png - Bhairava-Astra Homa Dark
+    URL: https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_00000000fa7061f9b1e0f06e33131475-313e2061-5a60-4a72-a635-0a0f8f4e8b20-EnWHJQ6rbQaAHmnefNZ59h5ZKnscom.png
+    Usage: Dark ritual/advanced practices
+
+RESPONSIVE USAGE GUIDELINES:
+- Hero images: 100% width, 60vh mobile / 70vh tablet / 80vh desktop
+- Card images: Lazy load with aspect-ratio containers (16:9 or 4:3)
+- Overlay opacity: 40-50% for readability
+- Max-width containers: 1280px centered with padding

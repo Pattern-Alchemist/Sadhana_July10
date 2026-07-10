@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useVaultData, type JournalEntry, type CycleEntry } from "@/components/useVaultData";
 import { DEITY_ROTATION, getCurrentSeason, getDailyQuote, QUOTES } from "@/lib/practice-data";
 import { OmGlyph, SriYantraGlyph, FlourishDivider, BinduSun, LotusGlyph } from "@/components/Symbols";
-import AnimatedSriCakra from "@/components/AnimatedSriCakra";
 
 // Lunar tithi computation (same as calendar page)
 function computeTithi(date: Date) {
@@ -81,18 +80,30 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — compact */}
-      <section className="relative overflow-hidden border-b border-[var(--color-hairline)] py-12 sm:py-16">
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div className="yantra-bg-spin absolute left-1/2 top-1/2 h-[120vh] w-[120vh] -translate-x-1/2 -translate-y-1/2">
-            <div className="absolute inset-0 rounded-full border border-[var(--color-gold)]" />
-            <div className="absolute inset-[20%] rounded-full border border-[var(--color-gold)]" />
-            <div className="absolute inset-[40%] rounded-full border border-[var(--color-gold)]" />
-          </div>
+      {/* Hero — Shiva Cosmic Deity */}
+      <section className="relative overflow-hidden border-b border-[var(--color-hairline)]">
+        {/* Shiva cosmic energy background */}
+        <div className="absolute inset-0">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ShiVa-hxRJzCoxIMkKJkyQrPcMMEzKEgeu6p.png"
+            alt="Shiva cosmic energy deity"
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
         </div>
-        <div className="content-z relative mx-auto max-w-4xl px-4 text-center sm:px-8">
-          <div className="mb-4">
-            <AnimatedSriCakra />
+        
+        {/* Gradient overlay for text legibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(10, 9, 8, 0.55) 0%, rgba(10, 9, 8, 0.35) 50%, rgba(10, 9, 8, 0.65) 100%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="content-z relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-8 sm:py-24">
+          <div className="mb-6 flex justify-center">
+            <div className="h-16 w-16 rounded-full border-2 border-[var(--color-gold)]/40 bg-gradient-to-br from-[var(--color-gold-bright)] to-[var(--color-gold)] opacity-20" />
           </div>
           <p className="fade-up text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
             {now ? now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) : "Loading..."}

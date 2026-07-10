@@ -20,30 +20,24 @@ const STATS = [
 export default function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8">
-      {/* Big rotating mandala behind */}
-      <div className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 z-0 h-[120vh] w-[120vh] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]">
-        <svg viewBox="0 0 400 400" className="h-full w-full text-gold-300">
-          <g fill="none" stroke="currentColor">
-            <circle cx="200" cy="200" r="196" strokeWidth="0.5" />
-            <circle cx="200" cy="200" r="160" strokeWidth="0.5" strokeDasharray="3 6" />
-            <circle cx="200" cy="200" r="120" strokeWidth="0.5" />
-            <circle cx="200" cy="200" r="80" strokeWidth="0.5" strokeDasharray="2 5" />
-            {Array.from({ length: 36 }).map((_, i) => {
-              const a = (i / 36) * Math.PI * 2;
-              return (
-                <line
-                  key={i}
-                  x1={200 + Math.cos(a) * 120}
-                  y1={200 + Math.sin(a) * 120}
-                  x2={200 + Math.cos(a) * 196}
-                  y2={200 + Math.sin(a) * 196}
-                  strokeWidth="0.5"
-                />
-              );
-            })}
-          </g>
-        </svg>
+      {/* Mystical fire eye background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000001fc61f8a59f0e203bde5080-398858ec-db30-4889-86f0-b58be4bf7c80-2F5ReKw85BVFUNLaJDpxwaSVL2C8P3.png"
+          alt="Mystical fire eye of consciousness"
+          className="h-full w-full object-cover opacity-45"
+          loading="eager"
+        />
       </div>
+
+      {/* Strong gradient overlay for oracle text contrast */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background: "linear-gradient(135deg, rgba(10, 9, 8, 0.7) 0%, rgba(15, 8, 4, 0.5) 50%, rgba(20, 10, 6, 0.8) 100%)",
+        }}
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Text */}
