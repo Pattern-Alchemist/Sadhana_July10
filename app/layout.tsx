@@ -6,6 +6,7 @@ import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import AmbientBackground from "@/components/hero/AmbientBackground";
+import { VaultProvider } from "@/components/VaultProvider";
 
 import RitualMotionConfig from "@/motion/RitualMotionConfig";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -60,11 +61,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang="en" className={`${cormorant.variable} ${crimson.variable}`} data-lens="scholar">
       <body className="min-h-screen font-body antialiased">
         <RitualMotionConfig>
-          <AmbientBackground />
-          <ServiceWorkerRegister />
-          <SiteNav siddhiSlugs={slugs} />
-          <main className="content-z relative">{children}</main>
-          <Footer />
+          <VaultProvider>
+            <AmbientBackground />
+            <ServiceWorkerRegister />
+            <SiteNav siddhiSlugs={slugs} />
+            <main className="content-z relative">{children}</main>
+            <Footer />
+          </VaultProvider>
         </RitualMotionConfig>
       </body>
     </html>
