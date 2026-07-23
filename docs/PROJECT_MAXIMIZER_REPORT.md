@@ -37,7 +37,7 @@ external analytics or telemetry — all personal data stays client-side, encrypt
 | SEO (technical + content) | 5 | (1) No `robots.txt` at all — **added in this PR** (`app/robots.ts`). (2) `sitemap.ts` hardcoded a placeholder domain (`astrokalki.example.com`) with no env override — **fixed in this PR** (now reads `NEXT_PUBLIC_SITE_URL`). (3) No Open Graph / Twitter card metadata anywhere (`app/layout.tsx` metadata object has only `title`/`description`). |
 | AI/automation depth | 5 | (1) "The Custodian" (`/api/archivist`) is a keyword scorer, not an LLM — fine as a deliberate design choice ("pointers, not prescriptions"), but the semantic-search endpoint (`/api/archivist/semantic`) is a stub requiring the caller to already have an embedding, which no client ever calls. (2) No AI writing/content pipeline despite the user's stated OpenAI/Claude/Gemini stack — a natural fit for auto-drafting siddhi FAQ/summary fields from the `knowledge/` corpus. (3) `scripts/generate_embeddings.py` exists but isn't wired to any CI job or npm script. |
 | Security & data handling | 7 | (1) No security headers at all (`next.config.ts` was an empty object) — **fixed in this PR** (HSTS, X-Frame-Options, nosniff, Permissions-Policy, Referrer-Policy). (2) `public/sw.js` had a syntax error (stray `)`) that silently broke the *entire* service worker / offline PWA feature — **fixed in this PR**. (3) Client-side vault crypto (AES-GCM + PBKDF2 100k) is a genuinely solid pattern for a no-backend personal-data model — no changes needed there. |
-| Testing & CI/CD | 4 → 8 (post-fix) | (1) `vitest.config.ts` aliased `@/*` to `./src`, but the project has no `src/` directory (code lives at repo root) — this silently broke 6 of 8 test files (only 2/8 ran). **Fixed in this PR**; all 93 tests across 8 files now pass. (2) Zero GitHub Actions / CI pipeline existed — **added in this PR** (`.github/workflows/ci.yml`: lint, typecheck, test, build on every push/PR). (3) No component/E2E tests (Playwright/Testing Library) — only pure-function unit tests exist. |
+| Testing & CI/CD | 4 → 8 (post-fix) | (1) `vitest.config.ts` aliased `@/*` to `./src`, but the project has no `src/` directory (code lives at repo root) — this silently broke 6 of 8 test files (only 2/8 ran). **Fixed in this PR**; all 93 tests across 8 files now pass. (2) Zero GitHub Actions / CI pipeline existed — **workflow added in this PR as `ci-templates/github-actions-ci.yml`** (lint, typecheck, test, build on every push/PR); see `ci-templates/README.md` to activate it under `.github/workflows/` (the agent's GitHub App token lacks the `workflows` scope needed to push directly into that path). (3) No component/E2E tests (Playwright/Testing Library) — only pure-function unit tests exist. |
 | Documentation & onboarding | 6 | Extensive docs exist (`docs/`, `ai-context/`) but were **duplicated verbatim inside `Arena_Export/docs/`** — **removed in this PR**, cutting ~46MB of repo bloat and eliminating "which copy is current" ambiguity. Root also has 12 loose status-report Markdown files (`PROJECT_COMPLETE.md`, `FINAL_DEPLOYMENT_REPORT.md`, etc.) that read like sprint logs rather than reference docs — worth consolidating into `docs/CHANGELOG.md`. |
 | Scalability (users, data, features) | 6 | (1) `better-sqlite3` (native binding) is used for the knowledge corpus alongside PostgreSQL for the main app — two storage engines to operate/scale independently. (2) `ensureArchiveSeeded()` runs on every cold start in `layout.tsx`, adding latency + a DB round-trip to *every* server render. (3) No pagination on `/api/archivist` or `/archive` — all rows are always fetched. |
 | Monetization & growth hooks | 4 | No email capture, no account system (by design — privacy-first), no share/referral mechanics, no analytics to learn what content resonates. Given the explicit "no server, no account" privacy stance, growth must come from content/SEO/YouTube funnel rather than in-app monetization — see Moonshot 4.1. |
@@ -252,8 +252,10 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - **Issue**: No CI pipeline existed at all — lint/typecheck/test/build only ran if a human remembered
   to run them locally.
 - **Impact**: Regressions (like the two above) ship straight to `main` undetected.
-- **Solution**: ✅ **Applied** — `.github/workflows/ci.yml` runs `pnpm lint`, `pnpm typecheck`,
-  `pnpm test`, and `pnpm build` on every push/PR to `main`.
+- **Solution**: ✅ **Applied** as `ci-templates/github-actions-ci.yml` (runs `pnpm lint`,
+  `pnpm typecheck`, `pnpm test`, and `pnpm build` on every push/PR to `main`). Copy it into
+  `.github/workflows/ci.yml` to activate — see `ci-templates/README.md` for why it landed here
+  instead of directly in `.github/workflows/`.
 - **Priority**: P0 · **Effort**: S
 
 - **Issue**: No component or end-to-end tests — only pure-function unit tests (cosmology math,
@@ -417,7 +419,7 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - [x] Fix broken `public/sw.js` syntax error breaking the entire PWA (P0, ~1h)
 - [x] Fix `vitest.config.ts` path alias breaking 6/8 test suites (P0, ~1h)
 - [x] Remove duplicated `Arena_Export/` + 3 zip bundles (~46MB) from git (P0, ~1h)
-- [x] Add `.github/workflows/ci.yml` (lint/typecheck/test/build) (P0, ~2h)
+- [x] Add CI workflow definition (lint/typecheck/test/build) as `ci-templates/github-actions-ci.yml` — copy into `.github/workflows/` to activate (P0, ~2h)
 - [x] Add security headers via `next.config.ts` (P0, ~1h)
 - [x] Add `app/robots.ts` + fix hardcoded sitemap domain (P0, ~1h)
 - [x] Replace raw `<img>` with `next/image` on both hero sections (P0, ~2h)
@@ -452,7 +454,7 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 ### Sprint 4: Testing & Reliability (Weeks 7–8)
 - [ ] Add Playwright with 5–8 critical-path smoke tests (vault setup/unlock, japa counter, archivist
       search, reader page load) (P2, ~10h)
-- [ ] Add the Playwright job to `.github/workflows/ci.yml` (P2, ~2h)
+- [ ] Add the Playwright job to the CI workflow (`ci-templates/github-actions-ci.yml` once activated) (P2, ~2h)
 - [ ] Move root-level historical report `.md` files into `docs/history/` (P2, ~1h)
 - **Success metric**: CI catches at least one real regression before merge during this sprint
   (validates the investment).
@@ -552,7 +554,7 @@ passphrase is rejected.
 <constraints>
 - Tests must not depend on a live Postgres DB (mock or stub the DB-backed routes if the flow touches them).
 - Use data-testid attributes only where absolutely necessary; prefer role/label-based queries.
-- Add the Playwright job to .github/workflows/ci.yml as a separate job from the existing quality job.
+- Add the Playwright job to the CI workflow (ci-templates/github-actions-ci.yml once activated) as a separate job from the existing quality job.
 </constraints>
 <output_format>New test file(s), any minimal component changes needed for testability, and the CI diff.</output_format>
 ```
