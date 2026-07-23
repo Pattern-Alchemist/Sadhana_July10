@@ -35,7 +35,7 @@ export default function Vision() {
           <p className="font-serif text-lg leading-relaxed text-mist">
             Each card is a portal — revealing hidden truths about past actions and their weight upon
             the present and future. Yet the deck is never a sentence. It is a mirror, offered in the
-            spirit of insight, healing, and the quiet power to rewrite one's own karmic story.
+            spirit of insight, healing, and the quiet power to rewrite one’s own karmic story.
           </p>
         </motion.div>
 

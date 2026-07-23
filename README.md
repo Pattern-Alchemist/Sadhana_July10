@@ -104,6 +104,7 @@ Arena_Export/
 | `docs/CONTRIBUTING.md`      | How to extend the corpus, add a siddhi, add a manuscript       |
 | `docs/CHANGELOG.md`         | Version history                                                |
 | `docs/ROADMAP.md`           | Future work — RAG, embeddings, multi-language, auth            |
+| `docs/PROJECT_MAXIMIZER_REPORT.md` | Full audit, prioritized enhancement blueprint, 10x moonshots, sprint roadmap, and reusable AI prompt templates |
 | `ai-context/AI_CONTEXT.md`  | Persistent context any AI agent should load first              |
 | `ai-context/PROJECT_MEMORY.md` | Long-term project memory + decisions log                    |
 | `ai-context/CODING_STANDARDS.md` | Style, naming, file organisation rules                     |

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { CARDS, type KarmaCard } from "../data/cards";
 import { OracleFace } from "./OracleCard";
 
@@ -22,11 +23,13 @@ export default function Hero() {
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-8">
       {/* Mystical fire eye background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <img
+        <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000001fc61f8a59f0e203bde5080-398858ec-db30-4889-86f0-b58be4bf7c80-2F5ReKw85BVFUNLaJDpxwaSVL2C8P3.png"
           alt="Mystical fire eye of consciousness"
-          className="h-full w-full object-cover opacity-45"
-          loading="eager"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-45"
         />
       </div>
 

@@ -18,7 +18,9 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-dynamic";
 
-const BASE_URL = "https://astrokalki.example.com"; // replace with real domain in production
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
+  "https://astrokalki.example.com"; // replace with real domain in production
 
 const STATIC_ROUTES = [
   "",

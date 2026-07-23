@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useVaultData, type JournalEntry, type CycleEntry } from "@/components/useVaultData";
 import { DEITY_ROTATION, getCurrentSeason, getDailyQuote, QUOTES } from "@/lib/practice-data";
@@ -84,11 +85,13 @@ export default function DashboardPage() {
       <section className="relative overflow-hidden border-b border-[var(--color-hairline)]">
         {/* Shiva cosmic energy background */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ShiVa-hxRJzCoxIMkKJkyQrPcMMEzKEgeu6p.png"
             alt="Shiva cosmic energy deity"
-            className="h-full w-full object-cover"
-            loading="eager"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
         </div>
         
@@ -127,7 +130,7 @@ export default function DashboardPage() {
 
           {/* Deity of the day */}
           <Link href="/deity" className="group rounded-sm border border-[var(--hairline)] bg-[var(--color-ink)]/40 p-5 transition hover:border-[var(--color-gold)]/40" style={{ borderColor: deity.color + "30" }}>
-            <p className="text-[0.5rem] uppercase tracking-luxe text-[var(--color-gold)]">Today's Deity</p>
+            <p className="text-[0.5rem] uppercase tracking-luxe text-[var(--color-gold)]">Today’s Deity</p>
             <p className="mt-2 font-display text-xl" style={{ color: deity.color }}>{deity.name}</p>
             <p className="mt-0.5 font-display text-xs text-[var(--color-gold)]/60">{deity.sanskrit}</p>
           </Link>
@@ -171,8 +174,8 @@ export default function DashboardPage() {
 
           {/* Daily quote */}
           <Link href="/quotes" className="group rounded-sm border border-[var(--hairline)] bg-[var(--color-ink)]/40 p-5 transition hover:border-[var(--color-gold)]/40">
-            <p className="text-[0.5rem] uppercase tracking-luxe text-[var(--color-gold)]">Today's Quote</p>
-            <p className="mt-2 text-xs italic leading-relaxed text-[var(--color-bone)]/75">"{quote.text}"</p>
+            <p className="text-[0.5rem] uppercase tracking-luxe text-[var(--color-gold)]">Today’s Quote</p>
+            <p className="mt-2 text-xs italic leading-relaxed text-[var(--color-bone)]/75">“{quote.text}”</p>
             <p className="mt-1 text-[0.5rem] text-[var(--color-gold-bright)]">— {quote.source}</p>
           </Link>
 
