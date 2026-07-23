@@ -6,10 +6,26 @@ __v0_jsx-dev-runtime.ts
 .v0-trash/
 .vercel/
 
-# Environment variables
+# Environment variables (never commit real secrets)
+.env
+.env.local
 .env*.local
 
 # Common ignores
 node_modules
 .next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
 .DS_Store
+Thumbs.db
+
+# Editor/OS cruft
+.vscode/*
+!.vscode/extensions.json
+
+# Package manager noise (pnpm is canonical; don't commit npm's/yarn's lockfile)
+package-lock.json
+yarn.lock

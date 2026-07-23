@@ -83,7 +83,7 @@ export default function DreamsPage() {
       {dreamEntries.length === 0 ? (
         <div className="rounded-sm border border-[var(--color-hairline)] bg-[var(--color-ink)]/40 p-8 text-center">
           <p className="text-sm text-[var(--color-bone)]/65">
-            No dream logs yet. Record dreams in your practice journal — they'll appear here.
+            No dream logs yet. Record dreams in your practice journal — they’ll appear here.
           </p>
         </div>
       ) : (

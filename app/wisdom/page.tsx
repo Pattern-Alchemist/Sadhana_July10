@@ -22,7 +22,7 @@ export default function WisdomPage() {
       <header className="fade-up mb-6 text-center">
         <div className="mb-3 text-[var(--color-gold)]/60"><OmGlyph style={{ fontSize: "1.6rem" }} /></div>
         <h1 className="font-display text-xl text-[var(--color-ivory)] sm:text-2xl">Practice Wisdom Board</h1>
-        <p className="mt-1 text-xs text-[var(--color-bone)]/60">Accumulated wisdom per siddhi — what worked, what didn't, what you'd change.</p>
+        <p className="mt-1 text-xs text-[var(--color-bone)]/60">Accumulated wisdom per siddhi — what worked, what didn’t, what you’d change.</p>
       </header>
       <div className="mb-4 space-y-2 rounded-sm border border-[var(--color-hairline)] bg-[var(--color-ink)]/40 p-4">
         <input type="text" value={siddhi} onChange={(e)=>setSiddhi(e.target.value)} placeholder="Siddhi / practice name" className="field text-sm" />

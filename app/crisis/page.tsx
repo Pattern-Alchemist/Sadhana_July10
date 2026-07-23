@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { OmGlyph } from "@/components/Symbols";
 
 const GROUNDING_STEPS = [
@@ -23,7 +24,7 @@ export default function CrisisPage() {
           Grounding Protocol · Instant Access
         </span>
         <h1 className="mt-2 font-display text-2xl text-[var(--color-ivory)] sm:text-3xl">
-          I'm Overwhelmed
+          I’m Overwhelmed
         </h1>
         <p className="mt-2 text-xs text-[var(--color-bone)]/65 sm:text-sm">
           If you feel destabilized — racing heart, blurred vision, overwhelming emotion — follow these steps in order. Do not skip.
@@ -65,7 +66,7 @@ export default function CrisisPage() {
       </div>
 
       <div className="mt-6 text-center">
-        <a href="/" className="btn-ghost text-xs">← Return to Archive</a>
+        <Link href="/" className="btn-ghost text-xs">← Return to Archive</Link>
       </div>
     </div>
   );

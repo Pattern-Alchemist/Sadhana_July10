@@ -138,7 +138,7 @@ export default function SacredTimeline() {
 
       {/* Today's Cosmic Info */}
       <div className="rounded-lg border border-[var(--hairline)] p-6 space-y-4">
-        <h2 className="text-2xl font-serif">Today's Cosmic Alignment</h2>
+        <h2 className="text-2xl font-serif">Today’s Cosmic Alignment</h2>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div className="rounded-lg bg-[var(--color-bone)]/5 p-4">

@@ -77,7 +77,7 @@ export default function PracticeDashboard({
           transition={transition}
         >
           <p className="text-xs font-light tracking-widest uppercase mb-2" style={{ color: theme.secondary }}>
-            Today's Practices
+            Today’s Practices
           </p>
           <p className="text-3xl font-light" style={{ color: theme.primary }}>
             {recentPractices.length}

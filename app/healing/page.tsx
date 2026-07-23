@@ -16,7 +16,7 @@ export default function HealingPage() {
           <OmGlyph style={{ fontSize: "1.8rem" }} />
         </div>
         <span className="text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
-          Healer's Reference · Encrypted
+          Healer’s Reference · Encrypted
         </span>
         <h1 className="mt-2 font-display text-2xl text-[var(--color-ivory)] sm:text-3xl">
           Healing Hub
@@ -121,7 +121,7 @@ function AfflictionReference() {
 
       <p className="mt-8 rounded-sm border border-[var(--color-rose-accent)]/20 bg-[var(--color-rose-accent)]/5 p-4 text-center text-xs italic leading-relaxed text-[var(--color-bone)]/60">
         These mappings document what the tradition holds — not what will work.
-        The healer's role is to facilitate, not to guarantee. Always consult
+        The healer’s role is to facilitate, not to guarantee. Always consult
         qualified medical professionals for physical and psychological conditions.
       </p>
     </div>
