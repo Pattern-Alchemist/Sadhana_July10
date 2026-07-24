@@ -5,7 +5,7 @@ import { SIDDHI_SEED } from "@/lib/archive-data";
 import AdminUnrestrictedView from "@/components/AdminUnrestrictedView";
 import { OmGlyph } from "@/components/Symbols";
 
-const ADMIN_PASSPHRASE = "sadhaka-archive-2026"; // Change this to a secure passphrase
+const ADMIN_PASSPHRASE = "Kaos@777"; // Change this to a secure passphrase
 
 export default function AdminPage() {
   const [passphrase, setPassphrase] = useState("");
