@@ -19,9 +19,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = getReaderEntry(slug);
   if (!entry) return { title: "Verse not found · AstroKalki" };
+  const title = `${entry.title} · Reader`;
+  const description = entry.english.slice(0, 160);
   return {
-    title: `${entry.title} · Reader · AstroKalki`,
-    description: entry.english.slice(0, 160),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

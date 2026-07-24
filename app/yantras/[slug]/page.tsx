@@ -18,9 +18,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const yantra = getYantraBySlug(slug);
   if (!yantra) return { title: "Yantra not found · AstroKalki" };
+  const title = `${yantra.title} · The Yantra Gallery`;
+  const description = yantra.description;
   return {
-    title: `${yantra.title} · The Yantra Gallery · AstroKalki`,
-    description: yantra.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
