@@ -7,6 +7,9 @@ blueprint, 10x moonshot vision, sprint roadmap, and reusable prompt templates fo
 > **What's already applied in this PR** is marked ✅ inline. Everything else is a recommendation —
 > intentionally *not* auto-applied because it touches ~50 UI files and needs a browser/DB to verify
 > visually, per the scope agreed with the repo owner.
+>
+> **Continuation on `arena/019f926b-sadhana-july10`:** Sprint 1, the first Sprint 3 semantic-search
+> path, and Moonshot 4.2's siddhi/manuscript folio SEO work have now been implemented in this branch.
 
 ---
 
@@ -357,7 +360,7 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
   that must only summarize the top-k retrieved chunks with inline `[source: slug]` citations, never
   free-generate. (3) Cache synthesized answers per-query in Postgres to avoid repeat LLM cost.
 
-### 4.2 Per-Folio SEO Pages with Auto-Generated Rich Snippets
+### 4.2 Per-Folio SEO Pages with Auto-Generated Rich Snippets — ✅ Siddhi/manuscript metadata + OG images shipped
 
 - **Description**: Each of the 35 siddhi folios and 11 manuscripts already has structured data
   (`SiddhiJsonLd.tsx` exists) but the pages share generic top-level metadata. Auto-generate unique
@@ -427,11 +430,11 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - [x] Fix `<a>` → `next/link` and remaining ESLint `@next/next` errors (P1, ~1h)
 - [x] Tidy `.gitignore` (build artifacts, lockfile hygiene) (P2, ~30m)
 
-### Sprint 1: Type & Data Safety (Weeks 1–2)
-- [ ] Type `db/index.ts` with `NodePgDatabase<typeof schema>` instead of `any` (P1, ~2h)
-- [ ] Resolve `db/schema.ts` vs `db/schema-v2.ts` ambiguity (P1, ~2h)
-- [ ] Enable `"strict": true` in `tsconfig.json`, fix fallout file-by-file (P2, ~8h)
-- [ ] Memoize `ensureArchiveSeeded()` at module scope (P1, ~2h)
+### Sprint 1: Type & Data Safety (Weeks 1–2) — ✅ Completed in continuation
+- [x] Type `db/index.ts` with `NodePgDatabase<typeof schema>` instead of `any` (P1, ~2h)
+- [x] Resolve `db/schema.ts` vs `db/schema-v2.ts` ambiguity (P1, ~2h)
+- [x] Enable `"strict": true` in `tsconfig.json`, fix fallout file-by-file (P2, ~8h)
+- [x] Memoize `ensureArchiveSeeded()` at module scope (P1, ~2h)
 - **Success metric**: `tsc --noEmit --strict` passes with zero errors; homepage TTFB drops
   measurably (verify via `next build && next start` + Lighthouse).
 
@@ -443,11 +446,12 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - **Success metric**: Google Search Console shows 46+ indexed unique-title pages (vs. ~9 today);
   Lighthouse SEO score 100.
 
-### Sprint 3: Search & AI Depth (Weeks 5–6)
-- [ ] Wire `/api/archivist/semantic` to generate its own query embedding server-side (P2, ~6h)
-- [ ] Add "Deep search" toggle in `components/Archivist.tsx` using semantic endpoint (P2, ~4h)
+### Sprint 3: Search & AI Depth (Weeks 5–6) — Partially completed in continuation
+- [x] Wire `/api/archivist/semantic` to generate its own query embedding server-side (P2, ~6h)
+- [x] Add "Deep search" toggle in `components/Archivist.tsx` using semantic endpoint (P2, ~4h)
 - [ ] Port `/api/archivist` scoring to the existing FTS5 index or Postgres `tsvector` (P2, ~6h)
-- [ ] Wire `scripts/generate_embeddings.py` into an npm script + manual CI dispatch (P3, ~2h)
+- [x] Wire `scripts/generate_embeddings.py` into an npm script wrapper (P3, ~2h)
+- [ ] Add manual CI dispatch for embedding/doc generation (P3 follow-up)
 - **Success metric**: Semantic search returns relevant results for paraphrased (non-keyword-exact)
   queries in manual QA; `/api/archivist` p95 latency measured and improved.
 

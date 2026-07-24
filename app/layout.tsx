@@ -10,8 +10,9 @@ import { VaultProvider } from "@/components/VaultProvider";
 
 import RitualMotionConfig from "@/motion/RitualMotionConfig";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { siddhis } from "@/db/schema";
+import { getSiteUrl } from "@/lib/seo";
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
@@ -36,10 +37,29 @@ const crimson = Crimson_Text({
   display: "swap",
 });
 
+const siteDescription =
+  "A museum-quality archive of contemplative heritage — siddhis, manuscripts, cosmology and lineage, presented with scholarly restraint and a dual epistemological lens.";
+
 export const metadata: Metadata = {
-  title: "AstroKalki · The Living Archive",
-  description:
-    "A museum-quality archive of contemplative heritage — siddhis, manuscripts, cosmology and lineage, presented with scholarly restraint and a dual epistemological lens.",
+  metadataBase: new URL(getSiteUrl()),
+  applicationName: "AstroKalki",
+  title: {
+    default: "AstroKalki · The Living Archive",
+    template: "%s · AstroKalki",
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName: "AstroKalki",
+    title: "AstroKalki · The Living Archive",
+    description: siteDescription,
+    url: getSiteUrl(),
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AstroKalki · The Living Archive",
+    description: siteDescription,
+  },
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -48,11 +68,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // during static generation at build time without DATABASE_URL set).
   let slugs: string[] = [];
   try {
-    if (db) {
-      await ensureArchiveSeeded();
-      const allSiddhis = await db.select({ slug: siddhis.slug }).from(siddhis);
-      slugs = allSiddhis.map((s) => s.slug).filter(Boolean) as string[];
-    }
+    const db = getDb();
+    await ensureArchiveSeeded();
+    const allSiddhis = await db.select({ slug: siddhis.slug }).from(siddhis);
+    slugs = allSiddhis.map((s) => s.slug).filter(Boolean);
   } catch {
     // Database unavailable — the random button will be disabled
   }

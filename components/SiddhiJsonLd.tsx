@@ -1,4 +1,5 @@
 import type { Siddhi, EvidenceSource } from "@/db/schema";
+import { getSiteUrl } from "@/lib/seo";
 
 /**
  * Emits Schema.org structured data (JSON-LD) for siddhi folios.
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export function SiddhiJsonLd({ siddhi, evidence }: Props) {
-  const baseUrl = "https://astrokalki.example.com"; // replace with real domain in production
+  const baseUrl = getSiteUrl();
   const siddhiUrl = `${baseUrl}/siddhi/${siddhi.slug}`;
   const archiveUrl = `${baseUrl}/archive`;
 

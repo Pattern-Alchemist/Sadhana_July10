@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface ManuscriptCardData {
   slug: string;
@@ -70,16 +71,24 @@ export default function CodexExplorer({
                   <Meta label="Language" value={m.language ?? "—"} />
                   <Meta label="Condition" value={m.conditionRating ?? "—"} />
                 </div>
-                {m.sourceUrl && (
-                  <a
-                    href={m.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-block btn-ghost px-5 py-2.5 text-sm"
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Link
+                    href={`/manuscripts/${m.slug}`}
+                    className="btn-gold px-5 py-2.5 text-sm"
                   >
-                    Consult the source text ↗
-                  </a>
-                )}
+                    Open catalogue record →
+                  </Link>
+                  {m.sourceUrl && (
+                    <a
+                      href={m.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-ghost px-5 py-2.5 text-sm"
+                    >
+                      Consult the source text ↗
+                    </a>
+                  )}
+                </div>
               </div>
             )}
           </div>

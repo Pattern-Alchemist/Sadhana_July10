@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb, type Database } from "@/db";
 import { sql } from "drizzle-orm";
 import {
   siddhis,
@@ -16,15 +16,12 @@ import {
 } from "@/lib/archive-data";
 
 /**
- * Self-healing schema. Mirrors src/db/schema.ts as idempotent DDL so the
+ * Self-healing schema. Mirrors db/schema.ts as idempotent DDL so the
  * application functions even against a freshly created / reset database.
  * (drizzle-kit push is the primary path; this is the safety net.)
  */
-async function ensureSchema() {
-  if (!db) {
-    throw new Error("Database not initialized - DATABASE_URL not set");
-  }
-  await db.execute(sql`
+async function ensureSchema(database: Database) {
+  await database.execute(sql`
     CREATE TABLE IF NOT EXISTS siddhis (
       id SERIAL PRIMARY KEY,
       slug TEXT NOT NULL UNIQUE,
@@ -50,7 +47,7 @@ async function ensureSchema() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
-  await db.execute(sql`
+  await database.execute(sql`
     CREATE TABLE IF NOT EXISTS manuscripts (
       id SERIAL PRIMARY KEY,
       slug TEXT NOT NULL UNIQUE,
@@ -66,7 +63,7 @@ async function ensureSchema() {
       source_url TEXT
     );
   `);
-  await db.execute(sql`
+  await database.execute(sql`
     CREATE TABLE IF NOT EXISTS schools (
       id SERIAL PRIMARY KEY,
       slug TEXT NOT NULL UNIQUE,
@@ -76,7 +73,7 @@ async function ensureSchema() {
       order_index INTEGER
     );
   `);
-  await db.execute(sql`
+  await database.execute(sql`
     CREATE TABLE IF NOT EXISTS evidence_sources (
       id SERIAL PRIMARY KEY,
       siddhi_slug TEXT,
@@ -87,7 +84,7 @@ async function ensureSchema() {
       confidence TEXT
     );
   `);
-  await db.execute(sql`
+  await database.execute(sql`
     CREATE TABLE IF NOT EXISTS reflections (
       id SERIAL PRIMARY KEY,
       pen_name TEXT,
@@ -98,17 +95,17 @@ async function ensureSchema() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
-  await db.execute(sql`
+  await database.execute(sql`
     CREATE INDEX IF NOT EXISTS evidence_siddhi_idx ON evidence_sources (siddhi_slug);
   `);
 }
 
-async function ensureSeed() {
-  const raw = await db.execute(sql`SELECT count(*)::int AS c FROM siddhis`);
-  const arr = ((raw as { rows?: unknown[] }).rows ?? []) as { c: number }[];
-  const siddhiRows = Number(arr[0]?.c ?? 0);
+async function ensureSeed(database: Database) {
+  const raw = await database.execute(sql`SELECT count(*)::int AS c FROM siddhis`);
+  const rows = raw.rows as { c?: number | string }[];
+  const siddhiRows = Number(rows[0]?.c ?? 0);
   if (siddhiRows === 0) {
-    await db
+    await database
       .insert(siddhis)
       .values(
         SIDDHI_SEED.map((s) => ({
@@ -136,7 +133,7 @@ async function ensureSeed() {
       )
       .onConflictDoNothing({ target: siddhis.slug });
 
-    await db
+    await database
       .insert(manuscripts)
       .values(
         MANUSCRIPT_SEED.map((m) => ({
@@ -155,7 +152,7 @@ async function ensureSeed() {
       )
       .onConflictDoNothing({ target: manuscripts.slug });
 
-    await db
+    await database
       .insert(schools)
       .values(
         SCHOOL_SEED.map((s) => ({
@@ -168,7 +165,7 @@ async function ensureSeed() {
       )
       .onConflictDoNothing({ target: schools.slug });
 
-    await db
+    await database
       .insert(evidenceSources)
       .values(
         EVIDENCE_SEED.map((e) => ({
@@ -182,7 +179,7 @@ async function ensureSeed() {
       )
       .onConflictDoNothing();
 
-    await db
+    await database
       .insert(reflections)
       .values(
         REFLECTION_SEED.map((r) => ({
@@ -197,15 +194,26 @@ async function ensureSeed() {
   }
 }
 
-let bootstrapped = false;
+async function runArchiveBootstrap() {
+  const database = getDb();
+  await ensureSchema(database);
+  await ensureSeed(database);
+}
 
-export async function ensureArchiveSeeded() {
-  if (bootstrapped) return;
-  try {
-    await ensureSchema();
-    await ensureSeed();
-    bootstrapped = true;
-  } catch (err) {
-    console.error("[AstroKalki] bootstrap error:", err);
-  }
+let bootstrapped = false;
+let bootstrapPromise: Promise<void> | null = null;
+
+export function ensureArchiveSeeded(): Promise<void> {
+  if (bootstrapped) return Promise.resolve();
+
+  bootstrapPromise ??= runArchiveBootstrap()
+    .then(() => {
+      bootstrapped = true;
+    })
+    .catch((err: unknown) => {
+      bootstrapPromise = null;
+      console.error("[AstroKalki] bootstrap error:", err);
+    });
+
+  return bootstrapPromise;
 }

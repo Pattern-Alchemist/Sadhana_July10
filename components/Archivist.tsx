@@ -6,13 +6,15 @@ import Link from "next/link";
 interface ArchivistResult {
   slug: string;
   name: string;
-  sanskrit: string;
-  category: string;
-  summary: string;
+  sanskrit: string | null;
+  category: string | null;
+  summary: string | null;
   type: "siddhi" | "manuscript";
   reason: string;
   score: number;
 }
+
+type SearchMode = "keyword" | "semantic";
 
 const SUGGESTIONS = [
   "What is the significance of Oṃ?",
@@ -22,26 +24,74 @@ const SUGGESTIONS = [
   "Breath and the witness self",
 ];
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function getResults(payload: unknown): ArchivistResult[] {
+  if (!isRecord(payload) || !Array.isArray(payload.results)) return [];
+  return payload.results as ArchivistResult[];
+}
+
+function getNote(payload: unknown): string {
+  if (!isRecord(payload)) return "";
+  return typeof payload.note === "string" ? payload.note : "";
+}
+
+async function postSearch(endpoint: string, query: string) {
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query }),
+  });
+  const payload = (await response.json().catch(() => ({}))) as unknown;
+  return { response, payload };
+}
+
 export default function Archivist() {
   const [query, setQuery] = useState("");
+  const [searchMode, setSearchMode] = useState<SearchMode>("keyword");
   const [results, setResults] = useState<ArchivistResult[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [note, setNote] = useState<string>("");
 
   async function ask(q: string) {
     if (!q.trim()) return;
+    const trimmedQuery = q.trim();
     setLoading(true);
     setResults(null);
     setNote("");
+
     try {
-      const res = await fetch("/api/archivist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q }),
-      });
-      const data = await res.json();
-      setResults(data.results ?? []);
-      setNote(data.note ?? "");
+      if (searchMode === "semantic") {
+        const { response, payload } = await postSearch("/api/archivist/semantic", trimmedQuery);
+
+        if (response.ok) {
+          setResults(getResults(payload));
+          setNote(getNote(payload));
+          return;
+        }
+
+        const semanticNote = getNote(payload);
+        const fallback = await postSearch("/api/archivist", trimmedQuery);
+        const fallbackResults = getResults(fallback.payload);
+        const fallbackNote = getNote(fallback.payload);
+        setResults(fallbackResults);
+        setNote(
+          [
+            semanticNote || "Deep search is unavailable on this deployment.",
+            "Showing keyword pointers instead.",
+            fallbackNote,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        );
+        return;
+      }
+
+      const { payload } = await postSearch("/api/archivist", trimmedQuery);
+      setResults(getResults(payload));
+      setNote(getNote(payload));
     } catch {
       setNote("The Custodian could not be reached. Try again.");
     } finally {
@@ -67,6 +117,42 @@ export default function Archivist() {
             {loading ? "Searching…" : "Inquire"}
           </button>
         </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="text-[0.55rem] uppercase tracking-luxe text-[var(--color-bone)]/45">
+            Search mode
+          </span>
+          <button
+            type="button"
+            aria-pressed={searchMode === "keyword"}
+            onClick={() => setSearchMode("keyword")}
+            className={`border px-2.5 py-1 text-xs transition ${
+              searchMode === "keyword"
+                ? "border-[var(--color-gold)]/70 text-[var(--color-gold-bright)]"
+                : "border-[var(--hairline)] text-[var(--color-bone)]/70 hover:border-[var(--color-gold)]/50 hover:text-[var(--color-gold-bright)]"
+            }`}
+          >
+            Keyword
+          </button>
+          <button
+            type="button"
+            aria-pressed={searchMode === "semantic"}
+            onClick={() => setSearchMode("semantic")}
+            className={`border px-2.5 py-1 text-xs transition ${
+              searchMode === "semantic"
+                ? "border-[var(--color-cyan-accent)]/70 text-[var(--color-cyan-accent)]"
+                : "border-[var(--hairline)] text-[var(--color-bone)]/70 hover:border-[var(--color-cyan-accent)]/50 hover:text-[var(--color-cyan-accent)]"
+            }`}
+          >
+            Deep search
+          </button>
+          <span className="text-xs italic text-[var(--color-bone)]/50">
+            {searchMode === "semantic"
+              ? "Embeds your query server-side and falls back to keyword pointers if unavailable."
+              : "Weighted catalogue search across siddhis and codices."}
+          </span>
+        </div>
+
         <div className="mt-3 flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
             <button
@@ -93,8 +179,8 @@ export default function Archivist() {
         <div className="mt-6 space-y-3">
           {results.map((r) => (
             <Link
-              key={r.slug}
-              href={r.type === "manuscript" ? `/manuscripts#${r.slug}` : `/siddhi/${r.slug}`}
+              key={`${r.type}-${r.slug}`}
+              href={r.type === "manuscript" ? `/manuscripts/${r.slug}` : `/siddhi/${r.slug}`}
               className="folio-card block rounded-sm p-5"
             >
               <div className="flex items-start justify-between gap-3">
@@ -103,15 +189,21 @@ export default function Archivist() {
                   <h3 className="mt-1.5 inline font-display text-xl text-[var(--color-ivory)]">
                     {r.name}
                   </h3>
-                  <span className="ml-2 text-sm text-[var(--color-gold-bright)]">{r.sanskrit}</span>
+                  {r.sanskrit && (
+                    <span className="ml-2 text-sm text-[var(--color-gold-bright)]">
+                      {r.sanskrit}
+                    </span>
+                  )}
                 </div>
                 <span className="text-[0.58rem] uppercase tracking-luxe text-[var(--color-gold)]">
                   {r.score}% match
                 </span>
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-bone)]/75">
-                {r.summary}
-              </p>
+              {r.summary && (
+                <p className="mt-2 text-sm leading-relaxed text-[var(--color-bone)]/75">
+                  {r.summary}
+                </p>
+              )}
               <p className="mt-2 text-xs italic text-[var(--color-cyan-accent)]/80">
                 ⟶ {r.reason}
               </p>

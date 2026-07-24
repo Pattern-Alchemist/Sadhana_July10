@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "knowledge:embed": "python3 scripts/generate_embeddings.py",
+    "docs:generate": "python3 scripts/generate_docs.py"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",

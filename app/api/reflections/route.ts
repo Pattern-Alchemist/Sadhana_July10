@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { reflections } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const db = getDb();
     await ensureArchiveSeeded();
     const rows = await db
       .select()
@@ -21,6 +22,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const db = getDb();
     await ensureArchiveSeeded();
     const body = await req.json().catch(() => ({}));
     const penName = String(body?.penName ?? "anonymous reader")

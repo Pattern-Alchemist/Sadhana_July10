@@ -52,7 +52,7 @@ export function createMotionPolicy(options: {
   motionProfile?: "ritual" | "analytical";
 }): MotionPolicy {
   // If reduced motion preference OR low performance, apply reduced motion policy
-  const shouldReduceMotion = options.prefersReducedMotion || options.isLowPerformance;
+  const shouldReduceMotion = options.prefersReducedMotion || (options.isLowPerformance ?? false);
   const isRitualProfile = options.motionProfile === "ritual";
 
   return {
