@@ -85,7 +85,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       {/* Hero — Shiva Cosmic Deity */}
-      <section className="relative overflow-hidden border-b border-[var(--color-hairline)]">
+      <section className="relative overflow-hidden border-b border-[var(--color-hairline)] h-96 sm:h-[500px]">
         {/* Shiva cosmic energy background */}
         <div className="absolute inset-0">
           <Image
@@ -94,7 +94,7 @@ export default function DashboardPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-contain object-top"
           />
         </div>
         
@@ -107,14 +107,11 @@ export default function DashboardPage() {
           aria-hidden="true"
         />
 
-        <div className="content-z relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-8 sm:py-24">
-          <div className="mb-6 flex justify-center">
-            <div className="h-16 w-16 rounded-full border-2 border-[var(--color-gold)]/40 bg-gradient-to-br from-[var(--color-gold-bright)] to-[var(--color-gold)] opacity-20" />
-          </div>
+        <div className="content-z relative h-full flex flex-col justify-end mx-auto max-w-4xl px-4 pb-12 text-center sm:px-8 sm:pb-16">
           <p className="fade-up text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
             {now ? now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) : "Loading..."}
           </p>
-          <h1 className="fade-up mt-3 font-display text-[1.75rem] font-medium leading-tight text-balance text-[var(--color-ivory)] sm:text-4xl">
+          <h1 className="fade-up mt-2 font-display text-[1.75rem] font-medium leading-tight text-balance text-[var(--color-ivory)] sm:text-3xl">
             Your Practice Dashboard
           </h1>
         </div>
