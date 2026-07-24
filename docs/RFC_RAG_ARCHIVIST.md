@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | Accepted — Phase A implemented; synthesizer ships flag-gated per §8 |
-| **Date** | 2026-07-24 |
+| **Status** | Phase A + C implemented — synthesis endpoint ships **flag-gated** (dark) per §8; enable after eval calibration |
+| **Date** | 2026-07-24 (updated 2026-07-24, Sprint 7) |
 | **Sprint** | Sprint 5–6 (Moonshots) — item 4.1 of `PROJECT_MAXIMIZER_REPORT.md` |
 | **Author** | Pattern-Alchemist / Arena agent session |
 | **Affects** | `app/api/archivist/*`, `components/Archivist.tsx`, `scripts/generate_embeddings.py`, `db/schema.ts`, `docs/` |
@@ -306,7 +306,7 @@ Worst-case monthly spend with the flag on: **≤ $5** (governor); with the flag 
 | --- | --- | --- |
 | **A** | pgvector semantic route, server-side query embeddings, embeddings script + npm wrapper, "Deep search" toggle | ✅ shipped (Sprint 3) |
 | **B** | This RFC; cost-model sign-off; env documentation in `.env.example` | ✅ this document |
-| **C** | `/api/archivist/synthesize` + citation validator + cost ledger/governor + UI toggle; all behind `ARCHIVIST_SYNTHESIS_ENABLED`; 20-query eval set to calibrate the 0.32 floor | next sprint, flag-gated |
+| **C** | `/api/archivist/synthesize` + citation validator + `archivist_cost_ledger` governor + per-IP rate limit + "Ask the Custodian" UI toggle; shared `lib/embeddings.ts` extraction; all behind `ARCHIVIST_SYNTHESIS_ENABLED` + `NEXT_PUBLIC_ARCHIVIST_SYNTHESIS` | ✅ shipped **dark**, 2026-07-24 (Sprint 7) — pending: 20-query eval set to calibrate the 0.32 floor before flag-on |
 | **D** | HNSW index (only if corpus > 50 k rows), streaming, `manuscripts` corpus review, eval harness in CI | future |
 
 Phase C ships dark: code lands behind the flag, ops enables `OPENAI_API_KEY` +
