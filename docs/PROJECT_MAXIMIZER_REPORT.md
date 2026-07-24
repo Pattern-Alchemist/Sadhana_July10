@@ -438,20 +438,23 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - **Success metric**: `tsc --noEmit --strict` passes with zero errors; homepage TTFB drops
   measurably (verify via `next build && next start` + Lighthouse).
 
-### Sprint 2: SEO & Content Discoverability (Weeks 3–4)
-- [ ] Add `metadataBase`, Open Graph, Twitter card to `app/layout.tsx` (P1, ~3h)
-- [ ] Add per-route `generateMetadata()` for siddhi/manuscript/reader/yantra dynamic pages (P1, ~8h)
-- [ ] Add `next/og` dynamic OG images per siddhi folio (P2, ~6h)
-- [ ] Switch `sitemap.ts`/API routes from `force-dynamic` to ISR (`revalidate`) (P1, ~4h)
+### Sprint 2: SEO & Content Discoverability (Weeks 3–4) — ✅ Completed (verified in tree 2026-07-24)
+- [x] Add `metadataBase`, Open Graph, Twitter card to `app/layout.tsx` (P1, ~3h)
+- [x] Add per-route `generateMetadata()` for siddhi/manuscript/reader/yantra dynamic pages (P1, ~8h)
+- [x] Add `next/og` dynamic OG images per siddhi folio (P2, ~6h) — `opengraph-image.tsx` on all four dynamic routes
+- [x] Switch `sitemap.ts`/API routes from `force-dynamic` to ISR (`revalidate`) (P1, ~4h) — sitemap on 24 h ISR
 - **Success metric**: Google Search Console shows 46+ indexed unique-title pages (vs. ~9 today);
   Lighthouse SEO score 100.
 
-### Sprint 3: Search & AI Depth (Weeks 5–6) — Partially completed in continuation
+### Sprint 3: Search & AI Depth (Weeks 5–6) — ✅ Completed in Sprint 7 continuation
 - [x] Wire `/api/archivist/semantic` to generate its own query embedding server-side (P2, ~6h)
 - [x] Add "Deep search" toggle in `components/Archivist.tsx` using semantic endpoint (P2, ~4h)
-- [ ] Port `/api/archivist` scoring to the existing FTS5 index or Postgres `tsvector` (P2, ~6h)
+- [x] Port `/api/archivist` scoring to Postgres `tsvector` (P2, ~6h) — Sprint 7: `'simple'` config
+  (correct for mixed Sanskrit/English) + `unaccent` on both sides, with a folded JS fallback tier
+  via shared `lib/iast-fold.ts` (completes Roadmap T-002: "Siva" now matches "Śiva")
 - [x] Wire `scripts/generate_embeddings.py` into an npm script wrapper (P3, ~2h)
-- [ ] Add manual CI dispatch for embedding/doc generation (P3 follow-up)
+- [x] Add manual CI dispatch for embedding/doc generation (P3 follow-up) — Sprint 7:
+  `ci-templates/embeddings-docs-dispatch.yml` (`workflow_dispatch`, embeddings + optional docs jobs)
 - **Success metric**: Semantic search returns relevant results for paraphrased (non-keyword-exact)
   queries in manual QA; `/api/archivist` p95 latency measured and improved.
 

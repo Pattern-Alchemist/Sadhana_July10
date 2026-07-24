@@ -13,7 +13,7 @@ This file catalogues in-progress and planned tasks for AstroKalki. It is the AI 
 
 ### T-001 — Runtime FTS5 search over the knowledge archive
 
-- **Status:** proposed
+- **Status:** done (shipped as `GET /api/knowledge` over `knowledge/sqlite/knowledge.db`; completed in an earlier sprint, verified 2026-07-24)
 - **Priority:** high
 - **Description:** Add a `GET /api/knowledge/search?q=...&limit=...` endpoint that opens `knowledge/sqlite/knowledge.db` read-only, runs an FTS5 `MATCH` query against the `chunks` table, and returns the top-k chunks with their parent document metadata. The response shape should be `{ results: Chunk[], note: string }` where `note` is a templated summary consistent with the Custodian's pointer-only posture. Update `docs/API_REFERENCE.md` and `docs/FEATURES.md`.
 - **Depends on:** nothing (the FTS5 index already exists).
@@ -21,7 +21,7 @@ This file catalogues in-progress and planned tasks for AstroKalki. It is the AI 
 
 ### T-002 — Diacritic folding in the runtime Custodian
 
-- **Status:** proposed
+- **Status:** done (2026-07-24, Sprint 7) — shared `lib/iast-fold.ts`; JS scoring tier folds both sides, and the Postgres FTS tier was switched to `tsvector 'simple'` + `unaccent`. Response shape, weights and `note` template unchanged.
 - **Priority:** high
 - **Description:** Define a `foldDiacritics(s: string): string` utility that maps IAST characters to ASCII equivalents. Apply it to both the query and the candidate field values in the scoring loop of `src/app/api/archivist/route.ts`. Do not change the response shape, the weights, or the `note` template.
 - **Depends on:** nothing.

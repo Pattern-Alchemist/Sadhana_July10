@@ -29,6 +29,26 @@ modify files under `.github/workflows/`.
 - `pnpm test`
 - `pnpm build`
 
+## Also in this directory
+
+`embeddings-docs-dispatch.yml` (Sprint 7) — a **manual-dispatch** workflow for the
+Moonshot 4.1 build-time jobs: regenerating pgvector corpus embeddings
+(`scripts/generate_embeddings.py`) and optionally derived corpus docs
+(`scripts/generate_docs.py`). No schedule is attached on purpose — a full corpus
+embedding pass costs ~$0.0005 and is only needed when corpus content changes.
+
+Activate it the same way:
+
+```bash
+cp ci-templates/embeddings-docs-dispatch.yml .github/workflows/corpus-jobs.yml
+git add .github/workflows/corpus-jobs.yml
+git commit -m "Enable manual corpus jobs workflow"
+git push
+```
+
+Required secrets: `DATABASE_URL` (both jobs) and `OPENAI_API_KEY` (embeddings).
+Trigger from Actions → "Corpus Embeddings & Docs (Manual)" → Run workflow.
+
 See `docs/PROJECT_MAXIMIZER_REPORT.md` § 3.7 for the rationale (no CI existed
 before this pass, and two real regressions — a broken service worker and a
 broken test config — had already silently shipped to `main` without it).

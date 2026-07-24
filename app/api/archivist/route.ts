@@ -1,6 +1,7 @@
 import { getDb } from "@/db";
 import { siddhis, manuscripts } from "@/db/schema";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
+import { foldDiacritics } from "@/lib/iast-fold";
 import { sql } from "drizzle-orm";
 import type { Siddhi, Manuscript } from "@/db/schema";
 
@@ -51,29 +52,30 @@ export async function POST(req: Request) {
     const candidates: Candidate[] = [];
     let usedFallback = false;
 
-    // Try Postgres Full-Text Search first
+    // Try Postgres Full-Text Search first (tsvector 'simple' + unaccent —
+    // folded on both sides, so diacritic-free queries match IAST content).
     try {
       const siddhiQuery = sql`
         SELECT slug, name, sanskrit, category, summary,
                ts_rank(
-                 (setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
-                  setweight(to_tsvector('english', coalesce(primary_mantra, '')), 'A') ||
-                  setweight(to_tsvector('english', coalesce(category, '')), 'B') ||
-                  setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
-                  setweight(to_tsvector('english', coalesce(sanskrit, '')), 'C') ||
-                  setweight(to_tsvector('english', coalesce(summary, '')), 'C') ||
-                  setweight(to_tsvector('english', coalesce(description, '')), 'D')),
-                 websearch_to_tsquery('english', ${raw})
+                 (setweight(to_tsvector('simple', unaccent(coalesce(name, ''))), 'A') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(primary_mantra, ''))), 'A') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(category, ''))), 'B') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(tradition, ''))), 'B') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(sanskrit, ''))), 'C') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(summary, ''))), 'C') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(description, ''))), 'D')),
+                 websearch_to_tsquery('simple', unaccent(${raw}))
                ) AS rank
         FROM siddhis
-        WHERE (setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
-               setweight(to_tsvector('english', coalesce(primary_mantra, '')), 'A') ||
-               setweight(to_tsvector('english', coalesce(category, '')), 'B') ||
-               setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
-               setweight(to_tsvector('english', coalesce(sanskrit, '')), 'C') ||
-               setweight(to_tsvector('english', coalesce(summary, '')), 'C') ||
-               setweight(to_tsvector('english', coalesce(description, '')), 'D'))
-              @@ websearch_to_tsquery('english', ${raw})
+        WHERE (setweight(to_tsvector('simple', unaccent(coalesce(name, ''))), 'A') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(primary_mantra, ''))), 'A') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(category, ''))), 'B') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(tradition, ''))), 'B') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(sanskrit, ''))), 'C') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(summary, ''))), 'C') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(description, ''))), 'D'))
+              @@ websearch_to_tsquery('simple', unaccent(${raw}))
         ORDER BY rank DESC
         LIMIT 10;
       `;
@@ -81,18 +83,18 @@ export async function POST(req: Request) {
       const manuscriptQuery = sql`
         SELECT slug, title, original_title as sanskrit, tradition as category, description as summary,
                ts_rank(
-                 (setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
-                  setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
-                  setweight(to_tsvector('english', coalesce(original_title, '')), 'C') ||
-                  setweight(to_tsvector('english', coalesce(description, '')), 'D')),
-                 websearch_to_tsquery('english', ${raw})
+                 (setweight(to_tsvector('simple', unaccent(coalesce(title, ''))), 'A') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(tradition, ''))), 'B') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(original_title, ''))), 'C') ||
+                  setweight(to_tsvector('simple', unaccent(coalesce(description, ''))), 'D')),
+                 websearch_to_tsquery('simple', unaccent(${raw}))
                ) AS rank
         FROM manuscripts
-        WHERE (setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
-               setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
-               setweight(to_tsvector('english', coalesce(original_title, '')), 'C') ||
-               setweight(to_tsvector('english', coalesce(description, '')), 'D'))
-              @@ websearch_to_tsquery('english', ${raw})
+        WHERE (setweight(to_tsvector('simple', unaccent(coalesce(title, ''))), 'A') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(tradition, ''))), 'B') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(original_title, ''))), 'C') ||
+               setweight(to_tsvector('simple', unaccent(coalesce(description, ''))), 'D'))
+              @@ websearch_to_tsquery('simple', unaccent(${raw}))
         ORDER BY rank DESC
         LIMIT 10;
       `;
@@ -141,8 +143,10 @@ export async function POST(req: Request) {
 
     if (usedFallback && candidates.length === 0) {
       const { allRows, codexRows } = await getCachedCorpus();
-      const terms = raw.toLowerCase().split(/[\s,.;:]+/).filter((t) => t.length > 2);
-      const textFn = (s: string | null) => (s ?? "").toLowerCase();
+      // Fold IAST diacritics on both sides so "siva" matches "Śiva" (T-002).
+      const foldedQuery = foldDiacritics(raw).toLowerCase();
+      const terms = foldedQuery.split(/[\s,.;:]+/).filter((t) => t.length > 2);
+      const textFn = (s: string | null) => foldDiacritics(s ?? "").toLowerCase();
 
       for (const s of allRows) {
         const fields: Record<string, string> = {

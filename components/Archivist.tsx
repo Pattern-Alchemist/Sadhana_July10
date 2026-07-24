@@ -14,7 +14,17 @@ interface ArchivistResult {
   score: number;
 }
 
-type SearchMode = "keyword" | "semantic";
+interface SynthesisCitation {
+  slug: string;
+  url: string;
+  name: string;
+  score: number;
+}
+
+type SearchMode = "keyword" | "semantic" | "synthesis";
+
+/** RFC-001 Phase C — synthesis UI ships only when the flag is compiled in. */
+const SYNTHESIS_ENABLED = process.env.NEXT_PUBLIC_ARCHIVIST_SYNTHESIS === "true";
 
 const SUGGESTIONS = [
   "What is the significance of Oṃ?",
@@ -38,6 +48,23 @@ function getNote(payload: unknown): string {
   return typeof payload.note === "string" ? payload.note : "";
 }
 
+function getAnswer(payload: unknown): string | null {
+  if (!isRecord(payload) || typeof payload.answer !== "string") return null;
+  return payload.answer.trim() || null;
+}
+
+function getCitations(payload: unknown): SynthesisCitation[] {
+  if (!isRecord(payload) || !Array.isArray(payload.citations)) return [];
+  return payload.citations.filter(
+    (c): c is SynthesisCitation =>
+      isRecord(c) && typeof c.slug === "string" && typeof c.name === "string",
+  );
+}
+
+function isSynthesis(payload: unknown): boolean {
+  return isRecord(payload) && payload.synthesis === true;
+}
+
 async function postSearch(endpoint: string, query: string) {
   const response = await fetch(endpoint, {
     method: "POST",
@@ -54,6 +81,8 @@ export default function Archivist() {
   const [results, setResults] = useState<ArchivistResult[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [note, setNote] = useState<string>("");
+  const [answer, setAnswer] = useState<string | null>(null);
+  const [citations, setCitations] = useState<SynthesisCitation[]>([]);
 
   async function ask(q: string) {
     if (!q.trim()) return;
@@ -61,8 +90,23 @@ export default function Archivist() {
     setLoading(true);
     setResults(null);
     setNote("");
+    setAnswer(null);
+    setCitations([]);
 
     try {
+      if (searchMode === "synthesis") {
+        // RFC-001 Phase C: the endpoint itself refuses or degrades to
+        // retrieval pointers — this client renders whatever it returns.
+        const { payload } = await postSearch("/api/archivist/synthesize", trimmedQuery);
+        setNote(getNote(payload) || "The Custodian is momentarily unavailable.");
+        setResults(getResults(payload));
+        if (isSynthesis(payload)) {
+          setAnswer(getAnswer(payload));
+          setCitations(getCitations(payload));
+        }
+        return;
+      }
+
       if (searchMode === "semantic") {
         const { response, payload } = await postSearch("/api/archivist/semantic", trimmedQuery);
 
@@ -146,10 +190,26 @@ export default function Archivist() {
           >
             Deep search
           </button>
+          {SYNTHESIS_ENABLED && (
+            <button
+              type="button"
+              aria-pressed={searchMode === "synthesis"}
+              onClick={() => setSearchMode("synthesis")}
+              className={`border px-2.5 py-1 text-xs transition ${
+                searchMode === "synthesis"
+                  ? "border-[var(--color-gold)]/70 text-[var(--color-gold-bright)]"
+                  : "border-[var(--hairline)] text-[var(--color-bone)]/70 hover:border-[var(--color-gold)]/50 hover:text-[var(--color-gold-bright)]"
+              }`}
+            >
+              Ask the Custodian
+            </button>
+          )}
           <span className="text-xs italic text-[var(--color-bone)]/50">
             {searchMode === "semantic"
               ? "Embeds your query server-side and falls back to keyword pointers if unavailable."
-              : "Weighted catalogue search across siddhis and codices."}
+              : searchMode === "synthesis"
+                ? "Answers composed only from retrieved folios, every claim cited. Falls back to pointers when grounding is thin."
+                : "Weighted catalogue search across siddhis and codices (no cost, works everywhere)."}
           </span>
         </div>
 
@@ -173,6 +233,28 @@ export default function Archivist() {
         <p className="mt-4 rounded-sm border-l-2 border-[var(--color-gold)] bg-[var(--color-gold)]/5 px-4 py-3 text-sm italic leading-relaxed text-[var(--color-bone)]/80">
           {note}
         </p>
+      )}
+
+      {answer && (
+        <div className="folio-card mt-4 rounded-sm p-5">
+          <span className="text-[0.55rem] uppercase tracking-luxe text-[var(--color-gold)]">
+            The Custodian answers — every claim cited
+          </span>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-ivory)]">{answer}</p>
+          {citations.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {citations.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/siddhi/${c.slug}`}
+                  className="border border-[var(--color-cyan-accent)]/40 px-2.5 py-1 text-xs text-[var(--color-cyan-accent)] transition hover:border-[var(--color-cyan-accent)]"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       )}
 
       {results && results.length > 0 && (

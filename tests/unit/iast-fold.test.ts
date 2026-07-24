@@ -1,35 +1,13 @@
 import { describe, it, expect } from "vitest";
+import { foldDiacritics, slugify } from "@/lib/iast-fold";
 
 /**
- * Tests for the IAST-fold function used in slug generation.
+ * Tests for the shared IAST-fold utility (`lib/iast-fold.ts`).
  *
- * This function lives in scripts/build_knowledge_archive.py (Python), but
- * the same logic is needed at runtime for the knowledge-search endpoint.
- * Here we test the TypeScript port of the same logic.
+ * This logic mirrors scripts/build_knowledge_archive.py (Python) and is used
+ * at runtime by /api/archivist (JS scoring fallback) so diacritic-free queries
+ * match IAST content, e.g. "Siva" → "Śiva".
  */
-
-const IAST_FOLD: Record<string, string> = {
-  "ā": "a", "á": "a", "à": "a", "â": "a", "Ā": "A", "Á": "A", "À": "A", "Â": "A",
-  "ī": "i", "í": "i", "ì": "i", "î": "i", "Ī": "I", "Í": "I", "Ì": "I", "Î": "I",
-  "ū": "u", "ú": "u", "ù": "u", "û": "u", "Ū": "U", "Ú": "U", "Ù": "U", "Û": "U",
-  "ṛ": "r", "ṝ": "r", "ṙ": "r", "Ṛ": "R", "Ṝ": "R", "Ṙ": "R",
-  "ṅ": "n", "ñ": "n", "ṇ": "n", "Ṅ": "N", "Ñ": "N", "Ṇ": "N",
-  "ṭ": "t", "ḍ": "d", "Ṭ": "T", "Ḍ": "D",
-  "ś": "s", "ṣ": "s", "Ś": "S", "Ṣ": "S",
-  "ḥ": "h", "ṃ": "m", "ṁ": "m", "Ḥ": "H", "Ṃ": "M", "Ṁ": "M",
-  "—": "-", "–": "-",
-  "’": "", "‘": "",
-  "“": '"', "”": '"',
-};
-
-function foldDiacritics(s: string): string {
-  return Array.from(s).map((c) => IAST_FOLD[c] ?? c).join("");
-}
-
-function slugify(name: string): string {
-  const folded = foldDiacritics(name).toLowerCase();
-  return folded.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-}
 
 describe("foldDiacritics — IAST to ASCII folding", () => {
   it("folds ā → a", () => {
@@ -76,6 +54,18 @@ describe("foldDiacritics — IAST to ASCII folding", () => {
 
   it("passes through ASCII unchanged", () => {
     expect(foldDiacritics("AstroKalki")).toBe("AstroKalki");
+  });
+
+  it("enables diacritic-free search terms to match IAST field values (T-002)", () => {
+    // The archivist JS fallback folds BOTH sides before substring matching.
+    const query = foldDiacritics("siva");
+    const field = foldDiacritics("Śiva Maheśvara sādhanā").toLowerCase();
+    expect(field.includes(query.toLowerCase())).toBe(true);
+  });
+
+  it("folds mixed punctuation for slug parity with the Python builder", () => {
+    expect(slugify("Māraṇa — Keśava’s Vidhi")).toBe("marana-kesavas-vidhi");
+    expect(slugify("  Oṃ  ")).toBe("om");
   });
 });
 

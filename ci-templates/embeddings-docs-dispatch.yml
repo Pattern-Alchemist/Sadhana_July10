@@ -1,0 +1,67 @@
+name: Corpus Embeddings & Docs (Manual)
+
+# Manual-dispatch workflow for Moonshot 4.1's build-time jobs (Sprint 3
+# follow-up in docs/PROJECT_MAXIMIZER_REPORT.md). Runs only when a maintainer
+# triggers it from the Actions tab — embeddings cost ~$0.0005 per full corpus
+# run, so no schedule is attached.
+#
+# Activation: copy to .github/workflows/corpus-jobs.yml (see ci-templates/README.md).
+# Required secrets: DATABASE_URL, OPENAI_API_KEY (embeddings job only).
+
+on:
+  workflow_dispatch:
+    inputs:
+      embedding_model:
+        description: OpenAI embedding model for the corpus pass
+        required: true
+        default: text-embedding-3-small
+      also_generate_docs:
+        description: Also regenerate derived corpus docs (scripts/generate_docs.py)
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  embeddings:
+    name: Regenerate corpus embeddings (pgvector)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependency
+        run: pip install psycopg2-binary
+
+      - name: Generate embeddings into siddhis.embedding
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run:
+          python3 scripts/generate_embeddings.py
+            --model "${{ inputs.embedding_model }}"
+            --api-key "${{ secrets.OPENAI_API_KEY }}"
+
+  docs:
+    name: Regenerate derived corpus docs
+    if: ${{ inputs.also_generate_docs }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate docs
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python3 scripts/generate_docs.py

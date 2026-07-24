@@ -45,6 +45,34 @@ All notable changes to AstroKalki are documented here. The format follows [Keep 
 
 ## [Unreleased]
 
+### Added — Sprint 7: Search & RAG Depth (2026-07-24)
+
+- **RFC-001 Phase C — `/api/archivist/synthesize`** (flag-gated, ships dark):
+  citation-constrained RAG synthesis over the retrieved siddhi corpus. Includes
+  the deterministic §5.4 citation validator (every emitted sentence must cite a
+  retrieved folio slug; unknown slugs count as uncited; <60% kept → degraded
+  fallback to raw hits), the `archivist_cost_ledger` monthly budget governor
+  (default $5 hard ceiling, estimates ×2 safety multiplier), per-IP rate
+  limiting (10/min), similarity-floor refusal (0.32), and "Ask the Custodian"
+  UI mode behind `NEXT_PUBLIC_ARCHIVIST_SYNTHESIS`. Every failure mode degrades
+  to retrieval pointers; keyword `/api/archivist` stays zero-cost.
+- **Shared embedding substrate**: `lib/embeddings.ts` extracts server-side
+  query embedding + pgvector cosine retrieval (`<=>`, top-k) used by both
+  `/api/archivist/semantic` and the new synthesis route.
+- **T-002 diacritic folding**: `lib/iast-fold.ts` (shared utility); the
+  archivist JS scoring tier now folds both query and fields ("Siva" matches
+  "Śiva"), and the Postgres FTS tier moved to `tsvector 'simple'` + `unaccent`
+  on both sides — the correct config for this mixed Sanskrit/English corpus —
+  with graceful fallback when the extension is absent.
+- **CI template**: `ci-templates/embeddings-docs-dispatch.yml` — manual
+  `workflow_dispatch` for corpus embeddings + optional docs regeneration
+  (activation notes in `ci-templates/README.md`).
+- Tests: `tests/unit/archivist-synthesis.test.ts` (+21 unit tests);
+  `tests/unit/iast-fold.test.ts` now exercises the shipped `lib/iast-fold.ts`.
+- Docs: RFC-001 rollout table updated (Phase C shipped dark); stale Sprint 2/3
+  checkboxes verified and ticked in `docs/PROJECT_MAXIMIZER_REPORT.md`;
+  `ai-context/TASK_INDEX.md` T-001/T-002 marked done.
+
 ### Added — Sprint 6 Moonshots (2026-07-24)
 
 - **Moonshot 4.1 — RAG Archivist RFC**: `docs/RFC_RAG_ARCHIVIST.md` specifies the
