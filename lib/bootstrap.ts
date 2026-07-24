@@ -98,6 +98,25 @@ async function ensureSchema(database: Database) {
   await database.execute(sql`
     CREATE INDEX IF NOT EXISTS evidence_siddhi_idx ON evidence_sources (siddhi_slug);
   `);
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS siddhis_fts_idx ON siddhis USING GIN (
+      (setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
+       setweight(to_tsvector('english', coalesce(primary_mantra, '')), 'A') ||
+       setweight(to_tsvector('english', coalesce(category, '')), 'B') ||
+       setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
+       setweight(to_tsvector('english', coalesce(sanskrit, '')), 'C') ||
+       setweight(to_tsvector('english', coalesce(summary, '')), 'C') ||
+       setweight(to_tsvector('english', coalesce(description, '')), 'D'))
+    );
+  `);
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS manuscripts_fts_idx ON manuscripts USING GIN (
+      (setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
+       setweight(to_tsvector('english', coalesce(tradition, '')), 'B') ||
+       setweight(to_tsvector('english', coalesce(original_title, '')), 'C') ||
+       setweight(to_tsvector('english', coalesce(description, '')), 'D'))
+    );
+  `);
 }
 
 async function ensureSeed(database: Database) {
