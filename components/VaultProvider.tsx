@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { encrypt, decrypt, hashPassphrase, generateSalt, bytesToBase64 } from "@/lib/crypto";
 
 /**
@@ -24,6 +24,8 @@ const VAULT_DATA_KEY = "astrokalki:vault-data";
 const AUTO_LOCK_MS = 30 * 60 * 1000; // 30 minutes
 
 type VaultStatus = "loading" | "needs-setup" | "locked" | "unlocked";
+type VaultCache = Record<string, unknown>;
+type EncryptedStore = Record<string, string>;
 
 interface VaultContextValue {
   status: VaultStatus;
@@ -46,28 +48,44 @@ export function useVault() {
   return ctx;
 }
 
+function readEncryptedStore(): EncryptedStore {
+  const raw = localStorage.getItem(VAULT_DATA_KEY);
+  return raw ? JSON.parse(raw) as EncryptedStore : {};
+}
+
+function clearCache(cache: VaultCache) {
+  Object.keys(cache).forEach((key) => delete cache[key]);
+}
+
 export function VaultProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<VaultStatus>("loading");
   const [passphrase, setPassphrase] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [lastActivity, setLastActivity] = useState(Date.now());
+  const [lastActivity, setLastActivity] = useState(0);
+  const memoryCacheRef = useRef<VaultCache>({});
 
-  // On mount: check if vault is set up
+  // On mount: check if vault is set up.
   useEffect(() => {
-    const salt = localStorage.getItem(VAULT_SALT_KEY);
-    const hash = localStorage.getItem(VAULT_HASH_KEY);
-    if (!salt || !hash) {
-      setStatus("needs-setup");
-    } else {
-      setStatus("locked");
-    }
-    setIsHydrated(true);
+    const timer = window.setTimeout(() => {
+      const salt = localStorage.getItem(VAULT_SALT_KEY);
+      const hash = localStorage.getItem(VAULT_HASH_KEY);
+      setStatus(!salt || !hash ? "needs-setup" : "locked");
+      setIsHydrated(true);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
-  // Auto-lock after inactivity
+  const lock = useCallback(() => {
+    clearCache(memoryCacheRef.current);
+    setPassphrase(null);
+    setStatus("locked");
+  }, []);
+
+  // Auto-lock after inactivity.
   useEffect(() => {
     if (status !== "unlocked") return;
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       if (Date.now() - lastActivity > AUTO_LOCK_MS) {
         lock();
       }
@@ -76,20 +94,21 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     window.addEventListener("click", onActivity);
     window.addEventListener("keydown", onActivity);
     return () => {
-      clearInterval(interval);
+      window.clearInterval(interval);
       window.removeEventListener("click", onActivity);
       window.removeEventListener("keydown", onActivity);
     };
-  }, [status, lastActivity]);
+  }, [status, lastActivity, lock]);
 
-  const setup = useCallback(async (passphrase: string) => {
+  const setup = useCallback(async (newPassphrase: string) => {
     const salt = generateSalt();
     const saltB64 = bytesToBase64(salt);
-    const hash = await hashPassphrase(passphrase, salt);
+    const hash = await hashPassphrase(newPassphrase, salt);
     localStorage.setItem(VAULT_SALT_KEY, saltB64);
     localStorage.setItem(VAULT_HASH_KEY, hash);
     localStorage.setItem(VAULT_DATA_KEY, JSON.stringify({})); // empty encrypted store
-    setPassphrase(passphrase);
+    clearCache(memoryCacheRef.current);
+    setPassphrase(newPassphrase);
     setStatus("unlocked");
     setLastActivity(Date.now());
   }, []);
@@ -99,7 +118,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     const storedHash = localStorage.getItem(VAULT_HASH_KEY);
     if (!saltB64 || !storedHash) return false;
 
-    // Convert base64 salt back to Uint8Array
+    // Convert base64 salt back to Uint8Array.
     const binary = atob(saltB64);
     const salt = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) salt[i] = binary.charCodeAt(i);
@@ -113,37 +132,15 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     return true;
   }, []);
 
-  const lock = useCallback(() => {
-    setPassphrase(null);
-    setStatus("locked");
-  }, []);
-
-  const read = useCallback(<T = any>(key: string): T | null => {
+  const read = useCallback(<T = any,>(key: string): T | null => {
     if (!passphrase) return null;
-    try {
-      const raw = localStorage.getItem(VAULT_DATA_KEY);
-      if (!raw) return null;
-      // The data store is a JSON object of { key: encryptedBlob }
-      // But since we can't do async in a sync read, we store the decrypted
-      // cache in memory after unlock. This is a design tradeoff: we keep
-      // the decrypted data in memory (not localStorage) for the session.
-      // On lock, the in-memory cache is cleared.
-      // For simplicity, we use a synchronous in-memory cache.
-      return _memoryCache[key] as T ?? null;
-    } catch {
-      return null;
-    }
+    return (memoryCacheRef.current[key] as T | undefined) ?? null;
   }, [passphrase]);
 
-  // In-memory decrypted cache (cleared on lock)
-  const _memoryCache: Record<string, any> = {};
-
-  const write = useCallback(async <T = any>(key: string, value: T) => {
+  const write = useCallback(async <T = any,>(key: string, value: T) => {
     if (!passphrase) throw new Error("Vault is locked");
-    _memoryCache[key] = value;
-    // Persist encrypted
-    const raw = localStorage.getItem(VAULT_DATA_KEY);
-    const store = raw ? JSON.parse(raw) : {};
+    memoryCacheRef.current[key] = value;
+    const store = readEncryptedStore();
     const encrypted = await encrypt(JSON.stringify(value), passphrase);
     store[key] = encrypted;
     localStorage.setItem(VAULT_DATA_KEY, JSON.stringify(store));
@@ -151,9 +148,8 @@ export function VaultProvider({ children }: { children: ReactNode }) {
   }, [passphrase]);
 
   const remove = useCallback(async (key: string) => {
-    delete _memoryCache[key];
-    const raw = localStorage.getItem(VAULT_DATA_KEY);
-    const store = raw ? JSON.parse(raw) : {};
+    delete memoryCacheRef.current[key];
+    const store = readEncryptedStore();
     delete store[key];
     localStorage.setItem(VAULT_DATA_KEY, JSON.stringify(store));
   }, []);
@@ -162,11 +158,11 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     if (!passphrase) return null;
     const raw = localStorage.getItem(VAULT_DATA_KEY);
     if (!raw) return null;
-    const store = JSON.parse(raw);
-    const exported: Record<string, any> = {};
+    const store = JSON.parse(raw) as EncryptedStore;
+    const exported: VaultCache = {};
     for (const [key, blob] of Object.entries(store)) {
       try {
-        const decrypted = await decrypt(blob as string, passphrase);
+        const decrypted = await decrypt(blob, passphrase);
         exported[key] = JSON.parse(decrypted);
       } catch {
         exported[key] = null;
@@ -179,32 +175,43 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(VAULT_DATA_KEY);
     localStorage.removeItem(VAULT_SALT_KEY);
     localStorage.removeItem(VAULT_HASH_KEY);
-    Object.keys(_memoryCache).forEach((k) => delete _memoryCache[k]);
+    clearCache(memoryCacheRef.current);
     setPassphrase(null);
     setStatus("needs-setup");
   }, []);
 
-  // On unlock, load all data into memory cache
+  // On unlock, load all data into memory cache.
   useEffect(() => {
-    if (status === "unlocked" && passphrase) {
-      (async () => {
-        const raw = localStorage.getItem(VAULT_DATA_KEY);
-        if (!raw) return;
-        const store = JSON.parse(raw);
-        for (const [key, blob] of Object.entries(store)) {
-          try {
-            const decrypted = await decrypt(blob as string, passphrase);
-            _memoryCache[key] = JSON.parse(decrypted);
-          } catch {
-            // skip corrupted entries
-          }
-        }
-      })();
-    }
-    // Clear cache on lock
     if (status === "locked") {
-      Object.keys(_memoryCache).forEach((k) => delete _memoryCache[k]);
+      clearCache(memoryCacheRef.current);
+      return;
     }
+
+    if (status !== "unlocked" || !passphrase) return;
+
+    let cancelled = false;
+    (async () => {
+      const raw = localStorage.getItem(VAULT_DATA_KEY);
+      if (!raw) return;
+      const store = JSON.parse(raw) as EncryptedStore;
+      const nextCache: VaultCache = {};
+      for (const [key, blob] of Object.entries(store)) {
+        try {
+          const decrypted = await decrypt(blob, passphrase);
+          nextCache[key] = JSON.parse(decrypted);
+        } catch {
+          // skip corrupted entries
+        }
+      }
+      if (!cancelled) {
+        clearCache(memoryCacheRef.current);
+        Object.assign(memoryCacheRef.current, nextCache);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [status, passphrase]);
 
   return (

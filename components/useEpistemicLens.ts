@@ -21,12 +21,15 @@ export function useEpistemicLens() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setLens(readLens());
-    setMounted(true);
+    const hydrateTimer = window.setTimeout(() => {
+      setLens(readLens());
+      setMounted(true);
+    }, 0);
     const handler = () => setLens(readLens());
     window.addEventListener("astrokalki:lens-change", handler);
     window.addEventListener("storage", handler);
     return () => {
+      window.clearTimeout(hydrateTimer);
       window.removeEventListener("astrokalki:lens-change", handler);
       window.removeEventListener("storage", handler);
     };

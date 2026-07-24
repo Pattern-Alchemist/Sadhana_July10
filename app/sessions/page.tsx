@@ -26,6 +26,8 @@ export default function SessionsPage() {
   function saveSession() { if (!name || steps.length === 0) return; setSaved((p) => [...p, { id: crypto.randomUUID(), name, steps }]); setName(""); }
   function loadSession(s: SavedSession) { setSteps(s.steps); setName(s.name); }
 
+  function playBell() { try { const ctx = new (window.AudioContext||(window as any).webkitAudioContext)(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value=523.25; o.type="sine"; g.gain.setValueAtTime(0.15,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+2); o.start(); o.stop(ctx.currentTime+2);} catch{} if(navigator.vibrate) navigator.vibrate(100); }
+
   const totalMin = steps.reduce((s, st) => s + st.duration, 0);
 
   useEffect(() => {
@@ -44,8 +46,6 @@ export default function SessionsPage() {
     }, 1000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [running, steps, currentStep]);
-
-  function playBell() { try { const ctx = new (window.AudioContext||(window as any).webkitAudioContext)(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value=523.25; o.type="sine"; g.gain.setValueAtTime(0.15,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+2); o.start(); o.stop(ctx.currentTime+2);} catch{} if(navigator.vibrate) navigator.vibrate(100); }
 
   const current = steps[currentStep];
   const remaining = current ? current.duration * 60 - stepElapsed : 0;

@@ -29,8 +29,11 @@ export default function RitualHero({
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setTheme(getThemeForTime());
-    setIsReady(true);
+    const timer = window.setTimeout(() => {
+      setTheme(getThemeForTime());
+      setIsReady(true);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const entranceTransition = createTransitionFromProfile(profile, 'entrance');

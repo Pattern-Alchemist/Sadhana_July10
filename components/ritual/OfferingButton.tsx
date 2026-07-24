@@ -38,15 +38,17 @@ export default function OfferingButton({
   const completedRef = useRef(false);
 
   // Trigger onComplete when status reaches "completed"
-  if (status === "completed" && !completedRef.current) {
-    completedRef.current = true;
-    setTimeout(onComplete, 300);
-  }
+  useEffect(() => {
+    if (status === "completed" && !completedRef.current) {
+      completedRef.current = true;
+      const timer = window.setTimeout(onComplete, 300);
+      return () => window.clearTimeout(timer);
+    }
 
-  // Reset ref when step changes
-  if (status === "idle" && completedRef.current) {
-    completedRef.current = false;
-  }
+    if (status === "idle" && completedRef.current) {
+      completedRef.current = false;
+    }
+  }, [status, onComplete]);
 
   const isCharged = status === "charged" || status === "released" || status === "completed";
   const isReleased = status === "released" || status === "completed";

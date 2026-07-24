@@ -82,20 +82,22 @@ export default function BreathMagicLab() {
     if (!isActive) return;
 
     if (secondsRemaining === 0) {
-      // Move to next phase
-      const nextPhaseIndex = (currentPhaseIndex + 1) % technique.phases.length;
-      setCurrentPhaseIndex(nextPhaseIndex);
+      timerRef.current = setTimeout(() => {
+        // Move to next phase
+        const nextPhaseIndex = (currentPhaseIndex + 1) % technique.phases.length;
+        setCurrentPhaseIndex(nextPhaseIndex);
 
-      if (nextPhaseIndex === 0) {
-        setCycleCount((prev) => prev + 1);
-      }
+        if (nextPhaseIndex === 0) {
+          setCycleCount((prev) => prev + 1);
+        }
 
-      if (cycleCount >= technique.cycles) {
-        setIsActive(false);
-        return;
-      }
+        if (cycleCount >= technique.cycles) {
+          setIsActive(false);
+          return;
+        }
 
-      setSecondsRemaining(technique.phases[nextPhaseIndex].duration);
+        setSecondsRemaining(technique.phases[nextPhaseIndex].duration);
+      }, 0);
     } else {
       timerRef.current = setTimeout(() => setSecondsRemaining((prev) => prev - 1), 1000);
     }
