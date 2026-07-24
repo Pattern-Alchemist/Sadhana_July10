@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { OmGlyph } from "@/components/Symbols";
+import ForcePrecache from "@/components/ForcePrecache";
 
 export const dynamic = "force-static";
 
@@ -29,6 +30,7 @@ export default function OfflinePage() {
           Cached Archive
         </Link>
       </div>
+      <ForcePrecache />
       <p className="mt-12 text-[0.55rem] uppercase tracking-luxe text-[var(--color-bone)]/40">
         The Living Archive · Offline Mode
       </p>
