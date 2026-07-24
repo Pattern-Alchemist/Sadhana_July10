@@ -116,6 +116,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "System",
     icon: "⚙️",
     items: [
+      { href: "/vault", label: "Vault Settings" },
       { href: "/journey", label: "Curated Journey" },
       { href: "/api/health", label: "Health Check" },
     ],

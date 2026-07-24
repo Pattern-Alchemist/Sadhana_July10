@@ -40,7 +40,33 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          # The app self-heals schema at boot but needs a reachable Postgres
-          # for build-time data fetching (sitemap, homepage). Static export
-          # steps that require a live DB are skipped gracefully when unset.
           NEXT_PUBLIC_SITE_URL: https://astrokalki.example.com
+
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: pnpm exec playwright test
+        env:
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000

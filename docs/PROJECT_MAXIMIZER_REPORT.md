@@ -456,9 +456,9 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
   queries in manual QA; `/api/archivist` p95 latency measured and improved.
 
 ### Sprint 4: Testing & Reliability (Weeks 7–8)
-- [ ] Add Playwright with 5–8 critical-path smoke tests (vault setup/unlock, japa counter, archivist
+- [x] Add Playwright with 5–8 critical-path smoke tests (vault setup/unlock, japa counter, archivist
       search, reader page load) (P2, ~10h)
-- [ ] Add the Playwright job to the CI workflow (`ci-templates/github-actions-ci.yml` once activated) (P2, ~2h)
+- [x] Add the Playwright job to the CI workflow (`ci-templates/github-actions-ci.yml` once activated) (P2, ~2h)
 - [x] Move root-level historical report `.md` files into `docs/history/` (P2, ~1h)
 - **Success metric**: CI catches at least one real regression before merge during this sprint
   (validates the investment).
