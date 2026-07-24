@@ -60,6 +60,13 @@ export const metadata: Metadata = {
     title: "AstroKalki · The Living Archive",
     description: siteDescription,
   },
+  alternates: {
+    types: {
+      // Content-loop Atom feed (Moonshot 4.4) — discoverable by readers,
+      // podcast clients, and scheduled content pipelines.
+      "application/atom+xml": "/feed.xml",
+    },
+  },
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

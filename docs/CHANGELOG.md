@@ -45,4 +45,24 @@ All notable changes to AstroKalki are documented here. The format follows [Keep 
 
 ## [Unreleased]
 
+### Added — Sprint 6 Moonshots (2026-07-24)
+
+- **Moonshot 4.1 — RAG Archivist RFC**: `docs/RFC_RAG_ARCHIVIST.md` specifies the
+  complete retrieval-augmented synthesis architecture on top of the shipped pgvector
+  semantic substrate — embedding flow, cosine retrieval with similarity floor,
+  seven-layer fallback ladder, deterministic citation validator, and a hard
+  $5/month cost governor. Synthesis endpoint ships flag-gated next sprint (Phase C).
+- **Moonshot 4.3 — Force Precache**: `/offline` gains a user-triggered button
+  (`components/ForcePrecache.tsx` + `lib/offline-precache.ts`) that dynamically
+  resolves the service worker's static cache via `caches.open()` and proactively
+  stores all 60 core + practice top-level routes with live progress, letting
+  practitioners prepare for fully offline retreats.
+- **Moonshot 4.4 — Atom content feed**: RFC 4287 feed at `/feed.xml`
+  (`app/feed.xml/route.ts` + pure `lib/feed.ts`) traversing the `siddhis` and
+  `manuscripts` tables; hourly revalidation, valid zero-entry fallback on DB outage,
+  and `<link rel="alternate">` discovery in the root layout for podcast/YouTube
+  content pipelines.
+- Tests: `tests/unit/feed.test.ts` and `tests/unit/offline-precache.test.ts`
+  (+18 unit tests).
+
 Planned changes are tracked in `docs/ROADMAP.md` and `ai-context/TASK_INDEX.md`.

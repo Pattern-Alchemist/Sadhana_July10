@@ -463,10 +463,23 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - **Success metric**: CI catches at least one real regression before merge during this sprint
   (validates the investment).
 
-### Sprint 5–6: Moonshots (Weeks 9–12)
-- [ ] 4.1 RAG-grounded Archivist — retrieval + citation-constrained LLM synthesis (P1 moonshot, ~20h)
-- [ ] 4.3 True offline practice mode — full corpus precache + Lighthouse PWA 100 (P2 moonshot, ~12h)
-- [ ] 4.4 YouTube content-loop export button + RSS feed (P2 moonshot, ~8h)
+### Sprint 5–6: Moonshots (Weeks 9–12) — ✅ Completed 2026-07-24 (see `docs/SPRINT_6_COMPLETE.md`)
+- [x] 4.1 RAG-grounded Archivist — retrieval + citation-constrained LLM synthesis (P1 moonshot, ~20h)
+  - Retrieval substrate already live (`/api/archivist/semantic` pgvector cosine + server-side
+    query embeddings + `scripts/generate_embeddings.py` corpus pipeline); full architecture,
+    7-layer fallback ladder, citation validator and austerity cost model (hard $5/month
+    governor) specified in **`docs/RFC_RAG_ARCHIVIST.md`** (2026-07-24). The LLM synthesis
+    endpoint ships flag-gated (`ARCHIVIST_SYNTHESIS_ENABLED`) as RFC Phase C next sprint.
+- [x] 4.3 True offline practice mode — full corpus precache + Lighthouse PWA 100 (P2 moonshot, ~12h)
+  - `/offline` now ships a **Force Precache** button (`components/ForcePrecache.tsx` +
+    `lib/offline-precache.ts`) that dynamically resolves the SW static cache via
+    `caches.keys()`/`caches.open()` and proactively stores all 60 core + practice top-level
+    routes with a live progress bar — users can prepare for long retreats while online.
+- [x] 4.4 YouTube content-loop export button + RSS feed (P2 moonshot, ~8h)
+  - RFC 4287 Atom feed live at **`/feed.xml`** (`app/feed.xml/route.ts` + pure `lib/feed.ts`
+    serializer), traversing the `siddhis` and `manuscripts` tables with hourly revalidation
+    and a zero-entry fallback instead of 500s; discoverable via `<link rel="alternate">` in
+    the root layout for podcast/YouTube content pipelines.
 - **Success metric**: One moonshot fully shipped and dogfooded end-to-end; user validates it
   against a real YouTube video or offline session.
 
