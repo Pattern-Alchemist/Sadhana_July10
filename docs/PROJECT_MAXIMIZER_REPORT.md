@@ -459,7 +459,7 @@ folder, and missing SEO/security scaffolding. All of those are now fixed.
 - [ ] Add Playwright with 5–8 critical-path smoke tests (vault setup/unlock, japa counter, archivist
       search, reader page load) (P2, ~10h)
 - [ ] Add the Playwright job to the CI workflow (`ci-templates/github-actions-ci.yml` once activated) (P2, ~2h)
-- [ ] Move root-level historical report `.md` files into `docs/history/` (P2, ~1h)
+- [x] Move root-level historical report `.md` files into `docs/history/` (P2, ~1h)
 - **Success metric**: CI catches at least one real regression before merge during this sprint
   (validates the investment).
 
