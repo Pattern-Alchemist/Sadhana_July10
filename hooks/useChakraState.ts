@@ -13,20 +13,23 @@ export function useChakraState() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setHistory(parsed);
-        if (parsed.length > 0) {
-          setAssessments(parsed[parsed.length - 1].assessments);
+    const timer = window.setTimeout(() => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setHistory(parsed);
+          if (parsed.length > 0) {
+            setAssessments(parsed[parsed.length - 1].assessments);
+          }
         }
+      } catch (e) {
+        console.error('[v0] Failed to load chakra assessments:', e);
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      console.error('[v0] Failed to load chakra assessments:', e);
-    } finally {
-      setLoading(false);
-    }
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const updateChakraAssessment = useCallback(

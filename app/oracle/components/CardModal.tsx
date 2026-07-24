@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useCallback, useEffect, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CARDS, CATEGORY_MAP, toRoman } from "../data/cards";
 import { useDeck } from "./DeckContext";
@@ -17,6 +17,13 @@ function Label({ children }: { children: ReactNode }) {
 export default function CardModal() {
   const { activeCard, openCard, closeCard } = useDeck();
 
+  const navigate = useCallback((dir: number) => {
+    if (!activeCard) return;
+    const idx = CARDS.findIndex((c) => c.id === activeCard.id);
+    const next = CARDS[(idx + dir + CARDS.length) % CARDS.length];
+    openCard(next);
+  }, [activeCard, openCard]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!activeCard) return;
@@ -30,15 +37,7 @@ export default function CardModal() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCard]);
-
-  const navigate = (dir: number) => {
-    if (!activeCard) return;
-    const idx = CARDS.findIndex((c) => c.id === activeCard.id);
-    const next = CARDS[(idx + dir + CARDS.length) % CARDS.length];
-    openCard(next);
-  };
+  }, [activeCard, closeCard, navigate]);
 
   return (
     <AnimatePresence>

@@ -53,8 +53,11 @@ export function useReadingProgress() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    setState(load());
-    setIsHydrated(true);
+    const timer = window.setTimeout(() => {
+      setState(load());
+      setIsHydrated(true);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const trackView = useCallback((slug: string) => {

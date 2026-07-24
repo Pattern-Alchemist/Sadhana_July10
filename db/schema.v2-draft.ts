@@ -1,3 +1,11 @@
+/**
+ * UNWIRED DRAFT SCHEMA.
+ *
+ * The live AstroKalki schema is `db/schema.ts`, and `drizzle.config.json`
+ * intentionally points there. This file sketches a broader v2 practice/session
+ * model but is not used by runtime code, bootstrap SQL, or migrations yet.
+ * Do not import it until a migration plan promotes it to the canonical schema.
+ */
 import { pgTable, text, serial, timestamp, boolean, integer, jsonb, varchar } from 'drizzle-orm/pg-core';
 
 // Core Siddhi Table (55+ practices)

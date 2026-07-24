@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useVault } from "./VaultProvider";
 import { OmGlyph } from "./Symbols";
 
@@ -16,15 +16,8 @@ import { OmGlyph } from "./Symbols";
  */
 export default function VaultGate({ children }: { children: React.ReactNode }) {
   const { status, isHydrated } = useVault();
-  const [showGate, setShowGate] = useState(false);
-
-  // Only show the gate after hydration to avoid SSR mismatch
-  useEffect(() => {
-    if (isHydrated) {
-      // Show gate only if vault is set up AND locked
-      setShowGate(status === "locked");
-    }
-  }, [isHydrated, status]);
+  // Only show the gate after hydration to avoid SSR mismatch.
+  const showGate = isHydrated && status === "locked";
 
   if (!isHydrated) {
     return <>{children}</>;

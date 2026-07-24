@@ -22,6 +22,28 @@ const SOUND_PRESETS = [
   { id: "om", name: "Oṃ Drone", icon: "🕉️", freqs: [136.10] }, // C#3 — Om frequency
 ];
 
+// Generate white noise buffer for rain/fire. Kept outside the component so
+// React's render-purity lint knows this only runs from user-triggered audio code.
+function createNoiseBuffer(ctx: AudioContext, type: "white" | "brown" | "pink" = "white"): AudioBuffer {
+  const bufferSize = ctx.sampleRate * 2;
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  if (type === "brown") {
+    let last = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      data[i] = (last + 0.02 * white) / 1.02;
+      last = data[i];
+      data[i] *= 3.5;
+    }
+  } else {
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+  }
+  return buffer;
+}
+
 export default function AmbiencePage() {
   const [sources, setSources] = useState<SoundSource[]>(
     SOUND_PRESETS.map((s) => ({ ...s, enabled: false, volume: 0.3 }))
@@ -38,27 +60,6 @@ export default function AmbiencePage() {
       audioCtxRef.current.resume();
     }
     return audioCtxRef.current;
-  }
-
-  // Generate white noise buffer for rain/fire
-  function createNoiseBuffer(ctx: AudioContext, type: "white" | "brown" | "pink" = "white"): AudioBuffer {
-    const bufferSize = ctx.sampleRate * 2;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    if (type === "brown") {
-      let last = 0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        data[i] = (last + 0.02 * white) / 1.02;
-        last = data[i];
-        data[i] *= 3.5;
-      }
-    } else {
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
-    }
-    return buffer;
   }
 
   function toggleSource(id: string) {

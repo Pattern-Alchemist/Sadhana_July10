@@ -24,8 +24,11 @@ export default function ShrineScreen({
   const transition = createTransitionFromProfile(profile, 'entrance');
 
   useEffect(() => {
-    setTheme(getThemeForTime());
-    setIsReady(true);
+    const timer = window.setTimeout(() => {
+      setTheme(getThemeForTime());
+      setIsReady(true);
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

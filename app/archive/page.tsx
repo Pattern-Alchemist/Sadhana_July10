@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { siddhis } from "@/db/schema";
 import { asc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -8,6 +8,7 @@ import ArchiveBrowser from "@/components/ArchiveBrowser";
 export const dynamic = "force-dynamic";
 
 export default async function ArchivePage() {
+  const db = getDb();
   await ensureArchiveSeeded();
   const items = await db.select().from(siddhis).orderBy(asc(siddhis.name));
 

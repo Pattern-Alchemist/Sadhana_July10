@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { schools } from "@/db/schema";
 import { asc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 const GLYPHS = ["ॐ", "✶", "☥", "☾", "♃", "✦", "◆"];
 
 export default async function SchoolsPage() {
+  const db = getDb();
   await ensureArchiveSeeded();
   const items = await db.select().from(schools).orderBy(asc(schools.orderIndex));
 

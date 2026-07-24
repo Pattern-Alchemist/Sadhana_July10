@@ -1,6 +1,7 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { siddhis, manuscripts } from "@/db/schema";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
+import { getSiteUrl } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 
 /**
@@ -18,9 +19,7 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-dynamic";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://astrokalki.example.com"; // replace with real domain in production
+const BASE_URL = getSiteUrl();
 
 const STATIC_ROUTES = [
   "",
@@ -59,6 +58,7 @@ const YANTRA_SLUGS = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const db = getDb();
   await ensureArchiveSeeded();
 
   const [siddhiRows, manuscriptRows] = await Promise.all([
@@ -93,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Manuscripts — monthly refresh (stable catalogue)
   for (const m of manuscriptRows) {
     entries.push({
-      url: `${BASE_URL}/manuscripts#${m.slug}`,
+      url: `${BASE_URL}/manuscripts/${m.slug}`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,

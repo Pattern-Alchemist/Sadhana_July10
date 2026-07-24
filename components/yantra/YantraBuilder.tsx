@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 interface Point {
@@ -141,13 +141,12 @@ export default function YantraBuilder() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [yantraSize, setYantraSize] = useState(400);
   const [proportionValid, setProportionValid] = useState(true);
-  const [svgOutput, setSvgOutput] = useState('');
   const [purpose, setPurpose] = useState('');
 
   const template = YANTRA_TEMPLATES[selectedTemplate];
   const { circles, triangles } = template.generate(yantraSize);
 
-  useEffect(() => {
+  const svgOutput = useMemo(() => {
     // Generate SVG
     let svg = `<svg viewBox="0 0 ${yantraSize} ${yantraSize}" xmlns="http://www.w3.org/2000/svg">
   <!-- ${template.name} -->
@@ -169,8 +168,8 @@ export default function YantraBuilder() {
     });
 
     svg += '\n</svg>';
-    setSvgOutput(svg);
-  }, [selectedTemplate, yantraSize, template]);
+    return svg;
+  }, [circles, triangles, template.name, yantraSize]);
 
   const downloadSVG = () => {
     const element = document.createElement('a');

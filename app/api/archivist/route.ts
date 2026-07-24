@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { siddhis, manuscripts } from "@/db/schema";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
 
@@ -17,6 +17,7 @@ interface Candidate {
 
 export async function POST(req: Request) {
   try {
+    const db = getDb();
     await ensureArchiveSeeded();
     const body = await req.json().catch(() => ({}));
     const raw = String(body?.query ?? "").trim().toLowerCase();

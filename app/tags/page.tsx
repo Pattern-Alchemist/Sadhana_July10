@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { db } from "@/db";
-import { siddhis, manuscripts } from "@/db/schema";
+import { getDb } from "@/db";
+import { siddhis } from "@/db/schema";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
 import PageHeader from "@/components/PageHeader";
 import { OmGlyph } from "@/components/Symbols";
@@ -14,12 +14,10 @@ interface TagCount {
 }
 
 export default async function TagsPage() {
+  const db = getDb();
   await ensureArchiveSeeded();
 
-  const [siddhiRows, manuscriptRows] = await Promise.all([
-    db.select().from(siddhis),
-    db.select().from(manuscripts),
-  ]);
+  const siddhiRows = await db.select().from(siddhis);
 
   // Extract tags from category, tradition, and any tag-like fields
   // For siddhis: use category + tradition as the primary facets

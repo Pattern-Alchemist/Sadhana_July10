@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 interface Star {
   top: string;
   left: string;
@@ -9,23 +7,24 @@ interface Star {
   bright: boolean;
 }
 
-export default function Starfield() {
-  const stars = useMemo<Star[]>(() => {
-    const out: Star[] = [];
-    for (let i = 0; i < 140; i++) {
-      const bright = Math.random() > 0.86;
-      out.push({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        size: bright ? Math.random() * 2 + 2 : Math.random() * 1.6 + 0.5,
-        delay: `${Math.random() * 6}s`,
-        duration: `${Math.random() * 4 + 3}s`,
-        bright,
-      });
-    }
-    return out;
-  }, []);
+function seededUnit(index: number, salt: number): number {
+  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453;
+  return value - Math.floor(value);
+}
 
+const STARS: Star[] = Array.from({ length: 140 }, (_, i) => {
+  const bright = seededUnit(i, 1) > 0.86;
+  return {
+    top: `${seededUnit(i, 2) * 100}%`,
+    left: `${seededUnit(i, 3) * 100}%`,
+    size: bright ? seededUnit(i, 4) * 2 + 2 : seededUnit(i, 5) * 1.6 + 0.5,
+    delay: `${seededUnit(i, 6) * 6}s`,
+    duration: `${seededUnit(i, 7) * 4 + 3}s`,
+    bright,
+  };
+});
+
+export default function Starfield() {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Deep base gradient */}
@@ -43,7 +42,7 @@ export default function Starfield() {
       />
 
       {/* Stars */}
-      {stars.map((s, i) => (
+      {STARS.map((s, i) => (
         <span
           key={i}
           className="animate-twinkle absolute rounded-full"

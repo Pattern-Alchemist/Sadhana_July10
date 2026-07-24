@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { reflections, siddhis } from "@/db/schema";
 import { desc, asc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -17,6 +17,7 @@ const TONE_COLOR: Record<string, string> = {
 };
 
 export default async function JourneyPage() {
+  const db = getDb();
   await ensureArchiveSeeded();
 
   const [entries, siddhiRows] = await Promise.all([

@@ -45,7 +45,9 @@ export default function MeditationPlayer({ path, onComplete, onExit }: Props) {
       });
     }, 1000);
 
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [isPlaying, currentStepIndex, currentStep.duration, path.steps.length, stepStartTime]);
 
   const getBreathPattern = (pattern?: string) => {

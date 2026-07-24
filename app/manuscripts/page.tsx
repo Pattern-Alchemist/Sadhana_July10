@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { manuscripts } from "@/db/schema";
 import { asc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
@@ -8,6 +8,7 @@ import CodexExplorer from "@/components/CodexExplorer";
 export const dynamic = "force-dynamic";
 
 export default async function ManuscriptsPage() {
+  const db = getDb();
   await ensureArchiveSeeded();
   const items = await db
     .select()

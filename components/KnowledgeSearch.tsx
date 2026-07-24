@@ -118,7 +118,9 @@ export default function KnowledgeSearch() {
 
   // Re-run when the caution toggle or search mode changes
   useEffect(() => {
-    if (query.trim()) runSearch(query);
+    if (!query.trim()) return;
+    const timer = window.setTimeout(() => runSearch(query), 0);
+    return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [includeHighCaution, searchMode]);
 

@@ -13,6 +13,23 @@ export default function TimerPage() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const { setData: setJournal } = useVaultData<JournalEntry[]>("journal", []);
 
+  function playBell(freq: number) {
+    try {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      osc.type = "sine";
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 3);
+    } catch {}
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+  }
+
   useEffect(() => {
     if (!running) {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -46,23 +63,6 @@ export default function TimerPage() {
     }, 1000);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [running, duration, intervalBell, siddhiName, setJournal]);
-
-  function playBell(freq: number) {
-    try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      osc.type = "sine";
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 3);
-    } catch {}
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-  }
 
   const totalSec = duration * 60;
   const progress = (elapsed / totalSec) * 100;

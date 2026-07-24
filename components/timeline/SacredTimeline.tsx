@@ -89,6 +89,11 @@ function getDeity(date: Date): string {
   return deities[date.getDay()];
 }
 
+function getEnergyLevel(date: Date): number {
+  const dayKey = Math.floor(date.getTime() / 86_400_000);
+  return ((dayKey * 7 + date.getMonth() * 3) % 10) + 1;
+}
+
 export default function SacredTimeline() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [viewType, setViewType] = useState<'calendar' | 'timeline' | 'energy'>('calendar');
@@ -112,7 +117,7 @@ export default function SacredTimeline() {
         yoga: getYoga(date),
         deity: getDeity(date),
         recommendedPractice: tithi.recommendations[0] || 'Meditation',
-        energyLevel: Math.floor(Math.random() * 10) + 1,
+        energyLevel: getEnergyLevel(date),
       });
     }
     return days;

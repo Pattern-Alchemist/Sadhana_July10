@@ -10,6 +10,7 @@ import {
 
 /**
  * AstroKalki — The Living Archive
+ * Canonical schema — source of truth for drizzle-kit and runtime queries.
  * Source of truth for all relational content.
  * NOTE: bootstrap.ts mirrors these definitions as `CREATE TABLE IF NOT EXISTS`
  * so the app self-heals against a fresh or reset database.

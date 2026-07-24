@@ -19,8 +19,11 @@ export default function MantraVaultPage() {
   const STORAGE_KEY = "astrokalki:mantra-vault";
 
   useEffect(() => {
-    setMounted(true);
-    setHasStored(!!localStorage.getItem(STORAGE_KEY));
+    const timer = window.setTimeout(() => {
+      setMounted(true);
+      setHasStored(!!localStorage.getItem(STORAGE_KEY));
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   async function unlockMantra() {

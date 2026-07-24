@@ -1,42 +1,84 @@
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { manuscripts, evidenceSources, siddhis } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
+import { absoluteUrl, truncateDescription } from "@/lib/seo";
 import Link from "next/link";
 import { OmGlyph, FlourishDivider } from "@/components/Symbols";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({
-  params,
-}: {
+type ManuscriptPageParams = {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  await ensureArchiveSeeded();
-  const [row] = await db.select().from(manuscripts).where(eq(manuscripts.slug, slug)).limit(1);
-  if (!row) return { title: "Manuscript not found · AstroKalki" };
-  return {
-    title: `${row.title} · Codex Library · AstroKalki`,
-    description: row.description ?? undefined,
-  };
-}
+};
 
-export default async function ManuscriptDeepViewPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+async function getManuscriptBySlug(slug: string) {
+  const db = getDb();
   await ensureArchiveSeeded();
-  const { slug } = await params;
-
-  const [manuscript] = await db
+  const [row] = await db
     .select()
     .from(manuscripts)
     .where(eq(manuscripts.slug, slug))
     .limit(1);
+
+  return row ?? null;
+}
+
+export async function generateMetadata({ params }: ManuscriptPageParams): Promise<Metadata> {
+  const { slug } = await params;
+  const row = await getManuscriptBySlug(slug);
+
+  if (!row) {
+    return {
+      title: "Manuscript not found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${row.title} · Codex Library`;
+  const description =
+    truncateDescription(row.description) ||
+    "A catalogued AstroKalki manuscript record with provenance, condition, and source context.";
+  const url = absoluteUrl(`/manuscripts/${row.slug}`);
+  const imageUrl = absoluteUrl(`/manuscripts/${row.slug}/opengraph-image`);
+  const imageAlt = `${row.title} — AstroKalki codex record`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "article",
+      siteName: "AstroKalki",
+      title: `${row.title} · AstroKalki`,
+      description,
+      url,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: imageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${row.title} · AstroKalki`,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
+
+export default async function ManuscriptDeepViewPage({ params }: ManuscriptPageParams) {
+  const db = getDb();
+  const { slug } = await params;
+  const manuscript = await getManuscriptBySlug(slug);
 
   if (!manuscript) notFound();
 
@@ -68,7 +110,8 @@ export default async function ManuscriptDeepViewPage({
     dateCreated: manuscript.century ?? undefined,
     identifier: manuscript.catalogNumber ?? undefined,
     numberOfPages: manuscript.folios ?? undefined,
-    url: manuscript.sourceUrl ?? undefined,
+    url: absoluteUrl(`/manuscripts/${manuscript.slug}`),
+    sameAs: manuscript.sourceUrl ?? undefined,
     isPartOf: {
       "@type": "Collection",
       name: "AstroKalki Codex Library",

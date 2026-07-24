@@ -17,13 +17,14 @@ export function useVaultData<T>(key: string, defaultValue: T) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (vault.status === "unlocked") {
-      const stored = vault.read<T>(key);
-      setData(stored ?? defaultValue);
+    const timer = window.setTimeout(() => {
+      if (vault.status === "unlocked") {
+        const stored = vault.read<T>(key);
+        setData(stored ?? defaultValue);
+      }
       setLoading(false);
-    } else {
-      setLoading(false);
-    }
+    }, 0);
+    return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vault.status, key]);
 

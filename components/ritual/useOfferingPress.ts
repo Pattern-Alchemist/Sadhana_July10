@@ -79,7 +79,7 @@ export function useOfferingPress(options: UseOfferingPressOptions = {}) {
     } catch {}
   }, []);
 
-  const animate = useCallback(() => {
+  function animate() {
     if (!startRef.current || !isPointerDownRef.current) return;
     const elapsed = Date.now() - startRef.current;
     const pct = Math.min(elapsed / holdMs, 1);
@@ -97,7 +97,7 @@ export function useOfferingPress(options: UseOfferingPressOptions = {}) {
     if (isPointerDownRef.current && pct < 1) {
       rafRef.current = requestAnimationFrame(animate);
     }
-  }, [holdMs, haptic, tone]);
+  }
 
   const start = useCallback(() => {
     if (status === "completed" || status === "exited") return;
@@ -136,7 +136,7 @@ export function useOfferingPress(options: UseOfferingPressOptions = {}) {
     const effectiveHoldMs = reducedMotion ? Math.min(holdMs, 500) : holdMs;
 
     rafRef.current = requestAnimationFrame(animate);
-  }, [status, animate, mode, haptic, tone, unlockAudio, reducedMotion, holdMs]);
+  }, [status, mode, haptic, tone, unlockAudio, reducedMotion, holdMs]);
 
   const end = useCallback(() => {
     isPointerDownRef.current = false;

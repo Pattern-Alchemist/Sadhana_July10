@@ -38,7 +38,8 @@ export default function DashboardPage() {
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
-    setNow(new Date());
+    const timer = window.setTimeout(() => setNow(new Date()), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const today = now?.toISOString().slice(0, 10) ?? "";
@@ -51,14 +52,16 @@ export default function DashboardPage() {
   // Streak
   const dates = new Set(entries.map((e) => e.date));
   let streak = 0;
-  let cursor = new Date(now);
-  cursor.setHours(0, 0, 0, 0);
-  if (!dates.has(cursor.toISOString().slice(0, 10))) {
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  while (dates.has(cursor.toISOString().slice(0, 10))) {
-    streak++;
-    cursor.setDate(cursor.getDate() - 1);
+  if (now) {
+    const cursor = new Date(now);
+    cursor.setHours(0, 0, 0, 0);
+    if (!dates.has(cursor.toISOString().slice(0, 10))) {
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    while (dates.has(cursor.toISOString().slice(0, 10))) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    }
   }
 
   // Active cycle
