@@ -1,4 +1,4 @@
-import { getDb } from "@/db";
+import { getDb, isDatabaseAvailable } from "@/db";
 import { siddhis, evidenceSources } from "@/db/schema";
 import { eq, sql } from "drizzle-orm";
 import { notFound } from "next/navigation";
@@ -16,15 +16,23 @@ type SiddhiPageParams = {
 };
 
 async function getSiddhiBySlug(slug: string) {
-  const db = getDb();
-  await ensureArchiveSeeded();
-  const [row] = await db
-    .select()
-    .from(siddhis)
-    .where(eq(siddhis.slug, slug))
-    .limit(1);
+  if (!isDatabaseAvailable()) {
+    return null;
+  }
+  
+  try {
+    const db = getDb();
+    await ensureArchiveSeeded();
+    const [row] = await db
+      .select()
+      .from(siddhis)
+      .where(eq(siddhis.slug, slug))
+      .limit(1);
 
-  return row ?? null;
+    return row ?? null;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: SiddhiPageParams): Promise<Metadata> {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getDb } from "@/db";
+import { getDb, isDatabaseAvailable } from "@/db";
 import { siddhis } from "@/db/schema";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
 import PageHeader from "@/components/PageHeader";
@@ -14,39 +14,73 @@ interface TagCount {
 }
 
 export default async function TagsPage() {
-  const db = getDb();
-  await ensureArchiveSeeded();
+  if (!isDatabaseAvailable()) {
+    return (
+      <div>
+        <section className="border-b border-[var(--hairline)] bg-[var(--color-ink)]/40 py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl px-4 text-center sm:px-8">
+            <div className="mb-6 text-[var(--color-gold)]/70">
+              <OmGlyph style={{ fontSize: "2rem" }} />
+            </div>
+            <span className="text-[0.5rem] uppercase tracking-luxe text-[var(--color-gold)] sm:text-[0.6rem]">
+              Database Configuration Required
+            </span>
+            <h1 className="mt-3 font-display text-[2rem] font-medium leading-tight text-balance text-[var(--color-ivory)] sm:text-4xl lg:text-5xl">
+              Browse by Tag
+            </h1>
+          </div>
+        </section>
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
+          <div className="rounded-lg border border-border bg-muted/50 p-8 text-center">
+            <p className="text-sm text-muted-foreground">
+              Tag browsing requires a database connection. Please deploy with DATABASE_URL configured.
+            </p>
+            <Link
+              href="/"
+              className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Return to home
+            </Link>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
-  const siddhiRows = await db.select().from(siddhis);
+  try {
+    const db = getDb();
+    await ensureArchiveSeeded();
 
-  // Extract tags from category, tradition, and any tag-like fields
-  // For siddhis: use category + tradition as the primary facets
-  const tagMap = new Map<string, TagCount>();
+    const siddhiRows = await db.select().from(siddhis);
 
-  function addTag(tag: string, siddhi: { slug: string; name: string; category: string | null }) {
-    const normalized = tag.trim();
-    if (!normalized) return;
-    const existing = tagMap.get(normalized) ?? { tag: normalized, count: 0, siddhis: [] };
-    existing.count += 1;
-    if (!existing.siddhis.find((s) => s.slug === siddhi.slug)) {
-      existing.siddhis.push({ slug: siddhi.slug, name: siddhi.name, category: siddhi.category });
+    // Extract tags from category, tradition, and any tag-like fields
+    // For siddhis: use category + tradition as the primary facets
+    const tagMap = new Map<string, TagCount>();
+
+    function addTag(tag: string, siddhi: { slug: string; name: string; category: string | null }) {
+      const normalized = tag.trim();
+      if (!normalized) return;
+      const existing = tagMap.get(normalized) ?? { tag: normalized, count: 0, siddhis: [] };
+      existing.count += 1;
+      if (!existing.siddhis.find((s) => s.slug === siddhi.slug)) {
+        existing.siddhis.push({ slug: siddhi.slug, name: siddhi.name, category: siddhi.category });
+      }
+      tagMap.set(normalized, existing);
     }
-    tagMap.set(normalized, existing);
-  }
 
-  for (const s of siddhiRows) {
-    if (s.category) addTag(s.category, s);
-    if (s.tradition) addTag(s.tradition, s);
-  }
+    for (const s of siddhiRows) {
+      if (s.category) addTag(s.category, s);
+      if (s.tradition) addTag(s.tradition, s);
+    }
 
-  // Group tags into facets
-  const allTags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
-  const categories = allTags.filter((t) =>
-    ["Mantra", "Yantra", "Tantra", "Meditation", "Prāṇāyāma", "Dhāraṇā", "Ritual", "Yoga"].includes(t.tag)
-  );
-  const traditions = allTags.filter((t) => !categories.includes(t));
+    // Group tags into facets
+    const allTags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
+    const categories = allTags.filter((t) =>
+      ["Mantra", "Yantra", "Tantra", "Meditation", "Prāṇāyāma", "Dhāraṇā", "Ritual", "Yoga"].includes(t.tag)
+    );
+    const traditions = allTags.filter((t) => !categories.includes(t));
 
-  return (
+    return (
     <div>
       <section className="border-b border-[var(--hairline)] bg-[var(--color-ink)]/40 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-8">
@@ -91,7 +125,37 @@ export default async function TagsPage() {
         </div>
       </section>
     </div>
-  );
+    );
+  } catch (error) {
+    return (
+      <div>
+        <section className="border-b border-[var(--hairline)] bg-[var(--color-ink)]/40 py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl px-4 text-center sm:px-8">
+            <div className="mb-6 text-[var(--color-gold)]/70">
+              <OmGlyph style={{ fontSize: "2rem" }} />
+            </div>
+            <h1 className="mt-3 font-display text-[2rem] font-medium leading-tight text-balance text-[var(--color-ivory)] sm:text-4xl lg:text-5xl">
+              Browse by Tag
+            </h1>
+          </div>
+        </section>
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
+          <div className="rounded-lg border border-border bg-muted/50 p-8 text-center">
+            <h2 className="text-xl font-semibold text-foreground">Tags Error</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Tag browsing is temporarily unavailable. Please try again later.
+            </p>
+            <Link
+              href="/"
+              className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Return to home
+            </Link>
+          </div>
+        </section>
+      </div>
+    );
+  }
 }
 
 function TagCard({ tag }: { tag: TagCount }) {

@@ -1,4 +1,4 @@
-import { getDb } from "@/db";
+import { getDb, isDatabaseAvailable } from "@/db";
 import { manuscripts, evidenceSources, siddhis } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
@@ -15,15 +15,23 @@ type ManuscriptPageParams = {
 };
 
 async function getManuscriptBySlug(slug: string) {
-  const db = getDb();
-  await ensureArchiveSeeded();
-  const [row] = await db
-    .select()
-    .from(manuscripts)
-    .where(eq(manuscripts.slug, slug))
-    .limit(1);
+  if (!isDatabaseAvailable()) {
+    return null;
+  }
 
-  return row ?? null;
+  try {
+    const db = getDb();
+    await ensureArchiveSeeded();
+    const [row] = await db
+      .select()
+      .from(manuscripts)
+      .where(eq(manuscripts.slug, slug))
+      .limit(1);
+
+    return row ?? null;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: ManuscriptPageParams): Promise<Metadata> {

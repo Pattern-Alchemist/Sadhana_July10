@@ -7,6 +7,7 @@ export type Database = NodePgDatabase<typeof schema>;
 const globalForDb = globalThis as typeof globalThis & {
   __arenaNextJsPostgresqlPool?: Pool;
   __arenaNextJsDrizzleDb?: Database;
+  __arenaNextJsDbError?: string;
 };
 
 function initializeDb(): Database {
@@ -16,7 +17,9 @@ function initializeDb(): Database {
 
   const databaseUrl = process.env.DATABASE_URL;
   if (!databaseUrl) {
-    throw new Error("Database not initialized — set DATABASE_URL before using Postgres-backed routes.");
+    const error = "Database not initialized — set DATABASE_URL before using Postgres-backed routes.";
+    globalForDb.__arenaNextJsDbError = error;
+    throw new Error(error);
   }
 
   const pool =
@@ -37,6 +40,14 @@ function initializeDb(): Database {
 
 export function getDb(): Database {
   return initializeDb();
+}
+
+export function isDatabaseAvailable(): boolean {
+  return !!process.env.DATABASE_URL;
+}
+
+export function getDbError(): string | undefined {
+  return globalForDb.__arenaNextJsDbError;
 }
 
 let db: Database | undefined;

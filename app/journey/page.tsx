@@ -1,10 +1,11 @@
-import { getDb } from "@/db";
+import { getDb, isDatabaseAvailable } from "@/db";
 import { reflections, siddhis } from "@/db/schema";
 import { desc, asc } from "drizzle-orm";
 import { ensureArchiveSeeded } from "@/lib/bootstrap";
 import PageHeader from "@/components/PageHeader";
 import ReflectionComposer from "@/components/ReflectionComposer";
 import ReadinessValidator from "@/components/ReadinessValidator";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -17,100 +18,153 @@ const TONE_COLOR: Record<string, string> = {
 };
 
 export default async function JourneyPage() {
-  const db = getDb();
-  await ensureArchiveSeeded();
-
-  const [entries, siddhiRows] = await Promise.all([
-    db.select().from(reflections).orderBy(desc(reflections.createdAt)),
-    db.select({ slug: siddhis.slug, name: siddhis.name }).from(siddhis).orderBy(asc(siddhis.name)),
-  ]);
-
-  const siddhiMap = new Map(siddhiRows.map((s) => [s.slug, s.name]));
-
-  return (
-    <div className="pb-24">
-      <PageHeader
-        eyebrow="Hall VI · The Inner Chronicle"
-        title="Your Narrative Timeline"
-        subtitle="The Archive keeps no record of you but the one you inscribe. Honesty is the first discipline — record what you noticed, not what you wished to feel."
-      />
-
-      <div className="mx-auto mt-12 max-w-6xl px-6 sm:px-8">
-        <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
-          {/* Validator */}
-          <aside className="lg:sticky lg:top-24 lg:self-start">
-            <ReadinessValidator />
-          </aside>
-
-          {/* Timeline + composer */}
-          <div className="space-y-10">
-            <ReflectionComposer siddhiOptions={siddhiRows} />
-
-            <section>
-              <h2 className="mb-6 font-display text-2xl text-[var(--color-ivory)]">
-                The Chronicle
-              </h2>
-              {entries.length === 0 ? (
-                <p className="rounded-sm border border-dashed border-[var(--hairline)] p-10 text-center text-sm text-[var(--color-bone)]/50">
-                  The chronicle is empty. Inscribe your first reflection above.
-                </p>
-              ) : (
-                <ol className="relative space-y-6 border-l border-[var(--hairline)] pl-6">
-                  {entries.map((r) => (
-                    <li key={r.id} className="relative">
-                      <span className="absolute -left-[31px] top-1.5 grid h-4 w-4 place-items-center rounded-full border border-[var(--color-gold)] bg-[var(--color-obsidian)] text-[0.5rem] text-[var(--color-gold)]">
-                        ◆
-                      </span>
-                      <div className="rounded-sm border border-[var(--hairline)] bg-[var(--color-ink)]/50 p-5">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <h3 className="font-display text-xl text-[var(--color-gold-bright)]">
-                            {r.title}
-                          </h3>
-                          {r.tone && (
-                            <span
-                              className="badge"
-                              style={{
-                                color: TONE_COLOR[r.tone] ?? "var(--color-bone)",
-                                borderColor: TONE_COLOR[r.tone] ?? "var(--color-bone)",
-                              }}
-                            >
-                              {r.tone}
-                            </span>
-                          )}
-                        </div>
-                        <p className="mt-2 text-[0.95rem] leading-relaxed text-[var(--color-bone)]/85">
-                          {r.body}
-                        </p>
-                        <div className="mt-3 flex items-center gap-3 text-[0.6rem] uppercase tracking-luxe text-[var(--color-bone)]/40">
-                          <span>— {r.penName}</span>
-                          {r.siddhiSlug && siddhiMap.get(r.siddhiSlug) && (
-                            <>
-                              <span className="text-[var(--color-gold)]/40">·</span>
-                              <span>{siddhiMap.get(r.siddhiSlug) as string}</span>
-                            </>
-                          )}
-                          {r.createdAt && (
-                            <>
-                              <span className="text-[var(--color-gold)]/40">·</span>
-                              <span>
-                                {new Date(r.createdAt).toLocaleDateString("en-US", {
-                                  month: "short",
-                                  day: "numeric",
-                                  year: "numeric",
-                                })}
-                              </span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </section>
+  if (!isDatabaseAvailable()) {
+    return (
+      <div className="pb-24">
+        <PageHeader
+          eyebrow="Hall VI · The Inner Chronicle"
+          title="Your Narrative Timeline"
+          subtitle="Database configuration required"
+        />
+        <div className="mx-auto mt-12 max-w-6xl px-6 sm:px-8">
+          <div className="rounded-lg border border-border bg-muted/50 p-8 text-center">
+            <h2 className="text-xl font-semibold text-foreground">Database Not Connected</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your personal journal requires a database connection to store and retrieve your reflections. 
+              Please deploy this application with DATABASE_URL configured.
+            </p>
+            <Link
+              href="/"
+              className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Return to home
+            </Link>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  try {
+    const db = getDb();
+    await ensureArchiveSeeded();
+
+    const [entries, siddhiRows] = await Promise.all([
+      db.select().from(reflections).orderBy(desc(reflections.createdAt)),
+      db.select({ slug: siddhis.slug, name: siddhis.name }).from(siddhis).orderBy(asc(siddhis.name)),
+    ]);
+
+    const siddhiMap = new Map(siddhiRows.map((s) => [s.slug, s.name]));
+
+    return (
+      <div className="pb-24">
+        <PageHeader
+          eyebrow="Hall VI · The Inner Chronicle"
+          title="Your Narrative Timeline"
+          subtitle="The Archive keeps no record of you but the one you inscribe. Honesty is the first discipline — record what you noticed, not what you wished to feel."
+        />
+
+        <div className="mx-auto mt-12 max-w-6xl px-6 sm:px-8">
+          <div className="grid gap-8 lg:grid-cols-[320px_1fr]">
+            {/* Validator */}
+            <aside className="lg:sticky lg:top-24 lg:self-start">
+              <ReadinessValidator />
+            </aside>
+
+            {/* Timeline + composer */}
+            <div className="space-y-10">
+              <ReflectionComposer siddhiOptions={siddhiRows} />
+
+              <section>
+                <h2 className="mb-6 font-display text-2xl text-[var(--color-ivory)]">
+                  The Chronicle
+                </h2>
+                {entries.length === 0 ? (
+                  <p className="rounded-sm border border-dashed border-[var(--hairline)] p-10 text-center text-sm text-[var(--color-bone)]/50">
+                    The chronicle is empty. Inscribe your first reflection above.
+                  </p>
+                ) : (
+                  <ol className="relative space-y-6 border-l border-[var(--hairline)] pl-6">
+                    {entries.map((r) => (
+                      <li key={r.id} className="relative">
+                        <span className="absolute -left-[31px] top-1.5 grid h-4 w-4 place-items-center rounded-full border border-[var(--color-gold)] bg-[var(--color-obsidian)] text-[0.5rem] text-[var(--color-gold)]">
+                          ◆
+                        </span>
+                        <div className="rounded-sm border border-[var(--hairline)] bg-[var(--color-ink)]/50 p-5">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <h3 className="font-display text-xl text-[var(--color-gold-bright)]">
+                              {r.title}
+                            </h3>
+                            {r.tone && (
+                              <span
+                                className="badge"
+                                style={{
+                                  color: TONE_COLOR[r.tone] ?? "var(--color-bone)",
+                                  borderColor: TONE_COLOR[r.tone] ?? "var(--color-bone)",
+                                }}
+                              >
+                                {r.tone}
+                              </span>
+                            )}
+                          </div>
+                          <p className="mt-2 text-[0.95rem] leading-relaxed text-[var(--color-bone)]/85">
+                            {r.body}
+                          </p>
+                          <div className="mt-3 flex items-center gap-3 text-[0.6rem] uppercase tracking-luxe text-[var(--color-bone)]/40">
+                            <span>— {r.penName}</span>
+                            {r.siddhiSlug && siddhiMap.get(r.siddhiSlug) && (
+                              <>
+                                <span className="text-[var(--color-gold)]/40">·</span>
+                                <span>{siddhiMap.get(r.siddhiSlug) as string}</span>
+                              </>
+                            )}
+                            {r.createdAt && (
+                              <>
+                                <span className="text-[var(--color-gold)]/40">·</span>
+                                <span>
+                                  {new Date(r.createdAt).toLocaleDateString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } catch (error) {
+    return (
+      <div className="pb-24">
+        <PageHeader
+          eyebrow="Hall VI · The Inner Chronicle"
+          title="Your Narrative Timeline"
+          subtitle="Journal temporarily unavailable"
+        />
+        <div className="mx-auto mt-12 max-w-6xl px-6 sm:px-8">
+          <div className="rounded-lg border border-border bg-muted/50 p-8 text-center">
+            <h2 className="text-xl font-semibold text-foreground">Journal Error</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your journal is temporarily unavailable. Please try again later.
+            </p>
+            <Link
+              href="/"
+              className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Return to home
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
