@@ -74,11 +74,28 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // Gracefully handle the case where the database is not available (e.g.,
   // during static generation at build time without DATABASE_URL set).
   let slugs: string[] = [];
+  let siddhisData: any[] = [];
   try {
     const db = getDb();
     await ensureArchiveSeeded();
-    const allSiddhis = await db.select({ slug: siddhis.slug }).from(siddhis);
+    const allSiddhis = await db.select({ 
+      slug: siddhis.slug,
+      title: siddhis.name,
+      difficulty: siddhis.level,
+      category: siddhis.category,
+      tradition: siddhis.tradition,
+    }).from(siddhis);
+    
     slugs = allSiddhis.map((s) => s.slug).filter(Boolean);
+    // Format for cosmic alignment (will use defaults if fields missing)
+    siddhisData = allSiddhis.filter(s => s.slug).map(s => ({
+      slug: s.slug,
+      title: s.title,
+      difficulty: (s.difficulty === 'beginner' || s.difficulty === 'intermediate' || s.difficulty === 'advanced') ? s.difficulty : 'beginner',
+      bestTithi: [],
+      dosha: [],
+      season: '',
+    }));
   } catch {
     // Database unavailable — the random button will be disabled
   }
@@ -90,7 +107,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <VaultProvider>
             <AmbientBackground />
             <ServiceWorkerRegister />
-            <SiteNav siddhiSlugs={slugs} />
+            <SiteNav siddhiSlugs={slugs} siddhis={siddhisData} />
             <main className="content-z relative">{children}</main>
             <Footer />
           </VaultProvider>

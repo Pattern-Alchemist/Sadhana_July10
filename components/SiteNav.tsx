@@ -34,6 +34,7 @@ const NAV_GROUPS: NavGroup[] = [
     icon: "📚",
     items: [
       { href: "/archive", label: "Siddhi Archive" },
+      { href: "/locations", label: "🏛️ Sacred Locations" },
       { href: "/yantras", label: "Yantra Gallery" },
       { href: "/yantra-3d", label: "3D Yantra Viewer" },
       { href: "/reader", label: "Sanskrit Reader" },
@@ -60,6 +61,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Practice",
     icon: "🕉️",
     items: [
+      { href: "/voice-command", label: "🎤 Voice Commands" },
       { href: "/ritual", label: " Ritual Mode" },
       { href: "/sessions", label: "Session Builder" },
       { href: "/sankalpa", label: "Saṅkalpa" },
@@ -123,7 +125,13 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-export default function SiteNav({ siddhiSlugs = [] }: { siddhiSlugs?: string[] }) {
+export default function SiteNav({ 
+  siddhiSlugs = [],
+  siddhis = []
+}: { 
+  siddhiSlugs?: string[];
+  siddhis?: any[];
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [expandedGroup, setExpandedGroup] = useState<string | null>("personal");
@@ -189,7 +197,7 @@ export default function SiteNav({ siddhiSlugs = [] }: { siddhiSlugs?: string[] }
 
         {/* Right controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <RandomSiddhiButton slugs={siddhiSlugs} />
+          <RandomSiddhiButton slugs={siddhiSlugs} siddhis={siddhis} />
           <button
             onClick={toggle}
             title="Toggle the epistemological lens"
