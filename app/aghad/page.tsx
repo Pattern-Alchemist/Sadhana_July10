@@ -68,16 +68,16 @@ export default function AaghadLanding() {
           {/* CTA */}
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/aghad/dashboard"
+              href="/aghad/complete-curriculum"
               className="px-8 py-3 bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-gold-bright)] text-[var(--color-obsidian)] font-display text-lg font-medium rounded-sm hover:from-[var(--color-gold-bright)] hover:to-[var(--color-gold)] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Start Your Journey
+              View Complete 12-Week Course
             </Link>
             <Link
-              href="/aghad/curriculum"
+              href="/aghad/havans"
               className="px-8 py-3 border border-[var(--color-gold)] text-[var(--color-gold)] font-display text-lg font-medium rounded-sm hover:bg-[var(--color-gold)]/5 transition-colors duration-300"
             >
-              View Curriculum
+              Sacred Fire Rituals
             </Link>
           </div>
         </div>
