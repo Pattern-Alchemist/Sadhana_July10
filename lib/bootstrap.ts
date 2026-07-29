@@ -6,6 +6,12 @@ import {
   schools,
   evidenceSources,
   reflections,
+  aaghadCourses,
+  aaghadModules,
+  aaghadPractices,
+  aaghadMantras,
+  aaghadUserProgress,
+  aaghadVoiceLogs,
 } from "@/db/schema";
 import {
   SIDDHI_SEED,
@@ -116,6 +122,139 @@ async function ensureSchema(database: Database) {
        setweight(to_tsvector('english', coalesce(original_title, '')), 'C') ||
        setweight(to_tsvector('english', coalesce(description, '')), 'D'))
     );
+  `);
+
+  // Aghad Course Tables
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_courses (
+      id SERIAL PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      subtitle TEXT,
+      description TEXT,
+      duration_weeks INTEGER,
+      total_hours INTEGER,
+      hours_per_week INTEGER,
+      chakra_focus TEXT,
+      level TEXT,
+      philosophy TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_modules (
+      id SERIAL PRIMARY KEY,
+      course_slug TEXT NOT NULL,
+      module_number INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      subtitle TEXT,
+      description TEXT,
+      chakra TEXT,
+      duration_hours INTEGER,
+      week_number INTEGER,
+      learning_outcomes JSONB,
+      prerequisites JSONB,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS aghad_modules_course_idx ON aghad_modules (course_slug);
+  `);
+
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_practices (
+      id SERIAL PRIMARY KEY,
+      module_id INTEGER NOT NULL,
+      practice_number INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      sanskrit TEXT,
+      category TEXT,
+      description TEXT,
+      benefits JSONB,
+      precautions JSONB,
+      duration_minutes INTEGER,
+      frequency TEXT,
+      timing TEXT,
+      intensity TEXT,
+      detailed_steps JSONB,
+      modifications JSONB,
+      expected_results TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS aghad_practices_module_idx ON aghad_practices (module_id);
+  `);
+
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_mantras (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      sanskrit TEXT NOT NULL,
+      transliteration TEXT,
+      translation TEXT,
+      pronunciation TEXT,
+      sound_file TEXT,
+      mantra_type TEXT,
+      chakra TEXT,
+      frequency INTEGER,
+      timing TEXT,
+      duration INTEGER,
+      intensity TEXT,
+      why_recite TEXT,
+      benefits JSONB,
+      frequency_108 INTEGER,
+      total_rounds INTEGER,
+      visualizations JSONB,
+      chakra_activation JSONB,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_user_progress (
+      id SERIAL PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      course_slug TEXT NOT NULL,
+      current_module_id INTEGER,
+      completed_modules JSONB,
+      total_hours_completed INTEGER DEFAULT 0,
+      current_streak INTEGER DEFAULT 0,
+      longest_streak INTEGER DEFAULT 0,
+      last_practice_date TIMESTAMPTZ,
+      chakra_activation JSONB,
+      mantras_completed JSONB,
+      practice_history JSONB,
+      enlightenment_progress INTEGER DEFAULT 0,
+      updated_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS aghad_user_progress_user_idx ON aghad_user_progress (user_id);
+  `);
+
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS aghad_user_progress_course_idx ON aghad_user_progress (course_slug);
+  `);
+
+  await database.execute(sql`
+    CREATE TABLE IF NOT EXISTS aghad_voice_logs (
+      id SERIAL PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      command TEXT,
+      transcript TEXT,
+      guru_response TEXT,
+      practice_context TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await database.execute(sql`
+    CREATE INDEX IF NOT EXISTS aghad_voice_logs_user_idx ON aghad_voice_logs (user_id);
   `);
 }
 
