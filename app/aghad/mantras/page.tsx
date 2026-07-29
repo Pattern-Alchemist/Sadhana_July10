@@ -1,26 +1,69 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { AGHAD_MANTRAS } from "@/lib/aghad-course-data";
 
 type AudioState = "idle" | "loading" | "playing" | "error";
 
+type Mantra = {
+  id?: number;
+  title: string;
+  sanskrit?: string;
+  transliteration?: string;
+  translation?: string;
+  pronunciation?: string;
+  sound_file?: string;
+  soundFile?: string;
+  mantra_type?: string;
+  chakra?: string;
+  why_recite?: string;
+  whyRecite?: string;
+  benefits?: string[] | unknown;
+  visualizations?: string[] | unknown;
+  frequency?: number;
+  duration?: number;
+  intensity?: string;
+};
+
 export default function MantrasLab() {
-  const [selectedMantra, setSelectedMantra] = useState(AGHAD_MANTRAS[0]);
+  const [mantras, setMantras] = useState<Mantra[]>(AGHAD_MANTRAS);
+  const [selectedMantra, setSelectedMantra] = useState<Mantra>(AGHAD_MANTRAS[0]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMantras = async () => {
+      try {
+        const response = await fetch("/api/aghad/mantras");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.mantras && data.mantras.length > 0) {
+            setMantras(data.mantras as Mantra[]);
+            setSelectedMantra(data.mantras[0] as Mantra);
+          }
+        }
+      } catch (error) {
+        console.log("Using fallback mantras - database not available");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMantras();
+  }, []);
   const [audioState, setAudioState] = useState<AudioState>("idle");
   const [isReciting, setIsReciting] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const recognitionRef = useRef<any>(null);
 
   const playPronunciation = async () => {
-    if (!selectedMantra.soundFile) return;
+    if (!(selectedMantra.soundFile || selectedMantra.sound_file)) return;
     
     setAudioState("loading");
     try {
       const audio = audioRef.current;
       if (audio) {
-        audio.src = selectedMantra.soundFile;
+        audio.src = selectedMantra.soundFile || selectedMantra.sound_file || "";
         audio.play();
         setAudioState("playing");
       }
@@ -82,12 +125,12 @@ export default function MantrasLab() {
               Core Mantras
             </h2>
 
-            {AGHAD_MANTRAS.map((mantra) => (
+            {mantras.map((mantra) => (
               <button
-                key={mantra.id}
+                key={mantra.id || mantra.title}
                 onClick={() => setSelectedMantra(mantra)}
                 className={`w-full text-left p-4 rounded-sm border transition-all duration-300 ${
-                  selectedMantra.id === mantra.id
+                  selectedMantra.title === mantra.title
                     ? "bg-[var(--color-gold)]/10 border-[var(--color-gold)] shadow-lg"
                     : "bg-[var(--color-ink)]/20 border-[var(--hairline)] hover:bg-[var(--color-ink)]/40"
                 }`}
@@ -99,7 +142,7 @@ export default function MantrasLab() {
                   {mantra.transliteration}
                 </div>
                 <div className="text-xs text-[var(--color-gold)]/70 mt-2">
-                  {mantra.mantraType}
+                  {mantra.mantra_type}
                 </div>
               </button>
             ))}
@@ -160,7 +203,7 @@ export default function MantrasLab() {
                   </h4>
                   <button
                     onClick={playPronunciation}
-                    disabled={!selectedMantra.soundFile}
+                    disabled={!(selectedMantra.soundFile || selectedMantra.sound_file)}
                     className="w-full px-6 py-4 bg-[var(--color-gold)] text-[var(--color-obsidian)] font-semibold rounded-sm hover:bg-[var(--color-gold-bright)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {audioState === "playing" ? "Playing..." : "Play Pronunciation"}
@@ -220,7 +263,7 @@ export default function MantrasLab() {
                   Benefits
                 </h4>
                 <ul className="space-y-2">
-                  {selectedMantra.benefits?.map((benefit, idx) => (
+                  {(Array.isArray(selectedMantra.benefits) ? selectedMantra.benefits : [])?.map((benefit: any, idx: number) => (
                     <li
                       key={idx}
                       className="flex items-start gap-3 text-sm text-[var(--color-bone)]/75"
@@ -263,7 +306,7 @@ export default function MantrasLab() {
                   Visualizations
                 </h4>
                 <div className="space-y-2">
-                  {selectedMantra.visualizations?.map((viz, idx) => (
+                  {(Array.isArray(selectedMantra.visualizations) ? selectedMantra.visualizations : [])?.map((viz: any, idx: number) => (
                     <div
                       key={idx}
                       className="p-3 rounded-sm bg-[var(--color-stone)]/30 border border-[var(--hairline)]"
