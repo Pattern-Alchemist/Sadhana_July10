@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useVaultData, type JournalEntry, type CycleEntry } from "@/components/useVaultData";
 import { DEITY_ROTATION, getCurrentSeason, getDailyQuote, QUOTES } from "@/lib/practice-data";
 import { OmGlyph, SriYantraGlyph, FlourishDivider, BinduSun, LotusGlyph } from "@/components/Symbols";
+import { QuickAccessButtons } from "@/components/QuickAccessButtons";
 
 // Lunar tithi computation (same as calendar page)
 function computeTithi(date: Date) {
@@ -116,6 +117,14 @@ export default function DashboardPage() {
           </h1>
         </div>
       </section>
+
+      {/* Quick Access Buttons */}
+      <section className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 flex justify-center">
+        <QuickAccessButtons />
+      </section>
+
+      {/* Divider */}
+      <div className="border-t border-[var(--color-hairline)]/50" />
 
       {/* Dashboard grid */}
       <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
