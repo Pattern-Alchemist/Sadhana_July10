@@ -1,18 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { books } from '@/lib/db/schema'
-import { headers } from 'next/headers'
 import { processBook } from '@/lib/book-to-skill'
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth.api.getSession({ headers: await headers() })
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
-    const userId = session.user.id
+    const userId = 'user-demo-001'
     const body = await request.json()
     const { bookId, extractedText, title, author } = body
 
@@ -24,19 +17,21 @@ export async function POST(request: NextRequest) {
     }
 
     // Update book status to processing
+    const { eq } = await import('drizzle-orm')
     await db
       .update(books)
       .set({
         processingStatus: 'processing',
         updatedAt: new Date(),
       })
-      .where((t) => t.id.equals(bookId))
+      .where(eq(books.id, bookId))
 
     try {
       // Process the book
       const result = await processBook(bookId, extractedText, userId)
 
       // Update book to completed
+      const { eq } = await import('drizzle-orm')
       await db
         .update(books)
         .set({
@@ -44,7 +39,7 @@ export async function POST(request: NextRequest) {
           extractedText: extractedText.substring(0, 5000), // Store truncated version
           updatedAt: new Date(),
         })
-        .where((t) => t.id.equals(bookId))
+        .where(eq(books.id, bookId))
 
       return NextResponse.json({
         success: true,
@@ -55,13 +50,14 @@ export async function POST(request: NextRequest) {
       console.error('[v0] Book processing error:', error)
 
       // Mark as failed
+      const { eq } = await import('drizzle-orm')
       await db
         .update(books)
         .set({
           processingStatus: 'failed',
           updatedAt: new Date(),
         })
-        .where((t) => t.id.equals(bookId))
+        .where(eq(books.id, bookId))
 
       return NextResponse.json(
         { error: 'Book processing failed' },

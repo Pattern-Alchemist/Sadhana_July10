@@ -1,5 +1,3 @@
-'use server'
-
 import { generateText, streamText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 

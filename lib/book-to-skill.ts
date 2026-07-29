@@ -1,5 +1,3 @@
-'use server'
-
 import { generateText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { db } from './db'
@@ -76,8 +74,9 @@ export async function decomposeSkills(
 ): Promise<number[]> {
   const skillIds: number[] = []
 
+  const { inArray } = await import('drizzle-orm')
   const conceptData = await db.select().from(concepts).where(
-    (table, { inArray }) => table.id.inArray ? table.id.inArray(conceptIds) : table.id.equals(conceptIds[0])
+    inArray(concepts.id, conceptIds)
   )
 
   try {
@@ -104,15 +103,14 @@ export async function decomposeSkills(
       for (const skill of parsedSkills) {
         try {
           const result = await db.insert(skills).values({
-            bookId,
+            bookId: parseInt(bookId.toString()),
             skillName: skill.skill_name || 'Untitled Skill',
             description: skill.description,
-            learningObjectives: skill.learning_objectives || [],
-            prerequisiteSkills: skill.prerequisite_skills || [],
+            learningObjectives: skill.learning_objectives ? Array.isArray(skill.learning_objectives) ? skill.learning_objectives : [skill.learning_objectives] : [],
+            prerequisiteSkills: skill.prerequisite_skills ? Array.isArray(skill.prerequisite_skills) ? skill.prerequisite_skills : [skill.prerequisite_skills] : [],
             estimatedHours: skill.estimated_hours ? parseFloat(skill.estimated_hours.toString()) : 5,
             difficultyLevel: skill.difficulty_level || 'intermediate',
             practiceRecommendations: 'Practice daily for best results.',
-            createdAt: new Date(),
           }).returning({ id: skills.id })
 
           if (result[0]) skillIds.push(result[0].id)
@@ -201,8 +199,9 @@ export async function generatePersonalizedCurriculum(
   const pace = preferences.pace || 'normal'
   const learningStyle = preferences.learningStyle || 'auditory'
 
+    const { inArray } = await import('drizzle-orm')
     const skillData = await db.select().from(skills).where(
-      (table, { inArray }) => table.id.inArray ? table.id.inArray(skillIds) : table.id.equals(skillIds[0])
+      inArray(skills.id, skillIds)
     )
 
   const paceMultiplier = { slow: 1.5, normal: 1, accelerated: 0.7 }[pace]
@@ -251,7 +250,8 @@ export async function processBook(
   // Step 3: Generate micro-lessons
   let totalLessons = 0
   for (const skillId of skillIds) {
-    const skillData = await db.select().from(skills).where(table => table.id.equals(skillId)).limit(1)
+    const { eq } = await import('drizzle-orm')
+    const skillData = await db.select().from(skills).where(eq(skills.id, skillId)).limit(1)
     if (skillData[0]) {
       const lessonIds = await generateMicroLessons(skillId, skillData[0].skillName, skillData[0].description || '')
       totalLessons += lessonIds.length
@@ -263,8 +263,9 @@ export async function processBook(
   const curriculumId = await generatePersonalizedCurriculum(userId, bookId, skillIds)
   console.log(`[v0] Generated curriculum ${curriculumId}`)
 
+  const { inArray } = await import('drizzle-orm')
   const skillsForCalculation = await db.select().from(skills).where(
-    (table, { inArray }) => table.id.inArray ? table.id.inArray(skillIds) : table.id.equals(skillIds[0])
+    inArray(skills.id, skillIds)
   )
   const totalSkillHours = skillsForCalculation.reduce((sum, s) => sum + parseFloat(s.estimatedHours?.toString() || '0'), 0)
 

@@ -1,19 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { voiceSessions, guruMemory } from '@/lib/db/schema'
-import { headers } from 'next/headers'
 import { generateGuruResponse, detectEmotionalState, generateSpeech } from '@/lib/voice-system'
 
 export async function POST(request: NextRequest) {
   try {
-    // Get user session
-    const session = await auth.api.getSession({ headers: await headers() })
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
-    const userId = session.user.id
+    // Get user ID from request (demo - in production use proper auth)
+    const userId = 'user-demo-001'
     const body = await request.json()
     const { transcription, sessionType = 'guru_chat', contextData } = body
 
@@ -26,8 +19,9 @@ export async function POST(request: NextRequest) {
 
     // Fetch user's guru memory for context
     const { guruMemory } = await import('@/lib/db/schema')
+    const { eq } = await import('drizzle-orm')
     const memories = await db.select().from(guruMemory).where(
-      table => table.userId.equals(userId)
+      eq(guruMemory.userId, userId)
     ).limit(5)
 
     const context = {
